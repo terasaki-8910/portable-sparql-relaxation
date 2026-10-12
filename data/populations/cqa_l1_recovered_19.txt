@@ -1,0 +1,24 @@
+# The 19 CQA queries that Table 3 credits to L1 (residual-pattern deletion).
+# Used to check Proposition 1: re-running them with L1 disabled
+# (--phases L2,L3,L4a,L4b,L5) recovers 18 of them through L3, each with the same
+# result count and F1. One query is missed: its input has three unmatched
+# patterns, more than the two L3 can make optional at once.
+cmt-confOf,q_30.sparql
+cmt-conference,q_19.sparql
+cmt-conference,q_29.sparql
+cmt-conference,q_30.sparql
+cmt-conference,query_11.sparql
+cmt-conference,query_12.sparql
+cmt-conference,query_17.sparql
+cmt-conference,query_3.sparql
+cmt-conference,query_6.sparql
+cmt-conference,query_7.sparql
+conference-cmt,q_2.sparql
+conference-cmt,q_58.sparql
+conference-edas,q_2.sparql
+conference-edas,q_58.sparql
+edas-cmt,q_30.sparql
+ekaw-cmt,q_11.sparql
+ekaw-cmt,q_51.sparql
+ekaw-cmt,q_52.sparql
+ekaw-conference,q_25.sparql

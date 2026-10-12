@@ -1,0 +1,8 @@
+# Pair: cmt-conference (cmt_100 -> conference_100)
+# IntendedSuccessPhase: Phase 2
+# Mechanism: インスタンスURIが cmt-instances であることを要求するFILTER。
+#           sourceでは成立、target(=conference-instances)では不成立で0件。Phase2でFILTER除去後に復活。
+SELECT ?s WHERE {
+  ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Person> .
+  FILTER(CONTAINS(STR(?s), "cmt-instances#"))
+}

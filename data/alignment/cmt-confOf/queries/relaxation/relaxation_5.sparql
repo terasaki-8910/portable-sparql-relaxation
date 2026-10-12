@@ -1,0 +1,9 @@
+# Pair: cmt-confOf (cmt_100 -> confOf_100)
+# IntendedSuccessPhase: UNSOLVABLE
+# Mechanism: cmt:writtenBy はEDOAL未対応で残留。
+#            しかしクエリには他の制約がないため、Phase1で writtenBy を削除すると
+#            SELECT ?rev WHERE {} となり、全インスタンスが返る（過度な緩和）。
+# Note: cmt#Reviewクラスも未マップ。アライメント不足により緩和では解決不可能。
+SELECT ?rev WHERE {
+  ?rev <http://cmt#writtenBy> ?person .
+}

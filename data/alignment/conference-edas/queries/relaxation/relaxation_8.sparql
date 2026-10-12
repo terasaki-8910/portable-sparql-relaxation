@@ -1,0 +1,7 @@
+# Pair: conference-edas (conference_100 -> edas_100)
+# target_phase: Phase 2
+# FailureMechanism: review URIが conference-instances#review- であることを要求。targetは edas-instances#review- なので0件。Phase2で復活。
+SELECT ?r WHERE {
+  ?r <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Review> .
+  FILTER(STRSTARTS(STR(?r), "http://conference-instances#review-"))
+}

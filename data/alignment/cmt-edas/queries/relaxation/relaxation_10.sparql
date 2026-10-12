@@ -1,0 +1,8 @@
+# Pair: cmt-edas (cmt_100 -> edas_100)
+# IntendedSuccessPhase: Phase 2
+# Mechanism: cmt-instances#conference を要求。翻訳後は edas-instances#conference になるため0件。
+#            Phase2でFILTER除去後に復活。
+SELECT ?c WHERE {
+  ?c <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Conference> .
+  FILTER(CONTAINS(STR(?c), "cmt-instances#conference"))
+}

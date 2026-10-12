@@ -1,0 +1,8 @@
+# Pair: cmt-edas (cmt_100 -> edas_100)
+# IntendedSuccessPhase: Phase 2
+# Mechanism: 「edas-instances を含まない」FILTER。sourceは満たすが、翻訳後は edas-instances になるため0件。
+#            Phase2でFILTER除去後に復活。
+SELECT ?r WHERE {
+  ?r <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Review> .
+  FILTER(!CONTAINS(STR(?r), "edas-instances#"))
+}

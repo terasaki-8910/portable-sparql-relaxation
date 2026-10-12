@@ -1,0 +1,5 @@
+PREFIX cmt: <http://cmt#>
+SELECT ?person ?paper
+WHERE {
+	?person cmt:hasConflictOfInterest ?paper .
+}

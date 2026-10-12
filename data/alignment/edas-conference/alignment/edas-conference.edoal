@@ -1,0 +1,605 @@
+<?xml version='1.0' encoding='utf-8' standalone='no'?>
+<rdf:RDF xmlns='http://knowledgeweb.semanticweb.org/heterogeneity/alignment#'
+         xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+         xmlns:ns0='http://purl.org/dc/elements/1.1/'
+         xmlns:xsd='http://www.w3.org/2001/XMLSchema#'
+         xmlns:alext='http://exmo.inrialpes.fr/align/ext/1.0/'
+         xmlns:align='http://knowledgeweb.semanticweb.org/heterogeneity/alignment#'
+         xmlns:edoal='http://ns.inria.org/edoal/1.0/#'>
+<Alignment>
+  <xml>yes</xml>
+  <level>2EDOAL</level>
+  <type>**</type>
+  <ns0:creator>http://www.irit.fr/recherches/MELODI/ontologies/contributors#thieblin</ns0:creator>
+  <ns0:date>2017/04/27</ns0:date>
+  <alext:method>http://exmo.inrialpes.fr/align/impl/BasicAlignment#inverse</alext:method>
+  <alext:derivedFrom>http://conference-edas/alignment/</alext:derivedFrom>
+  <onto1>
+    <Ontology rdf:about="http://edas#">
+      <location>http://edas#</location>
+      <formalism>
+        <Formalism align:name="owl" align:uri="http://www.w3.org/TR/owl-guide/"/>
+      </formalism>
+    </Ontology>
+  </onto1>
+  <onto2>
+    <Ontology rdf:about="http://conference#">
+      <location>http://conference#</location>
+      <formalism>
+        <Formalism align:name="owl" align:uri="http://www.w3.org/TR/owl-guide/"/>
+      </formalism>
+    </Ontology>
+  </onto2>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class>
+          <edoal:or rdf:parseType="Collection">
+            <edoal:Class rdf:about="http://edas#RejectedPaper"/>
+            <edoal:Class rdf:about="http://edas#AcceptedPaper"/>
+          </edoal:or>
+        </edoal:Class>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://conference#Reviewed_contribution"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Property rdf:about="http://edas#hasFirstName"/>
+      </entity1>
+      <entity2>
+        <edoal:Property rdf:about="http://conference#has_the_first_name"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Relation>
+          <edoal:or rdf:parseType="Collection">
+            <edoal:Relation>
+              <edoal:and rdf:parseType="Collection">
+                <edoal:RelationCoDomainRestriction>
+                  <edoal:class>
+                    <edoal:Class rdf:about="http://edas#Person"/>
+                  </edoal:class>
+                </edoal:RelationCoDomainRestriction>
+                <edoal:Relation rdf:about="http://edas#relatesTo"/>
+              </edoal:and>
+            </edoal:Relation>
+            <edoal:Relation rdf:about="http://edas#isWrittenBy"/>
+          </edoal:or>
+        </edoal:Relation>
+      </entity1>
+      <entity2>
+        <edoal:Relation rdf:about="http://conference#has_authors"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://edas#Organization"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://conference#Organization"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://edas#Conference"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://conference#Conference"/>
+      </entity2>
+      <relation>&lt;</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://edas#Conference"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://conference#Conference_volume"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Relation rdf:about="http://edas#isReviewing"/>
+      </entity1>
+      <entity2>
+        <edoal:Relation>
+          <edoal:and rdf:parseType="Collection">
+            <edoal:Relation>
+              <edoal:compose rdf:parseType="Collection">
+                <edoal:Relation rdf:about="http://conference#contributes"/>
+                <edoal:Relation rdf:about="http://conference#reviews"/>
+              </edoal:compose>
+            </edoal:Relation>
+            <edoal:RelationDomainRestriction>
+              <edoal:class>
+                <edoal:Class rdf:about="http://conference#Reviewer"/>
+              </edoal:class>
+            </edoal:RelationDomainRestriction>
+          </edoal:and>
+        </edoal:Relation>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://edas#Workshop"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://conference#Workshop"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://edas#SlideSet"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://conference#Presentation"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Property rdf:about="http://edas#paperDueOn"/>
+      </entity1>
+      <entity2>
+        <edoal:Property>
+          <edoal:compose rdf:parseType="Collection">
+            <edoal:Relation rdf:about="http://conference#has_important_dates"/>
+            <edoal:Property rdf:about="http://conference#is_a_date_of_full_paper_submission"/>
+          </edoal:compose>
+        </edoal:Property>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Property rdf:about="http://edas#startDate"/>
+      </entity1>
+      <entity2>
+        <edoal:Property>
+          <edoal:compose rdf:parseType="Collection">
+            <edoal:Relation rdf:about="http://conference#has_important_dates"/>
+            <edoal:Property rdf:about="http://conference#is_a_starting_date"/>
+          </edoal:compose>
+        </edoal:Property>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://edas#Attendee"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://conference#Conference_participant"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Property rdf:about="http://edas#hasLastName"/>
+      </entity1>
+      <entity2>
+        <edoal:Property rdf:about="http://conference#has_the_last_name"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Property rdf:about="http://edas#hasEmail"/>
+      </entity1>
+      <entity2>
+        <edoal:Property rdf:about="http://conference#has_an_email"/>
+      </entity2>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Property rdf:about="http://edas#hasName"/>
+      </entity1>
+      <entity2>
+        <edoal:Property rdf:about="http://conference#has_a_name"/>
+      </entity2>
+      <relation>&lt;</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://edas#AcademicEvent"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://conference#Conference_part"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://edas#Programme"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://conference#Information_for_Participant"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://edas#RejectedPaper"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://conference#Rejected_contribution"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Relation>
+          <edoal:or rdf:parseType="Collection">
+            <edoal:Relation>
+              <edoal:and rdf:parseType="Collection">
+                <edoal:RelationDomainRestriction>
+                  <edoal:class>
+                    <edoal:Class rdf:about="http://edas#Person"/>
+                  </edoal:class>
+                </edoal:RelationDomainRestriction>
+                <edoal:Relation rdf:about="http://edas#hasRelatedDocument"/>
+              </edoal:and>
+            </edoal:Relation>
+            <edoal:Relation rdf:about="http://edas#hasRelatedPaper"/>
+          </edoal:or>
+        </edoal:Relation>
+      </entity1>
+      <entity2>
+        <edoal:Relation rdf:about="http://conference#contributes"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://edas#Review"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://conference#Review"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Relation rdf:about="http://edas#isWrittenBy"/>
+      </entity1>
+      <entity2>
+        <edoal:Relation>
+          <edoal:and rdf:parseType="Collection">
+            <edoal:RelationDomainRestriction>
+              <edoal:class>
+                <edoal:Class rdf:about="http://conference#Written_contribution"/>
+              </edoal:class>
+            </edoal:RelationDomainRestriction>
+            <edoal:RelationCoDomainRestriction>
+              <edoal:class>
+                <edoal:Class rdf:about="http://conference#Regular_author"/>
+              </edoal:class>
+            </edoal:RelationCoDomainRestriction>
+            <edoal:Relation rdf:about="http://conference#has_authors"/>
+          </edoal:and>
+        </edoal:Relation>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://edas#Document"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://conference#Conference_document"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://edas#AcceptedPaper"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://conference#Accepted_contribution"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://edas#TPCMember"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://conference#Committee_member"/>
+      </entity2>
+      <relation>&lt;</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://edas#Paper"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://conference#Written_contribution"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Property rdf:about="http://edas#manuscriptDueOn"/>
+      </entity1>
+      <entity2>
+        <edoal:Property>
+          <edoal:compose rdf:parseType="Collection">
+            <edoal:Relation rdf:about="http://conference#has_important_dates"/>
+            <edoal:Property rdf:about="http://conference#is_a_date_of_camera_ready_paper_submission"/>
+          </edoal:compose>
+        </edoal:Property>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://edas#Person"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://conference#Person"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Relation rdf:about="http://edas#isReviewedBy"/>
+      </entity1>
+      <entity2>
+        <edoal:Relation>
+          <edoal:and rdf:parseType="Collection">
+            <edoal:Relation>
+              <edoal:compose rdf:parseType="Collection">
+                <edoal:Relation rdf:about="http://conference#has_a_review"/>
+                <edoal:Relation rdf:about="http://conference#has_authors"/>
+              </edoal:compose>
+            </edoal:Relation>
+            <edoal:RelationCoDomainRestriction>
+              <edoal:class>
+                <edoal:Class rdf:about="http://conference#Reviewer"/>
+              </edoal:class>
+            </edoal:RelationCoDomainRestriction>
+          </edoal:and>
+        </edoal:Relation>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Property>
+          <edoal:and rdf:parseType="Collection">
+            <edoal:PropertyDomainRestriction>
+              <edoal:class>
+                <edoal:Class rdf:about="http://edas#Person"/>
+              </edoal:class>
+            </edoal:PropertyDomainRestriction>
+            <edoal:Property rdf:about="http://edas#hasEmail"/>
+          </edoal:and>
+        </edoal:Property>
+      </entity1>
+      <entity2>
+        <edoal:Property rdf:about="http://conference#has_an_email"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://edas#Author"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://conference#Regular_author"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://edas#Author"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://conference#Conference_contributor"/>
+      </entity2>
+      <relation>&lt;</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://edas#Topic"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://conference#Topic"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://edas#Reviewer"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://conference#Reviewer"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Relation rdf:about="http://edas#hasRelatedPaper"/>
+      </entity1>
+      <entity2>
+        <edoal:Relation>
+          <edoal:and rdf:parseType="Collection">
+            <edoal:RelationDomainRestriction>
+              <edoal:class>
+                <edoal:Class rdf:about="http://conference#Regular_author"/>
+              </edoal:class>
+            </edoal:RelationDomainRestriction>
+            <edoal:RelationCoDomainRestriction>
+              <edoal:class>
+                <edoal:Class rdf:about="http://conference#Written_contribution"/>
+              </edoal:class>
+            </edoal:RelationCoDomainRestriction>
+            <edoal:Relation rdf:about="http://conference#contributes"/>
+          </edoal:and>
+        </edoal:Relation>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://edas#ConferenceEvent"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://conference#Conference_part"/>
+      </entity2>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Property rdf:about="http://edas#endDate"/>
+      </entity1>
+      <entity2>
+        <edoal:Property>
+          <edoal:compose rdf:parseType="Collection">
+            <edoal:Relation rdf:about="http://conference#has_important_dates"/>
+            <edoal:Property rdf:about="http://conference#is_an_ending_date"/>
+          </edoal:compose>
+        </edoal:Property>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Property rdf:about="http://edas#hasName"/>
+      </entity1>
+      <entity2>
+        <edoal:Property>
+          <edoal:and rdf:parseType="Collection">
+            <edoal:PropertyDomainRestriction>
+              <edoal:class>
+                <edoal:Class rdf:about="http://conference#Conference"/>
+              </edoal:class>
+            </edoal:PropertyDomainRestriction>
+            <edoal:Property rdf:about="http://conference#has_a_name"/>
+          </edoal:and>
+        </edoal:Property>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+</Alignment>
+</rdf:RDF>

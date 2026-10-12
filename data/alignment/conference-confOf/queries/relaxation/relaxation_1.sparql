@@ -1,0 +1,8 @@
+# Pair: conference-confOf (conference_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: conference:has_an_abstract は未対応で残留 -> targetで0件。Phase1で残留triple削除後、Paper×has_authors で復活。
+SELECT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Paper> .
+  ?paper <http://conference#has_authors> ?a .
+  ?paper <http://conference#has_an_abstract> ?abs .
+}

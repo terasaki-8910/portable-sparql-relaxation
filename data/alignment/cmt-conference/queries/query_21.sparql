@@ -1,0 +1,5 @@
+PREFIX cmt: <http://cmt#>
+SELECT ?reviewer ?bid
+WHERE {
+	?reviewer cmt:adjustBid ?bid .
+}

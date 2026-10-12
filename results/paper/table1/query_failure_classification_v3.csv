@@ -1,0 +1,800 @@
+﻿pair_name,query_file,source_ont,target_ont,input_count,output_count,is_input_zero,input_query,output_query,primary_category,category_name,all_categories,category_C,category_D,category_E,category_F,category_G,rationale,recommended_phase,is_relaxation_target,has_residual_uris,residual_uris,has_filter,filter_clauses,has_rdf_type,rdf_type_classes,is_empty_where,triple_count
+agro-dbpedia,query_1.sparql,agro,dbpedia,0,0,True,"PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX agronto: <http://aims.fao.org/aos/agrontology#>
+PREFIX agrovoc: <http://aims.fao.org/aos/agrovoc/>
+PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#>
+
+select ?rank where {
+?taxon agro:prefScientificName ?label.
+?taxon a ?rank.
+?rank rdfs:subClassOf agro:Taxon.
+filter (regex(?label, ""^triticum$"",""i"")).
+}","PREFIX  dbo:  <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  skosxl: <http://www.w3.org/2008/05/skos-xl#>
+PREFIX  xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX  skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  agronto: <http://aims.fao.org/aos/agrontology#>
+PREFIX  agrovoc: <http://aims.fao.org/aos/agrovoc/>
+PREFIX  agro: <http://ontology.irstea.fr/agronomictaxon/core#>
+
+SELECT  ?rank
+WHERE
+  { ?taxon  rdfs:label       ?label ;
+            rdf:type         ?rank .
+    ?rank   rdfs:subClassOf  dbo:Species
+    FILTER regex(?label, ""^triticum$"", ""i"")
+  }",C,部分的語彙欠損,C;D;E;F,True,True,True,True,False,5トリプル中に残留URI: <http://ontology.irstea.fr/agronomictaxon/core#>,1.0,True,True,<http://ontology.irstea.fr/agronomictaxon/core#>,True,"FILTER regex(?label, ""^triticum$"", ""i"")",True,?rank,False,5
+agro-dbpedia,query_2.sparql,agro,dbpedia,0,0,True,"PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX agronto: <http://aims.fao.org/aos/agrontology#>
+PREFIX agrovoc: <http://aims.fao.org/aos/agrovoc/>
+PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#>
+
+select ?parent where {
+?taxon agro:prefVernacularName ?label.
+?taxon agro:hasHigherRank* ?parent.
+?parent a agro:KingdomRank.
+filter (regex(?label, ""^wheat$"", ""i"")).
+}","PREFIX  dbo:  <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  skosxl: <http://www.w3.org/2008/05/skos-xl#>
+PREFIX  xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX  skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  agronto: <http://aims.fao.org/aos/agrontology#>
+PREFIX  agrovoc: <http://aims.fao.org/aos/agrovoc/>
+PREFIX  agro: <http://ontology.irstea.fr/agronomictaxon/core#>
+
+SELECT  ?parent
+WHERE
+  { ?taxon  rdfs:label  ?label .
+    ?taxon (agro:hasHigherRank){0,} ?parent .
+    ?parent  rdf:type  dbo:Species
+    FILTER regex(?label, ""^wheat$"", ""i"")
+  }",C,部分的語彙欠損,C;D;E;F,True,True,True,True,False,"4トリプル中に残留URI: <http://ontology.irstea.fr/agronomictaxon/core#>, agro:hasHigherRank",1.0,True,True,<http://ontology.irstea.fr/agronomictaxon/core#>; agro:hasHigherRank,True,"FILTER regex(?label, ""^wheat$"", ""i"")",True,dbo:Species,False,4
+agro-dbpedia,query_3.sparql,agro,dbpedia,0,0,True,"PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX agronto: <http://aims.fao.org/aos/agrontology#>
+PREFIX agrovoc: <http://aims.fao.org/aos/agrovoc/>
+PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#>
+
+select ?commonName where {
+?taxon rdf:type agro:Taxon.
+?taxon agro:hasScientificName ?label.
+?taxon agro:hasVernacularName ?commonName.
+filter (regex(?label,""^triticum$"", ""i"") && lang(?commonName) =""fr"").
+}","PREFIX  dbo:  <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  skosxl: <http://www.w3.org/2008/05/skos-xl#>
+PREFIX  xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX  skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  agronto: <http://aims.fao.org/aos/agrontology#>
+PREFIX  agrovoc: <http://aims.fao.org/aos/agrovoc/>
+PREFIX  agro: <http://ontology.irstea.fr/agronomictaxon/core#>
+
+SELECT  ?commonName
+WHERE
+  { ?taxon  rdf:type    dbo:Species ;
+            rdfs:label  ?label ;
+            rdfs:label  ?commonName
+    FILTER ( regex(?label, ""^triticum$"", ""i"") && ( lang(?commonName) = ""fr"" ) )
+  }",C,部分的語彙欠損,C;D;E;F,True,True,True,True,False,6トリプル中に残留URI: <http://ontology.irstea.fr/agronomictaxon/core#>,1.0,True,True,<http://ontology.irstea.fr/agronomictaxon/core#>,True,"FILTER ( regex(?label, ""^triticum$"", ""i"") && ( lang(?commonName) = ""fr"" ) )",True,dbo:Species,False,6
+agro-dbpedia,query_4.sparql,agro,dbpedia,0,0,True,"PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX agronto: <http://aims.fao.org/aos/agrontology#>
+PREFIX agrovoc: <http://aims.fao.org/aos/agrovoc/>
+PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#>
+
+select ?commonName where {
+?taxon rdf:type agro:Taxon.
+?taxon agro:prefScientificName ?label.
+?taxon agro:prefVernacularName ?commonName.
+filter (regex(?label, ""^triticum$"", ""i"") && lang(?commonName) =""en"").
+}","PREFIX  dbo:  <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  skosxl: <http://www.w3.org/2008/05/skos-xl#>
+PREFIX  xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX  skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  agronto: <http://aims.fao.org/aos/agrontology#>
+PREFIX  agrovoc: <http://aims.fao.org/aos/agrovoc/>
+PREFIX  agro: <http://ontology.irstea.fr/agronomictaxon/core#>
+
+SELECT  ?commonName
+WHERE
+  { ?taxon  rdf:type    dbo:Species ;
+            rdfs:label  ?label ;
+            rdfs:label  ?commonName
+    FILTER ( regex(?label, ""^triticum$"", ""i"") && ( lang(?commonName) = ""en"" ) )
+  }",C,部分的語彙欠損,C;D;E;F,True,True,True,True,False,6トリプル中に残留URI: <http://ontology.irstea.fr/agronomictaxon/core#>,1.0,True,True,<http://ontology.irstea.fr/agronomictaxon/core#>,True,"FILTER ( regex(?label, ""^triticum$"", ""i"") && ( lang(?commonName) = ""en"" ) )",True,dbo:Species,False,6
+agro-dbpedia,query_5.sparql,agro,dbpedia,0,0,True,"PREFIX agro: <http://ontology.irstea.fr/agronomictaxon/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX agronto: <http://aims.fao.org/aos/agrontology#>
+PREFIX agrovoc: <http://aims.fao.org/aos/agrovoc/>
+PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#>
+
+select distinct ?specy where {
+?taxon agro:prefVernacularName ?label.
+?taxon agro:hasLowerRank ?specy.
+?specy a agro:SpecyRank.
+filter (regex(?label, ""^wheat$"",""i"")).
+}","PREFIX  dbo:  <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  skosxl: <http://www.w3.org/2008/05/skos-xl#>
+PREFIX  xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX  skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  agronto: <http://aims.fao.org/aos/agrontology#>
+PREFIX  agrovoc: <http://aims.fao.org/aos/agrovoc/>
+PREFIX  agro: <http://ontology.irstea.fr/agronomictaxon/core#>
+
+SELECT DISTINCT  ?specy
+WHERE
+  { ?taxon  rdfs:label  ?label .
+    ?specy  rdf:type    dbo:Species .
+    ?taxon  rdf:type    dbo:Species .
+    ?specy  rdf:type    dbo:Species
+    FILTER regex(?label, ""^wheat$"", ""i"")
+  }",C,部分的語彙欠損,C;D;E;F,True,True,True,True,False,5トリプル中に残留URI: <http://ontology.irstea.fr/agronomictaxon/core#>,1.0,True,True,<http://ontology.irstea.fr/agronomictaxon/core#>,True,"FILTER regex(?label, ""^wheat$"", ""i"")",True,dbo:Species,False,5
+cmt-confOf,q_30.sparql,cmt,confOf,4357,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://cmt#name> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://confOf#has_title>  ?o ;
+        a                     <http://cmt#Conference>
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,2トリプル中に残留URI: <http://cmt#Conference>,1.0,True,True,<http://cmt#Conference>,False,,True,<http:,False,2
+cmt-conference,q_19.sparql,cmt,conference,1248,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://cmt#hasProgramCommitteeMember> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://conference#has_a_committee_chair>  ?o .
+    ?o  a                     <http://cmt#ProgramCommitteeChair>
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,2トリプル中に残留URI: <http://cmt#ProgramCommitteeChair>,1.0,True,True,<http://cmt#ProgramCommitteeChair>,False,,True,<http:,False,2
+cmt-conference,q_29.sparql,cmt,conference,1248,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://cmt#memberOfProgramCommittee> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://conference#was_a_committee_chair_of>  ?o ;
+        a                     <http://cmt#ProgramCommitteeChair>
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,2トリプル中に残留URI: <http://cmt#ProgramCommitteeChair>,1.0,True,True,<http://cmt#ProgramCommitteeChair>,False,,True,<http:,False,2
+cmt-conference,q_30.sparql,cmt,conference,4357,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://cmt#name> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://conference#has_a_name>  ?o ;
+        a                     <http://cmt#Conference>
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,2トリプル中に残留URI: <http://cmt#Conference>,1.0,True,True,<http://cmt#Conference>,False,,True,<http:,False,2
+cmt-conference,query_11.sparql,cmt,conference,6,0,False,"PREFIX cmt: <http://cmt#>
+SELECT ?conference ?name
+WHERE {
+	?conference a cmt:Conference ;
+		cmt:name ?name .
+}","PREFIX  cmt:  <http://cmt#>
+
+SELECT  ?conference ?name
+WHERE
+  { ?conference  a                  <http://conference#Conference> ;
+              <http://conference#has_a_name>  ?name ;
+              a                     cmt:Conference
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,"4トリプル中に残留URI: <http://cmt#>, cmt:Conference",1.0,True,True,<http://cmt#>; cmt:Conference,False,,True,cmt:Conference; <http:,False,4
+cmt-conference,query_12.sparql,cmt,conference,4300,0,False,"PREFIX cmt: <http://cmt#>
+SELECT ?paper ?title
+WHERE {
+	?paper a cmt:Paper ;
+		cmt:title ?title .
+}","PREFIX  cmt:  <http://cmt#>
+
+SELECT  ?paper ?title
+WHERE
+  { ?paper  a          <http://conference#Conference_contribution> ;
+            cmt:title  ?title
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,"3トリプル中に残留URI: cmt:title, <http://cmt#>",1.0,True,True,cmt:title; <http://cmt#>,False,,True,<http:,False,3
+cmt-conference,query_15.sparql,cmt,conference,953,0,False,"PREFIX cmt: <http://cmt#>
+SELECT ?paper
+WHERE {
+	?paper a cmt:Paper ;
+		cmt:hasDecision ?decision .
+	?decision a cmt:Acceptance .
+}","PREFIX  cmt:  <http://cmt#>
+
+SELECT  ?paper
+WHERE
+  { ?paper    a                     <http://conference#Conference_contribution> ;
+              <http://conference#Rejected_contribution>  ?decision .
+    ?decision  a                    cmt:Acceptance
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,"4トリプル中に残留URI: cmt:Acceptance, <http://cmt#>",1.0,True,True,cmt:Acceptance; <http://cmt#>,False,,True,cmt:Acceptance; <http:,False,4
+cmt-conference,query_16.sparql,cmt,conference,1406,0,False,"PREFIX cmt: <http://cmt#>
+SELECT ?paper
+WHERE {
+	?paper a cmt:Paper ;
+		cmt:hasDecision ?decision .
+	?decision a cmt:Rejection .
+}","PREFIX  cmt:  <http://cmt#>
+
+SELECT  ?paper
+WHERE
+  { ?paper    a                     <http://conference#Conference_contribution> ;
+              <http://conference#Rejected_contribution>  ?decision .
+    ?decision  a                    cmt:Rejection
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,"4トリプル中に残留URI: cmt:Rejection, <http://cmt#>",1.0,True,True,cmt:Rejection; <http://cmt#>,False,,True,cmt:Rejection; <http:,False,4
+cmt-conference,query_17.sparql,cmt,conference,10000,0,False,"PREFIX cmt: <http://cmt#>
+SELECT ?paper ?reviewer
+WHERE {
+	?paper cmt:assignedTo ?reviewer .
+	?reviewer a cmt:Reviewer .
+}","PREFIX  cmt:  <http://cmt#>
+
+SELECT  ?paper ?reviewer
+WHERE
+  { ?paper    cmt:assignedTo  ?reviewer .
+    ?reviewer  a              <http://conference#Reviewer>
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,"2トリプル中に残留URI: cmt:assignedTo, <http://cmt#>",1.0,True,True,cmt:assignedTo; <http://cmt#>,False,,True,<http:,False,2
+cmt-conference,query_24.sparql,cmt,conference,0,0,True,"PREFIX cmt: <http://cmt#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?pcm ?maxPapers
+WHERE {
+	?pcm a cmt:ProgramCommitteeMember ;
+		cmt:maxPapers ?maxPapers .
+	FILTER (?maxPapers > 5)
+}","PREFIX  xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX  cmt:  <http://cmt#>
+
+SELECT  ?pcm ?maxPapers
+WHERE
+  { ?pcm  a              <http://conference#Committee_member> ;
+          cmt:maxPapers  ?maxPapers
+    FILTER ( ?maxPapers > 5 )
+  }",C,部分的語彙欠損,C;D;E;F,True,True,True,True,False,"3トリプル中に残留URI: cmt:maxPapers, <http://cmt#>",1.0,True,True,cmt:maxPapers; <http://cmt#>,True,FILTER ( ?maxPapers > 5 ),True,<http:,False,3
+cmt-conference,query_25.sparql,cmt,conference,0,0,True,"PREFIX cmt: <http://cmt#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?conference
+WHERE {
+	?conference a cmt:Conference ;
+		cmt:acceptsHardcopySubmissions ""true""^^xsd:boolean .
+}","PREFIX  xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX  cmt:  <http://cmt#>
+
+SELECT  ?conference
+WHERE
+  { ?conference  a                  <http://conference#Conference> ;
+              cmt:acceptsHardcopySubmissions  true
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,"2トリプル中に残留URI: cmt:acceptsHardcopySubmissions, <http://cmt#>",1.0,True,True,cmt:acceptsHardcopySubmissions; <http://cmt#>,False,,True,<http:,False,2
+cmt-conference,query_3.sparql,cmt,conference,4300,0,False,"PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX cmt: <http://cmt#>
+
+SELECT ?paper ?title
+WHERE {
+  ?paper rdf:type cmt:Paper .
+  ?paper cmt:title ?title .
+}","PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  cmt:  <http://cmt#>
+
+SELECT  ?paper ?title
+WHERE
+  { ?paper  rdf:type   <http://conference#Conference_contribution> ;
+            cmt:title  ?title
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,"3トリプル中に残留URI: cmt:title, <http://cmt#>",1.0,True,True,cmt:title; <http://cmt#>,False,,True,<http:,False,3
+cmt-conference,query_30.sparql,cmt,conference,0,0,True,"PREFIX cmt: <http://cmt#>
+SELECT DISTINCT ?email
+WHERE {
+	?person a cmt:Person ;
+		cmt:email ?email .
+}
+ORDER BY ?email","PREFIX  cmt:  <http://cmt#>
+
+SELECT DISTINCT  ?email
+WHERE
+  { ?person  a                     <http://conference#Person> ;
+             <http://conference#has_an_email>  ?email
+  }
+ORDER BY ASC(?email)",C,部分的語彙欠損,C;E;F,True,False,True,True,False,3トリプル中に残留URI: <http://cmt#>,1.0,True,True,<http://cmt#>,False,,True,<http:,False,3
+cmt-conference,query_4.sparql,cmt,conference,953,0,False,"PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX cmt: <http://cmt#>
+
+SELECT ?paper
+WHERE {
+  ?paper cmt:hasDecision ?decision .
+  ?decision rdf:type cmt:Acceptance .
+}","PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  cmt:  <http://cmt#>
+
+SELECT  ?paper
+WHERE
+  { ?paper    <http://conference#Rejected_contribution>  ?decision .
+    ?decision  rdf:type             cmt:Acceptance
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,"2トリプル中に残留URI: cmt:Acceptance, <http://cmt#>",1.0,True,True,cmt:Acceptance; <http://cmt#>,False,,True,cmt:Acceptance,False,2
+cmt-conference,query_5.sparql,cmt,conference,2150,0,False,"PREFIX cmt: <http://cmt#>
+
+SELECT ?authorName ?paperTitle
+WHERE {
+  ?author cmt:writePaper ?paper .
+  ?author cmt:name ?authorName .
+  ?paper cmt:title ?paperTitle .
+}","PREFIX  cmt:  <http://cmt#>
+
+SELECT  ?authorName ?paperTitle
+WHERE
+  { ?author  <http://conference#contributes>  ?paper ;
+             <http://conference#has_a_name>  ?authorName ;
+             a                     cmt:Conference .
+    ?paper   cmt:title             ?paperTitle
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,"5トリプル中に残留URI: <http://cmt#>, cmt:title, cmt:Conference",1.0,True,True,<http://cmt#>; cmt:title; cmt:Conference,False,,True,cmt:Conference,False,5
+cmt-conference,query_6.sparql,cmt,conference,10000,0,False,"PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX cmt: <http://cmt#>
+
+SELECT ?reviewer ?paper
+WHERE {
+  ?reviewer rdf:type cmt:Reviewer .
+  ?reviewer cmt:hasBeenAssigned ?paper .
+}","PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  cmt:  <http://cmt#>
+
+SELECT  ?reviewer ?paper
+WHERE
+  { ?reviewer  rdf:type            <http://conference#Reviewer> ;
+              cmt:hasBeenAssigned  ?paper
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,"3トリプル中に残留URI: cmt:hasBeenAssigned, <http://cmt#>",1.0,True,True,cmt:hasBeenAssigned; <http://cmt#>,False,,True,<http:,False,3
+cmt-conference,query_7.sparql,cmt,conference,6,0,False,"PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX cmt: <http://cmt#>
+
+SELECT ?conference ?name ?date ?reviewsPerPaper
+WHERE {
+  ?conference rdf:type cmt:Conference .
+  ?conference cmt:name ?name ;
+              cmt:date ?date ;
+              cmt:reviewsPerPaper ?reviewsPerPaper .
+}","PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  cmt:  <http://cmt#>
+
+SELECT  ?conference ?name ?date ?reviewsPerPaper
+WHERE
+  { ?conference  rdf:type           <http://conference#Conference> ;
+              <http://conference#has_a_name>  ?name ;
+              rdf:type              cmt:Conference ;
+              cmt:date              ?date ;
+              cmt:reviewsPerPaper   ?reviewsPerPaper
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,"7トリプル中に残留URI: cmt:date, cmt:reviewsPerPaper, <http://cmt#> 他1件",1.0,True,True,cmt:date; cmt:reviewsPerPaper; <http://cmt#>; cmt:Conference,False,,True,cmt:Conference; <http:,False,7
+cmt-conference,query_9.sparql,cmt,conference,0,0,True,"PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX cmt: <http://cmt#>
+
+SELECT ?metaReviewer ?email
+WHERE {
+  ?metaReviewer rdf:type cmt:Meta-Reviewer ;
+                cmt:email ?email .
+}","PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  cmt:  <http://cmt#>
+
+SELECT  ?metaReviewer ?email
+WHERE
+  { ?metaReviewer
+              rdf:type              cmt:Meta-Reviewer ;
+              <http://conference#has_an_email>  ?email
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,"2トリプル中に残留URI: cmt:Meta, <http://cmt#>",1.0,True,True,cmt:Meta; <http://cmt#>,False,,True,cmt:Meta-Reviewer,False,2
+cmt-ekaw,q_1.sparql,cmt,ekaw,1245,0,False,"SELECT distinct ?s WHERE {  
+?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Reviewer> .  
+ }
+","SELECT DISTINCT  ?s
+WHERE
+  {  }",A,システムエラー,,False,False,False,False,False,WHERE句が空,,False,False,,False,,False,,True,0
+confOf-cmt,q_36.sparql,confOf,cmt,10000,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://confOf#reviewes> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://cmt#Reviewer>  ?o }",G,述語不整合,G,False,False,False,False,True,1トリプル、残留URI/FILTER/rdf:typeなし,5.0,True,False,,False,,False,,False,1
+confOf-conference,q_36.sparql,confOf,conference,10000,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://confOf#reviewes> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://conference#Reviewed_contribution>  ?o }",G,述語不整合,G,False,False,False,False,True,1トリプル、残留URI/FILTER/rdf:typeなし,5.0,True,False,,False,,False,,False,1
+confOf-edas,q_36.sparql,confOf,edas,10000,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://confOf#reviewes> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://edas#Reviewer>  ?o }",G,述語不整合,G,False,False,False,False,True,1トリプル、残留URI/FILTER/rdf:typeなし,5.0,True,False,,False,,False,,False,1
+confOf-ekaw,q_42.sparql,confOf,ekaw,2606,0,False,"SELECT distinct ?s ?o 
+WHERE {
+ ?s <http://confOf#earlyRegistration> ?o .
+}
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://ekaw#Late-Registered_Participant>  ?o }",G,述語不整合,G,False,False,False,False,True,1トリプル、残留URI/FILTER/rdf:typeなし,5.0,True,False,,False,,False,,False,1
+conference-cmt,q_2.sparql,conference,cmt,10000,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://conference#has_a_review> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://cmt#readByReviewer>  ?o .
+    ?o  a                     <http://conference#Reviewer>
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,2トリプル中に残留URI: <http://conference#Reviewer>,1.0,True,True,<http://conference#Reviewer>,False,,True,<http:,False,2
+conference-cmt,q_21.sparql,conference,cmt,2359,0,False,"SELECT distinct ?s WHERE {  
+?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Submitted_contribution> .  
+ }
+","SELECT DISTINCT  ?s
+WHERE
+  { ?s  a  <http://conference#Submitted_contribution> }",B,変換システム不整合,,False,False,False,False,False,単一トリプルに残留URI: <http://conference#Submitted_contribution>,,False,True,<http://conference#Submitted_contribution>,False,,True,<http:,False,1
+conference-cmt,q_47.sparql,conference,cmt,1406,0,False,"SELECT distinct ?s WHERE {  
+?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Rejected_contribution> .  
+ }
+","SELECT DISTINCT  ?s
+WHERE
+  {  }",A,システムエラー,,False,False,False,False,False,WHERE句が空,,False,False,,False,,False,,True,0
+conference-cmt,q_58.sparql,conference,cmt,10000,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://conference#contributes> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://cmt#writePaper>  ?o ;
+        a                     <http://conference#Regular_author> .
+    ?o  a                     <http://conference#Written_contribution>
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,"3トリプル中に残留URI: <http://conference#Regular_author>, <http://conference#Written_contribution>",1.0,True,True,<http://conference#Regular_author>; <http://conference#Written_contribution>,False,,True,<http:,False,3
+conference-cmt,q_7.sparql,conference,cmt,953,0,False,"SELECT distinct ?s WHERE {  
+?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Accepted_contribution> .  
+ }
+","SELECT DISTINCT  ?s
+WHERE
+  {  }",A,システムエラー,,False,False,False,False,False,WHERE句が空,,False,False,,False,,False,,True,0
+conference-confOf,q_11.sparql,conference,confOf,18,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://conference#was_a_committee_chair_of> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://confOf#Chair_PC>  ?o }",G,述語不整合,G,False,False,False,False,True,1トリプル、残留URI/FILTER/rdf:typeなし,5.0,True,False,,False,,False,,False,1
+conference-confOf,q_14.sparql,conference,confOf,1772,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://conference#was_a_member_of> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://confOf#Chair_PC>  ?o }",G,述語不整合,G,False,False,False,False,True,1トリプル、残留URI/FILTER/rdf:typeなし,5.0,True,False,,False,,False,,False,1
+conference-confOf,q_25.sparql,conference,confOf,2359,0,False,"SELECT distinct ?s WHERE {  
+?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Reviewed_contribution> .  
+ }
+","SELECT DISTINCT  ?s
+WHERE
+  { ?s  a  <http://conference#Reviewed_contribution> }",B,変換システム不整合,,False,False,False,False,False,単一トリプルに残留URI: <http://conference#Reviewed_contribution>,,False,True,<http://conference#Reviewed_contribution>,False,,True,<http:,False,1
+conference-edas,q_1.sparql,conference,edas,1620,0,False,"SELECT distinct ?s WHERE {  
+?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Committee_member> .  
+ }
+","SELECT DISTINCT  ?s
+WHERE
+  { ?s  a  <http://edas#TPCMember> }",F,概念階層不整合,F,False,False,False,True,False,rdf:type制約: <http:,4.0,True,False,,False,,True,<http:,False,1
+conference-edas,q_2.sparql,conference,edas,10000,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://conference#has_a_review> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://edas#isReviewedBy>  ?o .
+    ?o  a                     <http://conference#Reviewer>
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,2トリプル中に残留URI: <http://conference#Reviewer>,1.0,True,True,<http://conference#Reviewer>,False,,True,<http:,False,2
+conference-edas,q_58.sparql,conference,edas,10000,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://conference#contributes> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://edas#isReviewing>  ?o ;
+        a                     <http://conference#Reviewer>
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,2トリプル中に残留URI: <http://conference#Reviewer>,1.0,True,True,<http://conference#Reviewer>,False,,True,<http:,False,2
+conference-ekaw,q_11.sparql,conference,ekaw,18,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://conference#was_a_committee_chair_of> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://ekaw#PC_Chair>  ?o }",G,述語不整合,G,False,False,False,False,True,1トリプル、残留URI/FILTER/rdf:typeなし,5.0,True,False,,False,,False,,False,1
+conference-ekaw,q_14.sparql,conference,ekaw,1772,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://conference#was_a_member_of> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://ekaw#SC_Member>  ?o }",G,述語不整合,G,False,False,False,False,True,1トリプル、残留URI/FILTER/rdf:typeなし,5.0,True,False,,False,,False,,False,1
+conference-ekaw,q_59.sparql,conference,ekaw,10000,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://conference#has_authors> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://ekaw#reviewWrittenBy>  ?o ;
+        a                     <http://conference#Review>
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,2トリプル中に残留URI: <http://conference#Review>,1.0,True,True,<http://conference#Review>,False,,True,<http:,False,2
+edas-cmt,q_1.sparql,edas,cmt,953,0,False,"SELECT distinct ?s WHERE {  
+?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://edas#AcceptedPaper> .  
+ }
+","SELECT DISTINCT  ?s
+WHERE
+  {  }",A,システムエラー,,False,False,False,False,False,WHERE句が空,,False,False,,False,,False,,True,0
+edas-cmt,q_16.sparql,edas,cmt,4244,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://edas#isMemberOf> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://cmt#ConferenceMember>  ?o }",G,述語不整合,G,False,False,False,False,True,1トリプル、残留URI/FILTER/rdf:typeなし,5.0,True,False,,False,,False,,False,1
+edas-cmt,q_30.sparql,edas,cmt,10000,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://edas#hasTopic> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://cmt#hasSubjectArea>  ?o ;
+        a                     <http://edas#Paper>
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,2トリプル中に残留URI: <http://edas#Paper>,1.0,True,True,<http://edas#Paper>,False,,True,<http:,False,2
+edas-cmt,q_31.sparql,edas,cmt,1406,0,False,"SELECT distinct ?s WHERE {  
+?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://edas#RejectedPaper> .  
+ }
+","SELECT DISTINCT  ?s
+WHERE
+  {  }",A,システムエラー,,False,False,False,False,False,WHERE句が空,,False,False,,False,,False,,True,0
+edas-conference,q_37.sparql,edas,conference,6,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://edas#paperDueOn> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s        <http://conference#has_important_dates>  ?unknown .
+    ?unknown  <http://conference#is_a_date_of_full_paper_submission>  ?o
+  }",E,複合トリプル不整合,E,False,False,True,False,False,2トリプル、FILTER/残留URIなし（OPTIONAL化候補）,3.0,True,False,,False,,False,,False,2
+edas-ekaw,q_34.sparql,edas,ekaw,2847,0,False,"SELECT distinct ?s WHERE {  
+?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://edas#Reviewer> .  
+ }
+","SELECT DISTINCT  ?s
+WHERE
+  {  }",A,システムエラー,,False,False,False,False,False,WHERE句が空,,False,False,,False,,False,,True,0
+edas-ekaw,q_45.sparql,edas,ekaw,10000,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://edas#isReviewedBy> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://ekaw#Assigned_Paper>  ?o }",G,述語不整合,G,False,False,False,False,True,1トリプル、残留URI/FILTER/rdf:typeなし,5.0,True,False,,False,,False,,False,1
+ekaw-cmt,q_11.sparql,ekaw,cmt,10000,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://ekaw#authorOf> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://cmt#writePaper>  ?o .
+    ?o  a                     <http://ekaw#Paper> .
+    ?s  a                     <http://ekaw#Paper_Author>
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,"3トリプル中に残留URI: <http://ekaw#Paper_Author>, <http://ekaw#Paper>",1.0,True,True,<http://ekaw#Paper_Author>; <http://ekaw#Paper>,False,,True,<http:,False,3
+ekaw-cmt,q_23.sparql,ekaw,cmt,1406,0,False,"SELECT distinct ?s WHERE {  
+?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ekaw#Rejected_Paper> .  
+ }
+","SELECT DISTINCT  ?s
+WHERE
+  {  }",A,システムエラー,,False,False,False,False,False,WHERE句が空,,False,False,,False,,False,,True,0
+ekaw-cmt,q_42.sparql,ekaw,cmt,953,0,False,"SELECT distinct ?s WHERE {  
+?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ekaw#Accepted_Paper> .  
+ }
+","SELECT DISTINCT  ?s
+WHERE
+  {  }",A,システムエラー,,False,False,False,False,False,WHERE句が空,,False,False,,False,,False,,True,0
+ekaw-cmt,q_44.sparql,ekaw,cmt,2359,0,False,"SELECT distinct ?s WHERE {  
+?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ekaw#Submitted_Paper> .  
+ }
+","SELECT DISTINCT  ?s
+WHERE
+  { ?s  a  <http://ekaw#Submitted_Paper> }",B,変換システム不整合,,False,False,False,False,False,単一トリプルに残留URI: <http://ekaw#Submitted_Paper>,,False,True,<http://ekaw#Submitted_Paper>,False,,True,<http:,False,1
+ekaw-cmt,q_51.sparql,ekaw,cmt,10000,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://ekaw#writtenBy> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://cmt#hasAuthor>  ?o ;
+        a                     <http://ekaw#Paper> .
+    ?o  a                     <http://ekaw#Paper_Author>
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,"3トリプル中に残留URI: <http://ekaw#Paper_Author>, <http://ekaw#Paper>",1.0,True,True,<http://ekaw#Paper_Author>; <http://ekaw#Paper>,False,,True,<http:,False,3
+ekaw-cmt,q_52.sparql,ekaw,cmt,10000,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://ekaw#coversTopic> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://cmt#hasSubjectArea>  ?o ;
+        a                     <http://ekaw#Paper>
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,2トリプル中に残留URI: <http://ekaw#Paper>,1.0,True,True,<http://ekaw#Paper>,False,,True,<http:,False,2
+ekaw-confOf,q_16.sparql,ekaw,confOf,2359,0,False,"SELECT distinct ?s WHERE {  
+?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ekaw#Evaluated_Paper> .  
+ }
+","SELECT DISTINCT  ?s
+WHERE
+  { ?s  a  <http://ekaw#Evaluated_Paper> }",B,変換システム不整合,,False,False,False,False,False,単一トリプルに残留URI: <http://ekaw#Evaluated_Paper>,,False,True,<http://ekaw#Evaluated_Paper>,False,,True,<http:,False,1
+ekaw-confOf,q_61.sparql,ekaw,confOf,8,0,False,"SELECT distinct ?s WHERE {  
+?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ekaw#Location> .  
+ }
+","SELECT DISTINCT  ?s
+WHERE
+  {   { ?s  a  <http://confOf#Country>}
+    UNION
+      { ?s  a  <http://confOf#City>}
+  }",E,複合トリプル不整合,E;F,False,False,True,True,False,2トリプル、FILTER/残留URIなし（OPTIONAL化候補）,3.0,True,False,,False,,True,<http:,False,2
+ekaw-conference,q_11.sparql,ekaw,conference,10000,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://ekaw#authorOf> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://conference#Reviewer>  ?o }",G,述語不整合,G,False,False,False,False,True,1トリプル、残留URI/FILTER/rdf:typeなし,5.0,True,False,,False,,False,,False,1
+ekaw-conference,q_25.sparql,ekaw,conference,989,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://ekaw#hasEvent> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://conference#has_parts>  ?o ;
+        a                     <http://ekaw#Conference>
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,2トリプル中に残留URI: <http://ekaw#Conference>,1.0,True,True,<http://ekaw#Conference>,False,,True,<http:,False,2
+ekaw-edas,q_11.sparql,ekaw,edas,10000,0,False,"SELECT distinct ?s ?o WHERE {  
+?s <http://ekaw#authorOf> ?o .  
+ }
+","SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://edas#Reviewer>  ?o }",G,述語不整合,G,False,False,False,False,True,1トリプル、残留URI/FILTER/rdf:typeなし,5.0,True,False,,False,,False,,False,1
+gbo-gmo,query_1.sparql,gbo,gmo,0,0,True,"PREFIX gbo: <http://gbo#>
+SELECT ?cruise ?vesselName
+WHERE {
+	?cruise a gbo:Cruise ;
+		gbo:hasVessel ?vessel .
+	?vessel gbo:hasTitle ?vesselName .
+}","PREFIX  gbo:  <http://gbo#>
+
+SELECT  ?cruise ?vesselName
+WHERE
+  { ?cruise  a                     <http://gmo#Cruise> ;
+             gbo:hasVessel         ?vessel .
+    ?vessel  <http://gmo#hasCanonicalName>  ?vesselName
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,"4トリプル中に残留URI: gbo:hasVessel, <http://gbo#>",1.0,True,True,gbo:hasVessel; <http://gbo#>,False,,True,<http:,False,4
+gbo-gmo,query_10.sparql,gbo,gmo,0,0,True,"PREFIX gbo: <http://gbo#>
+SELECT ?cruise ?startPortName ?endPortName
+WHERE {
+	?cruise gbo:hasStartPortCall ?startCall ;
+		gbo:hasEndPortCall ?endCall .
+	?startCall gbo:atPort ?startPlace .
+	?endCall gbo:atPort ?endPlace .
+	?startPlace gbo:hasTitle ?startPortName .
+	?endPlace gbo:hasTitle ?endPortName .
+}","PREFIX  gbo:  <http://gbo#>
+
+SELECT  ?cruise ?startPortName ?endPortName
+WHERE
+  { ?cruise   gbo:hasStartPortCall  ?startCall ;
+              gbo:hasEndPortCall    ?endCall .
+    ?startCall  <http://gmo#atPort>  ?startPlace .
+    ?endCall  <http://gmo#atPort>   ?endPlace .
+    ?startPlace  <http://gmo#hasCanonicalName>  ?startPortName .
+    ?endPlace  <http://gmo#hasCanonicalName>  ?endPortName
+  }",C,部分的語彙欠損,C;E,True,False,True,False,False,"7トリプル中に残留URI: <http://gbo#>, gbo:hasStartPortCall, gbo:hasEndPortCall",1.0,True,True,<http://gbo#>; gbo:hasStartPortCall; gbo:hasEndPortCall,False,,False,,False,7
+gbo-gmo,query_11.sparql,gbo,gmo,0,0,True,"PREFIX gbo: <http://gbo#>
+SELECT DISTINCT ?email
+WHERE {
+	?person a gbo:Person ;
+		gbo:hasEmailAddress ?email .
+}
+ORDER BY ?email","PREFIX  gbo:  <http://gbo#>
+
+SELECT DISTINCT  ?email
+WHERE
+  { ?person  a                    <http://gmo#Person> ;
+             gbo:hasEmailAddress  ?email
+  }
+ORDER BY ASC(?email)",C,部分的語彙欠損,C;E;F,True,False,True,True,False,"3トリプル中に残留URI: <http://gbo#>, gbo:hasEmailAddress",1.0,True,True,<http://gbo#>; gbo:hasEmailAddress,False,,True,<http:,False,3
+gbo-gmo,query_12.sparql,gbo,gmo,0,0,True,"PREFIX gbo: <http://gbo#>
+SELECT ?sample ?feature
+WHERE {
+	?sample a gbo:PhysicalSample ;
+		gbo:originatesFrom ?feature .
+	?feature a gbo:Feature .
+}","PREFIX  gbo:  <http://gbo#>
+
+SELECT  ?sample ?feature
+WHERE
+  { ?sample   a                     <http://gmo#PhysicalSample> ;
+              <http://gmo#originatesFrom>  ?feature .
+    ?feature  a                     gbo:Feature
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,"4トリプル中に残留URI: gbo:Feature, <http://gbo#>",1.0,True,True,gbo:Feature; <http://gbo#>,False,,True,gbo:Feature; <http:,False,4
+gbo-gmo,query_13.sparql,gbo,gmo,0,0,True,"PREFIX gbo: <http://gbo#>
+SELECT ?organization ?award
+WHERE {
+	?organization gbo:isSponsorOf ?award .
+	?award a gbo:Award .
+}","PREFIX  gbo:  <http://gbo#>
+
+SELECT  ?organization ?award
+WHERE
+  { ?organization
+              gbo:isSponsorOf  ?award .
+    ?award    a                <http://gmo#FundingAward>
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,"3トリプル中に残留URI: <http://gbo#>, gbo:isSponsorOf",1.0,True,True,<http://gbo#>; gbo:isSponsorOf,False,,True,<http:,False,3
+gbo-gmo,query_14.sparql,gbo,gmo,5,0,False,"PREFIX gbo: <http://gbo#>
+SELECT ?person ?affiliation
+WHERE {
+	?person a gbo:Person ;
+		gbo:hasAffiliation ?affiliation .
+	?affiliation a gbo:Organization .
+}","PREFIX  gbo:  <http://gbo#>
+
+SELECT  ?person ?affiliation
+WHERE
+  { ?person   a                   <http://gmo#Person> ;
+              gbo:hasAffiliation  ?affiliation .
+    ?affiliation  a               <http://gmo#Organization>
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,"4トリプル中に残留URI: <http://gbo#>, gbo:hasAffiliation",1.0,True,True,<http://gbo#>; gbo:hasAffiliation,False,,True,<http:,False,4
+gbo-gmo,query_17.sparql,gbo,gmo,0,0,True,"PREFIX gbo: <http://gbo#>
+SELECT ?entity ?title
+WHERE {
+	{ ?entity a gbo:Dataset . }
+	UNION
+	{ ?entity a gbo:Document . }
+	?entity gbo:hasTitle ?title .
+}","PREFIX  gbo:  <http://gbo#>
+
+SELECT  ?entity ?title
+WHERE
+  {   { ?entity  a  gbo:Dataset }
+    UNION
+      { ?entity  a  gbo:Document }
+    ?entity  <http://gmo#hasCanonicalName>  ?title
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,"3トリプル中に残留URI: gbo:Document, <http://gbo#>, gbo:Dataset",1.0,True,True,gbo:Document; <http://gbo#>; gbo:Dataset,False,,True,gbo:Document; gbo:Dataset,False,3
+gbo-gmo,query_2.sparql,gbo,gmo,1,0,False,"PREFIX gbo: <http://gbo#>
+SELECT ?person ?familyName
+WHERE {
+	?person a gbo:Person ;
+		gbo:hasFamilyName ?familyName .
+	FILTER regex(?familyName, ""Smith"", ""i"")
+}","PREFIX  gbo:  <http://gbo#>
+
+SELECT  ?person ?familyName
+WHERE
+  { ?person  a                  <http://gmo#Person> ;
+             gbo:hasFamilyName  ?familyName
+    FILTER regex(?familyName, ""Smith"", ""i"")
+  }",C,部分的語彙欠損,C;D;E;F,True,True,True,True,False,"4トリプル中に残留URI: <http://gbo#>, gbo:hasFamilyName",1.0,True,True,<http://gbo#>; gbo:hasFamilyName,True,"FILTER regex(?familyName, ""Smith"", ""i"")",True,<http:,False,4
+gbo-gmo,query_5.sparql,gbo,gmo,0,0,True,"PREFIX gbo: <http://gbo#>
+SELECT ?program ?sponsor
+WHERE {
+	?program a gbo:Program ;
+		gbo:hasAward ?award .
+	?award gbo:hasSponsor ?sponsor .
+}","PREFIX  gbo:  <http://gbo#>
+
+SELECT  ?program ?sponsor
+WHERE
+  { ?program  a                     <http://gmo#Program> ;
+              <http://gmo#fundedBy>  ?award .
+    ?award    gbo:hasSponsor        ?sponsor
+  }",C,部分的語彙欠損,C;E;F,True,False,True,True,False,"4トリプル中に残留URI: gbo:hasSponsor, <http://gbo#>",1.0,True,True,gbo:hasSponsor; <http://gbo#>,False,,True,<http:,False,4
+gbo-gmo,query_7.sparql,gbo,gmo,0,0,True,"PREFIX gbo: <http://gbo#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?cruise ?startDate
+WHERE {
+	?cruise a gbo:Cruise ;
+		gbo:hasStartDate ?startDate .
+	FILTER (?startDate > ""2010-01-01T00:00:00""^^xsd:dateTime)
+}","PREFIX  xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX  gbo:  <http://gbo#>
+
+SELECT  ?cruise ?startDate
+WHERE
+  { ?cruise  a                 <http://gmo#Cruise> ;
+             gbo:hasStartDate  ?startDate
+    FILTER ( ?startDate > ""2010-01-01T00:00:00""^^xsd:dateTime )
+  }",C,部分的語彙欠損,C;D;E;F,True,True,True,True,False,"3トリプル中に残留URI: <http://gbo#>, gbo:hasStartDate",1.0,True,True,<http://gbo#>; gbo:hasStartDate,True,"FILTER ( ?startDate > ""2010-01-01T00:00:00""^^xsd:dateTime )",True,<http:,False,3

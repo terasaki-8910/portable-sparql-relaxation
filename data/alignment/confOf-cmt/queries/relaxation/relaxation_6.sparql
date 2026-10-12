@@ -1,0 +1,9 @@
+# Pair: confOf-cmt (confOf_100 -> cmt_100)
+# target_phase: Phase 1
+# FailureMechanism: confOf:earlyRegistration は未対応で残留 -> targetで0件
+# Recovery: Phase1で残留triple削除後、confOf:Person（対応済みクラス）+ confOf:writes（対応済み）で復活
+SELECT DISTINCT ?person WHERE {
+  ?person <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://confOf#Person> .
+  ?person <http://confOf#writes> ?paper .
+  ?person <http://confOf#earlyRegistration> ?flag .
+}

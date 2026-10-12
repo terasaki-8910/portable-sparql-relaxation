@@ -1,0 +1,11 @@
+# Pair: confOf-cmt (confOf_100 -> cmt_100)
+# target_phase: Phase 1
+# FailureMechanism: confOf:dealsWith は alignment(confOf-cmt.edoal) 対応済みだが、複数使用で制約強化
+# Recovery: 実際には翻訳されるためPhase1では復活しないが、writtenByを追加して別パターンでテスト
+SELECT DISTINCT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://confOf#Paper> .
+  ?paper <http://confOf#writtenBy> ?author .
+  ?paper <http://confOf#dealsWith> ?topic1 .
+  ?paper <http://confOf#dealsWith> ?topic2 .
+  FILTER(?topic1 != ?topic2)
+}

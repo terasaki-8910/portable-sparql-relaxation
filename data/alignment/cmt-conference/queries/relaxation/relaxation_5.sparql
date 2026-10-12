@@ -1,0 +1,9 @@
+# Pair: cmt-conference (cmt_100 -> conference_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: cmt:assignedTo が翻訳後も残留 -> targetで0件。Phase1で残留トリプル削除後に復活。
+SELECT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Paper> .
+  ?paper <http://cmt#hasAuthor> ?author .
+  ?author <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Author> .
+  ?paper <http://cmt#assignedTo> ?rev .
+}

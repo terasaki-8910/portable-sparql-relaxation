@@ -1,0 +1,75 @@
+{
+  "name": "conference-ekaw",
+  "alignment_file": "data/alignment/conference-ekaw/alignment/conference-ekaw.edoal",
+  "queries_dir": "data/alignment/conference-ekaw/queries/",
+  "expected_output_dir": "data/alignment/conference-ekaw/expected_output/",
+  "datasets": [
+    {
+      "type": "file",
+      "path": "data/datasets/conference_100.ttl",
+      "format": "turtle"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/conference_eswc.ttl",
+      "format": "turtle"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/ekaw_100.ttl",
+      "format": "turtle"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/ekaw_eswc.ttl",
+      "format": "turtle"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/conference.schema.owl",
+      "format": "xml"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/ekaw.schema.owl",
+      "format": "xml"
+    }
+  ],
+  "endpoints": {},
+  "source_datasets": [
+    {
+      "type": "file",
+      "path": "data/datasets/conference_100.ttl",
+      "format": "turtle"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/conference_eswc.ttl",
+      "format": "turtle"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/conference.schema.owl",
+      "format": "xml"
+    }
+  ],
+  "target_datasets": [
+    {
+      "type": "file",
+      "path": "data/datasets/ekaw_100.ttl",
+      "format": "turtle"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/ekaw_eswc.ttl",
+      "format": "turtle"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/ekaw.schema.owl",
+      "format": "xml"
+    }
+  ],
+  "source_endpoints": {},
+  "target_endpoints": {}
+}

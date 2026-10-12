@@ -1,0 +1,7 @@
+PREFIX cmt: <http://cmt#>
+SELECT ?paper
+WHERE {
+	?paper a cmt:Paper .
+	OPTIONAL { ?paper cmt:hasDecision ?decision . }
+	FILTER (!bound(?decision))
+}

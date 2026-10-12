@@ -1,0 +1,7 @@
+# Pair: cmt-confOf (cmt_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 2
+# Mechanism: STRSTARTSで cmt-instances#paper を要求。targetは confOf-instances# なので0件。Phase2でFILTER除去後に復活。
+SELECT ?p WHERE {
+  ?p <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Paper> .
+  FILTER(STRSTARTS(STR(?p), "http://cmt-instances#paper"))
+}

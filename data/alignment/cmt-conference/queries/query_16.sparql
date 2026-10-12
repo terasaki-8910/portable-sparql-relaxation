@@ -1,0 +1,7 @@
+PREFIX cmt: <http://cmt#>
+SELECT ?paper
+WHERE {
+	?paper a cmt:Paper ;
+		cmt:hasDecision ?decision .
+	?decision a cmt:Rejection .
+}

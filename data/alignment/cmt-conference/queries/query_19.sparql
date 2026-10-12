@@ -1,0 +1,6 @@
+PREFIX cmt: <http://cmt#>
+SELECT ?extReviewer ?reviewer
+WHERE {
+	?extReviewer a cmt:ExternalReviewer ;
+		cmt:assignedByReviewer ?reviewer .
+}

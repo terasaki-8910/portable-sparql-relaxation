@@ -1,0 +1,7 @@
+# Pair: conference-confOf (conference_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 2
+# Mechanism: paper URIが conference-instances#paper- であることを要求。targetは confOf-instances#paper- なので0件→Phase2で復活。
+SELECT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Paper> .
+  FILTER(regex(STR(?paper), "^http://conference-instances#paper-"))
+}

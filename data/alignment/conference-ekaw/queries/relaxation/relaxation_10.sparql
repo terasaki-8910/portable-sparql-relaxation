@@ -1,0 +1,7 @@
+# Pair: conference-ekaw (conference_100 -> ekaw_100)
+# target_phase: Phase 2
+# FailureMechanism: 「ekaw-instances# を含まない」ことを要求。sourceは満たすが、targetは満たさず0件→Phase2で復活。
+SELECT ?rev WHERE {
+  ?rev <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Review> .
+  FILTER(!CONTAINS(STR(?rev), "ekaw-instances#"))
+}

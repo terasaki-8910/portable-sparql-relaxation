@@ -1,0 +1,1486 @@
+pair_name,query_file,source_count,source_unique_count,source_success,source_error,translation_success,translation_error,translated_count,translated_empty,translated_error,relaxation_applied,relaxation_phase,relaxation_count,relaxation_success,tried_phases,tried_phases_count,relaxation_error,all_conditions_met,tp,fp,fn,precision,recall,f1,information_loss,source_query,translated_query,relaxed_query
+cmt-conference,relaxation_1.sparql,209,209,True,,True,,0,True,,True,Phase3_Optionalization,775,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,209,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: cmt-conference (cmt_100 -> conference_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: cmt:paperID が翻訳後も残留 -> targetで0件。Phase1で残留トリプル削除後に復活。
+SELECT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Paper> .
+  ?paper <http://cmt#hasAuthor> ?author .
+  ?paper <http://cmt#paperID> ?id .
+}","SELECT  ?paper
+WHERE
+  { ?paper   a                     <http://conference#Conference_contribution> ;
+             <http://conference#has_authors>  ?author ;
+             a                     <http://conference#Written_contribution> .
+    ?author  a                     <http://conference#Regular_author> .
+    ?paper   <http://cmt#paperID>  ?id
+  }","SELECT  ?paper
+WHERE {
+  ?paper a <http://conference#Conference_contribution> .
+  ?paper <http://conference#has_authors> ?author .
+  ?paper a <http://conference#Written_contribution> .
+  ?author a <http://conference#Regular_author> .
+  OPTIONAL { ?paper <http://cmt#paperID> ?id . }
+}"
+cmt-conference,relaxation_10.sparql,175,175,True,,True,,0,True,,True,Phase2_FilterRemoval,187,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,175,12,0,0.9358,1.0000,0.9669,0.0000,"# Pair: cmt-conference (cmt_100 -> conference_100)
+# IntendedSuccessPhase: Phase 2
+# Mechanism: 「conference-instances を含まない」ことを要求（sourceは満たすがtargetは満たさない）。
+#           変換直後は0件、Phase2でFILTER除去後に復活。
+SELECT ?s WHERE {
+  ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#ProgramCommitteeMember> .
+  FILTER(!CONTAINS(STR(?s), ""conference-instances#""))
+}","SELECT  ?s
+WHERE
+  { ?s  a  <http://conference#Committee_member>
+    FILTER ( ! contains(str(?s), ""conference-instances#"") )
+  }","SELECT  ?s
+WHERE {
+  ?s  a  <http://conference#Committee_member>
+}"
+cmt-conference,relaxation_2.sparql,209,209,True,,True,,0,True,,True,Phase3_Optionalization,209,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,209,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: cmt-conference (cmt_100 -> conference_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: cmt:paperID が翻訳後も残留 -> targetで0件。Phase1で残留トリプル削除後に復活。
+SELECT ?abs WHERE {
+  ?abs <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#PaperAbstract> .
+  ?abs <http://cmt#paperID> ?pid .
+}","SELECT  ?abs
+WHERE
+  { ?abs  a                     <http://conference#Abstract> ;
+          <http://cmt#paperID>  ?pid
+  }","SELECT  ?abs
+WHERE {
+  ?abs a <http://conference#Abstract> .
+  OPTIONAL { ?abs <http://cmt#paperID> ?pid . }
+}"
+cmt-conference,relaxation_3.sparql,173,173,True,,True,,0,True,,True,Phase3_Optionalization,3,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,1,1,172,0.5000,0.0058,0.0114,0.9942,"# Pair: cmt-conference (cmt_100 -> conference_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: cmt:assignedByAdministrator が翻訳後も残留 -> targetで0件。Phase1で残留トリプル削除後に復活。
+SELECT ?m WHERE {
+  ?m <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#ProgramCommitteeMember> .
+  ?m <http://cmt#memberOfProgramCommittee> ?pc .
+  ?m <http://cmt#assignedByAdministrator> ?adder .
+}","SELECT  ?m
+WHERE
+  { ?m  a                     <http://conference#Committee_member> ;
+        <http://conference#was_a_committee_chair_of>  ?pc ;
+        a                     <http://cmt#ProgramCommitteeChair> ;
+        <http://cmt#assignedByAdministrator>  ?adder
+  }","SELECT  ?m
+WHERE {
+  ?m a <http://conference#Committee_member> .
+  ?m <http://conference#was_a_committee_chair_of> ?pc .
+  OPTIONAL { ?m a <http://cmt#ProgramCommitteeChair> . ?m <http://cmt#assignedByAdministrator> ?adder . }
+}"
+cmt-conference,relaxation_4.sparql,174,174,True,,True,,0,True,,True,Phase3_Optionalization,3,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,1,1,173,0.5000,0.0057,0.0114,0.9943,"# Pair: cmt-conference (cmt_100 -> conference_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: cmt:memberOfConference が翻訳後も残留 -> targetで0件。Phase1で残留トリプル削除後に復活。
+SELECT ?p WHERE {
+  ?p <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Person> .
+  ?p <http://cmt#memberOfProgramCommittee> ?pc .
+  ?p <http://cmt#memberOfConference> ?conf .
+}","SELECT  ?p
+WHERE
+  { ?p  a                     <http://conference#Person> ;
+        <http://conference#was_a_committee_chair_of>  ?pc ;
+        a                     <http://cmt#ProgramCommitteeChair> ;
+        <http://cmt#memberOfConference>  ?conf
+  }","SELECT  ?p
+WHERE {
+  ?p a <http://conference#Person> .
+  ?p <http://conference#was_a_committee_chair_of> ?pc .
+  OPTIONAL { ?p a <http://cmt#ProgramCommitteeChair> . ?p <http://cmt#memberOfConference> ?conf . }
+}"
+cmt-conference,relaxation_5.sparql,672,168,True,,True,,0,True,,True,Phase3_Optionalization,55,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,48,6,120,0.8889,0.2857,0.4324,0.7143,"# Pair: cmt-conference (cmt_100 -> conference_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: cmt:assignedTo が翻訳後も残留 -> targetで0件。Phase1で残留トリプル削除後に復活。
+SELECT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Paper> .
+  ?paper <http://cmt#hasAuthor> ?author .
+  ?author <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Author> .
+  ?paper <http://cmt#assignedTo> ?rev .
+}","SELECT  ?paper
+WHERE
+  { ?paper   a                     <http://conference#Conference_contribution> ;
+             <http://conference#has_authors>  ?author ;
+             a                     <http://conference#Written_contribution> .
+    ?author  a                     <http://conference#Regular_author> ;
+             a                     <http://conference#Active_conference_participant> .
+    ?paper   <http://cmt#assignedTo>  ?rev
+  }","SELECT  ?paper
+WHERE {
+  ?paper a <http://conference#Conference_contribution> .
+  ?paper <http://conference#has_authors> ?author .
+  ?paper a <http://conference#Written_contribution> .
+  ?author a <http://conference#Regular_author> .
+  ?author a <http://conference#Active_conference_participant> .
+  OPTIONAL { ?paper <http://cmt#assignedTo> ?rev . }
+}"
+cmt-conference,relaxation_6.sparql,102,0,True,,True,,0,True,,False,,0,False,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,No successful relaxation,False,0,0,0,0.0000,0.0000,0.0000,0.0000,"# Pair: cmt-conference (cmt_100 -> conference_100)
+# IntendedSuccessPhase: UNSOLVABLE
+# Mechanism: cmt:markConflictOfInterest が翻訳後も残留（Phase1で削除可能）
+#            しかし cmt:memberOfProgramCommittee が conference:was_a_committee_chair_of に翻訳される。
+#            アライメントでは「Author + memberOfProgramCommittee」→「議長」と定義されており、
+#            conference_eswc.ttlには議長（was_a_committee_chair_of）が3件しか存在しないため、
+#            Phase1緩和後も0件となる。これはアライメントの意味的ミスマッチであり、緩和では解決不可能。
+# Note: ソースでは102件（PC所属のAuthor with conflict）、ターゲットでは議長のみが対象となるため不一致。
+SELECT ?a WHERE {
+  ?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Author> .
+  ?a <http://cmt#memberOfProgramCommittee> ?pc .
+  ?a <http://cmt#markConflictOfInterest> ?x .
+}","SELECT  ?a
+WHERE
+  { ?a  a                     <http://conference#Active_conference_participant> ;
+        <http://conference#was_a_committee_chair_of>  ?pc ;
+        a                     <http://cmt#ProgramCommitteeChair> ;
+        <http://cmt#markConflictOfInterest>  ?x
+  }","SELECT  ?a
+WHERE
+  { ?a  a                     <http://conference#Active_conference_participant> ;
+        <http://conference#was_a_committee_chair_of>  ?pc ;
+        a                     <http://cmt#ProgramCommitteeChair> ;
+        <http://cmt#markConflictOfInterest>  ?x
+  }"
+cmt-conference,relaxation_7.sparql,755,755,True,,True,,0,True,,True,Phase2_FilterRemoval,758,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,755,3,0,0.9960,1.0000,0.9980,0.0000,"# Pair: cmt-conference (cmt_100 -> conference_100)
+# IntendedSuccessPhase: Phase 2
+# Mechanism: インスタンスURIが cmt-instances であることを要求するFILTER。
+#           sourceでは成立、target(=conference-instances)では不成立で0件。Phase2でFILTER除去後に復活。
+SELECT ?s WHERE {
+  ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Person> .
+  FILTER(CONTAINS(STR(?s), ""cmt-instances#""))
+}","SELECT  ?s
+WHERE
+  { ?s  a  <http://conference#Person>
+    FILTER contains(str(?s), ""cmt-instances#"")
+  }","SELECT  ?s
+WHERE {
+  ?s  a  <http://conference#Person>
+}"
+cmt-conference,relaxation_8.sparql,784,784,True,,True,,0,True,,True,Phase2_FilterRemoval,784,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,784,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: cmt-conference (cmt_100 -> conference_100)
+# IntendedSuccessPhase: Phase 2
+# Mechanism: STRSTARTSで cmt-instances を要求。targetでは不成立で0件。Phase2でFILTER除去後に復活。
+SELECT ?s WHERE {
+  ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Review> .
+  FILTER(STRSTARTS(STR(?s), ""http://cmt-instances#""))
+}","SELECT  ?s
+WHERE
+  { ?s  a  <http://conference#Review>
+    FILTER strstarts(str(?s), ""http://cmt-instances#"")
+  }","SELECT  ?s
+WHERE {
+  ?s  a  <http://conference#Review>
+}"
+cmt-conference,relaxation_9.sparql,619,619,True,,True,,0,True,,True,Phase2_FilterRemoval,44,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,43,1,576,0.9773,0.0695,0.1297,0.9305,"# Pair: cmt-conference (cmt_100 -> conference_100)
+# IntendedSuccessPhase: Phase 2
+# Mechanism: regexで cmt-instances を要求。targetでは不成立で0件。Phase2でFILTER除去後に復活。
+SELECT ?s WHERE {
+  ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Author> .
+  FILTER(regex(STR(?s), ""^http://cmt-instances#""))
+}","SELECT  ?s
+WHERE
+  { ?s  a  <http://conference#Active_conference_participant>
+    FILTER regex(str(?s), ""^http://cmt-instances#"")
+  }","SELECT  ?s
+WHERE {
+  ?s  a  <http://conference#Active_conference_participant>
+}"
+cmt-confOf,relaxation_1.sparql,418,418,True,,True,,0,True,,True,Phase3_Optionalization,209,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,209,0,209,1.0000,0.5000,0.6667,0.5000,"# Pair: cmt-confOf (cmt_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: cmt:paperID はEDOAL未対応で残留 -> target(confOf)で0件。Phase1で残留トリプル削除後に復活。
+SELECT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Paper> .
+  ?paper <http://cmt#paperID> ?pid .
+}","SELECT  ?paper
+WHERE
+  { ?paper  a                     <http://confOf#Contribution> ;
+            <http://cmt#paperID>  ?pid
+  }","SELECT  ?paper
+WHERE {
+  ?paper a <http://confOf#Contribution> .
+  OPTIONAL { ?paper <http://cmt#paperID> ?pid . }
+}"
+cmt-confOf,relaxation_10.sparql,175,175,True,,True,,0,True,,True,Phase2_FilterRemoval,174,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,174,0,1,1.0000,0.9943,0.9971,0.0057,"# Pair: cmt-confOf (cmt_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 2
+# Mechanism: 「confOf-instances# を含まない」ことを要求。sourceは満たすがtargetは満たさず0件。Phase2でFILTER除去後に復活。
+SELECT ?m WHERE {
+  ?m <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#ProgramCommitteeMember> .
+  FILTER(!CONTAINS(STR(?m), ""confOf-instances#""))
+}","SELECT  ?m
+WHERE
+  { ?m  a  <http://confOf#Member_PC>
+    FILTER ( ! contains(str(?m), ""confOf-instances#"") )
+  }","SELECT  ?m
+WHERE {
+  ?m  a  <http://confOf#Member_PC>
+}"
+cmt-confOf,relaxation_2.sparql,672,168,True,,True,,0,True,,True,Phase3_Optionalization,209,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,168,41,0,0.8038,1.0000,0.8912,0.0000,"# Pair: cmt-confOf (cmt_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: cmt:assignedTo はEDOAL未対応で残留 -> targetで0件。Phase1で残留トリプル削除後に復活。
+SELECT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Paper> .
+  ?paper <http://cmt#assignedTo> ?rev .
+}","SELECT  ?paper
+WHERE
+  { ?paper  a                     <http://confOf#Contribution> ;
+            <http://cmt#assignedTo>  ?rev
+  }","SELECT  ?paper
+WHERE {
+  ?paper a <http://confOf#Contribution> .
+  OPTIONAL { ?paper <http://cmt#assignedTo> ?rev . }
+}"
+cmt-confOf,relaxation_3.sparql,672,173,True,,True,,0,True,,True,Phase3_Optionalization,672,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,173,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: cmt-confOf (cmt_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: cmt:hasBeenAssigned はEDOAL未対応で残留 -> targetで0件。Phase1で残留トリプル削除後に復活。
+SELECT ?r WHERE {
+  ?r <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Reviewer> .
+  ?r <http://cmt#hasBeenAssigned> ?paper .
+}","SELECT  ?r
+WHERE
+  { ?r  <http://confOf#reviewes>  ?temp0 ;
+        <http://cmt#hasBeenAssigned>  ?paper
+  }","SELECT  ?r
+WHERE {
+  ?r <http://confOf#reviewes> ?temp0 .
+  OPTIONAL { ?r <http://cmt#hasBeenAssigned> ?paper . }
+}"
+cmt-confOf,relaxation_4.sparql,784,173,True,,True,,0,True,,True,Phase3_Optionalization,672,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,173,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: cmt-confOf (cmt_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: cmt:writeReview はEDOAL未対応で残留 -> targetで0件。Phase1で残留トリプル削除後に復活。
+SELECT ?r WHERE {
+  ?r <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Reviewer> .
+  ?r <http://cmt#writeReview> ?review .
+}","SELECT  ?r
+WHERE
+  { ?r  <http://confOf#reviewes>  ?temp0 ;
+        <http://cmt#writeReview>  ?review
+  }","SELECT  ?r
+WHERE {
+  ?r <http://confOf#reviewes> ?temp0 .
+  OPTIONAL { ?r <http://cmt#writeReview> ?review . }
+}"
+cmt-confOf,relaxation_5.sparql,784,0,True,,True,,0,True,,False,,0,False,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,No successful relaxation,False,0,0,0,0.0000,0.0000,0.0000,0.0000,"# Pair: cmt-confOf (cmt_100 -> confOf_100)
+# IntendedSuccessPhase: UNSOLVABLE
+# Mechanism: cmt:writtenBy はEDOAL未対応で残留。
+#            しかしクエリには他の制約がないため、Phase1で writtenBy を削除すると
+#            SELECT ?rev WHERE {} となり、全インスタンスが返る（過度な緩和）。
+# Note: cmt#Reviewクラスも未マップ。アライメント不足により緩和では解決不可能。
+SELECT ?rev WHERE {
+  ?rev <http://cmt#writtenBy> ?person .
+}","SELECT  ?rev
+WHERE
+  { ?rev  <http://cmt#writtenBy>  ?person }","SELECT  ?rev
+WHERE
+  { ?rev  <http://cmt#writtenBy>  ?person }"
+cmt-confOf,relaxation_6.sparql,775,619,True,,True,,0,True,,True,Phase3_Optionalization,619,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,619,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: cmt-confOf (cmt_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: cmt:markConflictOfInterest はEDOAL未対応で残留 -> targetで0件。Phase1で残留トリプル削除後に復活。
+SELECT ?a WHERE {
+  ?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Author> .
+  ?a <http://cmt#markConflictOfInterest> ?x .
+}","SELECT  ?a
+WHERE
+  { ?a  a                     <http://confOf#Author> ;
+        <http://cmt#markConflictOfInterest>  ?x
+  }","SELECT  ?a
+WHERE {
+  ?a a <http://confOf#Author> .
+  OPTIONAL { ?a <http://cmt#markConflictOfInterest> ?x . }
+}"
+cmt-confOf,relaxation_7.sparql,755,755,True,,True,,0,True,,True,Phase2_FilterRemoval,755,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,755,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: cmt-confOf (cmt_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 2
+# Mechanism: FILTERで cmt-instances# を要求。targetは confOf-instances# なので0件。Phase2でFILTER除去後に復活。
+SELECT ?s WHERE {
+  ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Person> .
+  FILTER(CONTAINS(STR(?s), ""cmt-instances#""))
+}","SELECT  ?s
+WHERE
+  { ?s  a  <http://confOf#Person>
+    FILTER contains(str(?s), ""cmt-instances#"")
+  }","SELECT  ?s
+WHERE {
+  ?s  a  <http://confOf#Person>
+}"
+cmt-confOf,relaxation_8.sparql,209,209,True,,True,,0,True,,True,Phase2_FilterRemoval,209,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,209,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: cmt-confOf (cmt_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 2
+# Mechanism: STRSTARTSで cmt-instances#paper を要求。targetは confOf-instances# なので0件。Phase2でFILTER除去後に復活。
+SELECT ?p WHERE {
+  ?p <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Paper> .
+  FILTER(STRSTARTS(STR(?p), ""http://cmt-instances#paper""))
+}","SELECT  ?p
+WHERE
+  { ?p  a  <http://confOf#Contribution>
+    FILTER strstarts(str(?p), ""http://cmt-instances#paper"")
+  }","SELECT  ?p
+WHERE {
+  ?p  a  <http://confOf#Contribution>
+}"
+cmt-confOf,relaxation_9.sparql,784,0,True,,True,,0,True,,False,,0,False,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,No successful relaxation,False,0,0,0,0.0000,0.0000,0.0000,0.0000,"# Pair: cmt-confOf (cmt_100 -> confOf_100)
+# IntendedSuccessPhase: UNSOLVABLE
+# Mechanism: regexで cmt-instances#review を要求（Phase2でFILTER削除可能）。
+#            しかし cmt#Review クラスがEDOALに未マップ（confOfには Reviewing_event が存在）。
+#            Phase1で cmt#Review を削除すると、残るのはFILTERのみ。
+#            Phase2でFILTER削除すると制約が全くなくなり、全トリプルが返る（意味的に不正確）。
+# Note: アライメントに cmt#Review のマッピングが必要。緩和では解決不可能。
+SELECT ?r WHERE {
+  ?r <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Review> .
+  FILTER(regex(STR(?r), ""^http://cmt-instances#review""))
+}","SELECT  ?r
+WHERE
+  { ?r  a  <http://cmt#Review>
+    FILTER regex(str(?r), ""^http://cmt-instances#review"")
+  }","SELECT  ?r
+WHERE
+  { ?r  a  <http://cmt#Review>
+    FILTER regex(str(?r), ""^http://cmt-instances#review"")
+  }"
+cmt-edas,relaxation_1.sparql,736,1,True,,True,,0,True,,True,Phase3_Optionalization,1,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,1,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: cmt-edas (cmt_100 -> edas_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: cmt:logoURL が翻訳後も残留し target(edas)で0件。Phase1で残留triple削除後、Conference×memberで復活。
+SELECT ?conf WHERE {
+  ?conf <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Conference> .
+  ?conf <http://cmt#hasConferenceMember> ?member .
+  ?conf <http://cmt#logoURL> ?logo .
+}","SELECT  ?conf
+WHERE
+  { ?conf  a                     <http://edas#Conference> ;
+           <http://edas#hasMember>  ?member ;
+           <http://cmt#logoURL>  ?logo
+  }","SELECT  ?conf
+WHERE {
+  ?conf a <http://edas#Conference> .
+  OPTIONAL { ?conf <http://edas#hasMember> ?member . ?conf <http://cmt#logoURL> ?logo . }
+}"
+cmt-edas,relaxation_10.sparql,1,1,True,,True,,0,True,,True,Phase2_FilterRemoval,1,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,1,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: cmt-edas (cmt_100 -> edas_100)
+# IntendedSuccessPhase: Phase 2
+# Mechanism: cmt-instances#conference を要求。翻訳後は edas-instances#conference になるため0件。
+#            Phase2でFILTER除去後に復活。
+SELECT ?c WHERE {
+  ?c <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Conference> .
+  FILTER(CONTAINS(STR(?c), ""cmt-instances#conference""))
+}","SELECT  ?c
+WHERE
+  { ?c  a  <http://edas#Conference>
+    FILTER contains(str(?c), ""cmt-instances#conference"")
+  }","SELECT  ?c
+WHERE {
+  ?c  a  <http://edas#Conference>
+}"
+cmt-edas,relaxation_2.sparql,209,209,True,,True,,0,True,,True,Phase3_Optionalization,291,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,209,82,0,0.7182,1.0000,0.8360,0.0000,"# Pair: cmt-edas (cmt_100 -> edas_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: cmt:paperID が翻訳後も残留し targetで0件。Phase1で残留triple削除後に復活。
+SELECT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Paper> .
+  ?paper <http://cmt#hasAuthor> ?author .
+  ?paper <http://cmt#paperID> ?pid .
+}","SELECT  ?paper
+WHERE
+  { ?paper  a                     <http://edas#Paper> ;
+            <http://edas#relatesTo>  ?author ;
+            <http://cmt#paperID>  ?pid
+  }","SELECT  ?paper
+WHERE {
+  ?paper a <http://edas#Paper> .
+  ?paper <http://edas#relatesTo> ?author .
+  OPTIONAL { ?paper <http://cmt#paperID> ?pid . }
+}"
+cmt-edas,relaxation_3.sparql,672,168,True,,True,,0,True,,True,Phase3_Optionalization,291,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,168,123,0,0.5773,1.0000,0.7320,0.0000,"# Pair: cmt-edas (cmt_100 -> edas_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: cmt:assignedTo が翻訳後も残留し targetで0件。Phase1で残留triple削除後、Paper×Authorで復活。
+SELECT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Paper> .
+  ?paper <http://cmt#hasAuthor> ?author .
+  ?paper <http://cmt#assignedTo> ?rev .
+}","SELECT  ?paper
+WHERE
+  { ?paper  a                     <http://edas#Paper> ;
+            <http://edas#relatesTo>  ?author ;
+            <http://cmt#assignedTo>  ?rev
+  }","SELECT  ?paper
+WHERE {
+  ?paper a <http://edas#Paper> .
+  ?paper <http://edas#relatesTo> ?author .
+  OPTIONAL { ?paper <http://cmt#assignedTo> ?rev . }
+}"
+cmt-edas,relaxation_4.sparql,566,197,True,,True,,0,True,,True,Phase3_Optionalization,291,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,197,94,0,0.6770,1.0000,0.8074,0.0000,"# Pair: cmt-edas (cmt_100 -> edas_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: cmt:hasCo-author が翻訳後も残留し targetで0件。Phase1で残留triple削除後、Paper×Authorで復活。
+SELECT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Paper> .
+  ?paper <http://cmt#hasAuthor> ?author .
+  ?paper <http://cmt#hasCo-author> ?coauthor .
+}","SELECT  ?paper
+WHERE
+  { ?paper  a                     <http://edas#Paper> ;
+            <http://edas#relatesTo>  ?author ;
+            <http://cmt#hasCo-author>  ?coauthor
+  }","SELECT  ?paper
+WHERE {
+  ?paper a <http://edas#Paper> .
+  ?paper <http://edas#relatesTo> ?author .
+  OPTIONAL { ?paper <http://cmt#hasCo-author> ?coauthor . }
+}"
+cmt-edas,relaxation_5.sparql,173,173,True,,True,,0,True,,True,Phase3_Optionalization,736,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,173,563,0,0.2351,1.0000,0.3806,0.0000,"# Pair: cmt-edas (cmt_100 -> edas_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: cmt:assignedByAdministrator が翻訳後も残留し targetで0件。Phase1で残留triple削除後、Person型（mapped）で復活。
+SELECT ?p WHERE {
+  ?p <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Person> .
+  ?p <http://cmt#memberOfConference> ?conf .
+  ?p <http://cmt#assignedByAdministrator> ?adm .
+}","SELECT  ?p
+WHERE
+  { ?p  a                     <http://edas#Person> ;
+        <http://edas#isMemberOf>  ?conf ;
+        <http://cmt#assignedByAdministrator>  ?adm
+  }","SELECT  ?p
+WHERE {
+  ?p a <http://edas#Person> .
+  ?p <http://edas#isMemberOf> ?conf .
+  OPTIONAL { ?p <http://cmt#assignedByAdministrator> ?adm . }
+}"
+cmt-edas,relaxation_6.sparql,775,619,True,,True,,0,True,,True,Phase3_Optionalization,736,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,619,117,0,0.8410,1.0000,0.9137,0.0000,"# Pair: cmt-edas (cmt_100 -> edas_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: cmt:markConflictOfInterest が翻訳後も残留し targetで0件。Phase1で残留triple削除後、Person×Conferenceで復活。
+SELECT ?p WHERE {
+  ?p <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Person> .
+  ?p <http://cmt#memberOfConference> ?conf .
+  ?p <http://cmt#markConflictOfInterest> ?paper .
+}","SELECT  ?p
+WHERE
+  { ?p  a                     <http://edas#Person> ;
+        <http://edas#isMemberOf>  ?conf ;
+        <http://cmt#markConflictOfInterest>  ?paper
+  }","SELECT  ?p
+WHERE {
+  ?p a <http://edas#Person> .
+  ?p <http://edas#isMemberOf> ?conf .
+  OPTIONAL { ?p <http://cmt#markConflictOfInterest> ?paper . }
+}"
+cmt-edas,relaxation_7.sparql,209,209,True,,True,,0,True,,True,Phase2_FilterRemoval,291,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,209,82,0,0.7182,1.0000,0.8360,0.0000,"# Pair: cmt-edas (cmt_100 -> edas_100)
+# IntendedSuccessPhase: Phase 2
+# Mechanism: sourceでは cmt-instances に一致するが、翻訳後 target個体は edas-instances のためFILTER不成立で0件。
+#            Phase2でFILTER除去後に復活。
+SELECT ?p WHERE {
+  ?p <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Paper> .
+  FILTER(CONTAINS(STR(?p), ""cmt-instances#paper""))
+}","SELECT  ?p
+WHERE
+  { ?p  a  <http://edas#Paper>
+    FILTER contains(str(?p), ""cmt-instances#paper"")
+  }","SELECT  ?p
+WHERE {
+  ?p  a  <http://edas#Paper>
+}"
+cmt-edas,relaxation_8.sparql,755,755,True,,True,,0,True,,True,Phase2_FilterRemoval,755,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,755,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: cmt-edas (cmt_100 -> edas_100)
+# IntendedSuccessPhase: Phase 2
+# Mechanism: regexで cmt-instances#person を要求。翻訳後は edas-instances になり0件。Phase2でFILTER除去後に復活。
+SELECT ?s WHERE {
+  ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Person> .
+  FILTER(regex(STR(?s), ""^http://cmt-instances#person""))
+}","SELECT  ?s
+WHERE
+  { ?s  a  <http://edas#Person>
+    FILTER regex(str(?s), ""^http://cmt-instances#person"")
+  }","SELECT  ?s
+WHERE {
+  ?s  a  <http://edas#Person>
+}"
+cmt-edas,relaxation_9.sparql,784,784,True,,True,,0,True,,True,Phase2_FilterRemoval,784,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,784,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: cmt-edas (cmt_100 -> edas_100)
+# IntendedSuccessPhase: Phase 2
+# Mechanism: 「edas-instances を含まない」FILTER。sourceは満たすが、翻訳後は edas-instances になるため0件。
+#            Phase2でFILTER除去後に復活。
+SELECT ?r WHERE {
+  ?r <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Review> .
+  FILTER(!CONTAINS(STR(?r), ""edas-instances#""))
+}","SELECT  ?r
+WHERE
+  { ?r  a  <http://edas#Review>
+    FILTER ( ! contains(str(?r), ""edas-instances#"") )
+  }","SELECT  ?r
+WHERE {
+  ?r  a  <http://edas#Review>
+}"
+cmt-ekaw,relaxation_1.sparql,418,418,True,,True,,0,True,,True,Phase3_Optionalization,291,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,209,82,209,0.7182,0.5000,0.5896,0.5000,"# Pair: cmt-ekaw (cmt_100 -> ekaw_100)
+# target_phase: Phase 1
+# FailureMechanism: cmt:paperID が翻訳後も残留し target(ekaw)で0件。Phase1で残留triple削除後、rdf:type(Paper)で復活。
+SELECT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Paper> .
+  ?paper <http://cmt#paperID> ?id .
+}","SELECT  ?paper
+WHERE
+  { ?paper  a                     <http://ekaw#Paper> ;
+            <http://cmt#paperID>  ?id
+  }","SELECT  ?paper
+WHERE {
+  ?paper a <http://ekaw#Paper> .
+  OPTIONAL { ?paper <http://cmt#paperID> ?id . }
+}"
+cmt-ekaw,relaxation_10.sparql,585,585,True,,True,,0,True,,True,Phase2_FilterRemoval,585,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,585,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: cmt-ekaw (cmt_100 -> ekaw_100)
+# target_phase: Phase 2
+# FailureMechanism: 「ekaw-instances# を含まない」ことを要求。sourceは満たすが、翻訳後は ekaw-instances# になり0件。Phase2でFILTER削除後に復活。
+SELECT ?sa WHERE {
+  ?sa <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#SubjectArea> .
+  FILTER(!CONTAINS(STR(?sa), ""ekaw-instances#""))
+}","SELECT  ?sa
+WHERE
+  { ?sa  a  <http://ekaw#Research_Topic>
+    FILTER ( ! contains(str(?sa), ""ekaw-instances#"") )
+  }","SELECT  ?sa
+WHERE {
+  ?sa  a  <http://ekaw#Research_Topic>
+}"
+cmt-ekaw,relaxation_2.sparql,418,418,True,,True,,0,True,,True,Phase3_Optionalization,291,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,209,82,209,0.7182,0.5000,0.5896,0.5000,"# Pair: cmt-ekaw (cmt_100 -> ekaw_100)
+# target_phase: Phase 1
+# FailureMechanism: cmt:paperID が翻訳後も残留し targetで0件。Phase1で残留triple削除後、rdf:type(Paper)で復活。
+SELECT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Paper> .
+  ?paper <http://cmt#paperID> ?pid .
+}","SELECT  ?paper
+WHERE
+  { ?paper  a                     <http://ekaw#Paper> ;
+            <http://cmt#paperID>  ?pid
+  }","SELECT  ?paper
+WHERE {
+  ?paper a <http://ekaw#Paper> .
+  OPTIONAL { ?paper <http://cmt#paperID> ?pid . }
+}"
+cmt-ekaw,relaxation_3.sparql,784,784,True,,True,,0,True,,True,Phase3_Optionalization,784,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,784,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: cmt-ekaw (cmt_100 -> ekaw_100)
+# target_phase: Phase 1
+# FailureMechanism: cmt:memberOfConference が翻訳後も残留し targetで0件。Phase1で残留triple削除後、Review×writtenBy×Personで復活。
+SELECT ?rev WHERE {
+  ?rev <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Review> .
+  ?rev <http://cmt#writtenBy> ?p .
+  ?p <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Person> .
+  ?p <http://cmt#memberOfConference> ?c .
+}","SELECT  ?rev
+WHERE
+  { ?rev  a                     <http://ekaw#Review> ;
+          <http://ekaw#reviewWrittenBy>  ?p .
+    ?p    a                     <http://ekaw#Person> ;
+          <http://cmt#memberOfConference>  ?c
+  }","SELECT  ?rev
+WHERE {
+  ?rev a <http://ekaw#Review> .
+  ?rev <http://ekaw#reviewWrittenBy> ?p .
+  ?p a <http://ekaw#Person> .
+  OPTIONAL { ?p <http://cmt#memberOfConference> ?c . }
+}"
+cmt-ekaw,relaxation_4.sparql,173,173,True,,True,,0,True,,True,Phase3_Optionalization,187,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,173,14,0,0.9251,1.0000,0.9611,0.0000,"# Pair: cmt-ekaw (cmt_100 -> ekaw_100)
+# target_phase: Phase 1
+# FailureMechanism: cmt:assignedByAdministrator が翻訳後も残留し targetで0件。Phase1で残留triple削除後、rdf:type(ProgramCommitteeMember)で復活。
+SELECT ?m WHERE {
+  ?m <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#ProgramCommitteeMember> .
+  ?m <http://cmt#assignedByAdministrator> ?x .
+}","SELECT  ?m
+WHERE
+  { ?m  a                     <http://ekaw#Possible_Reviewer> ;
+        <http://cmt#assignedByAdministrator>  ?x
+  }","SELECT  ?m
+WHERE {
+  ?m a <http://ekaw#Possible_Reviewer> .
+  OPTIONAL { ?m <http://cmt#assignedByAdministrator> ?x . }
+}"
+cmt-ekaw,relaxation_5.sparql,775,619,True,,True,,0,True,,True,Phase3_Optionalization,619,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,619,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: cmt-ekaw (cmt_100 -> ekaw_100)
+# target_phase: Phase 1
+# FailureMechanism: cmt:markConflictOfInterest が翻訳後も残留し targetで0件。Phase1で残留triple削除後、rdf:type(Author)で復活。
+SELECT ?a WHERE {
+  ?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Author> .
+  ?a <http://cmt#markConflictOfInterest> ?paper .
+}","SELECT  ?a
+WHERE
+  { ?a  a                     <http://ekaw#Paper_Author> ;
+        <http://cmt#markConflictOfInterest>  ?paper
+  }","SELECT  ?a
+WHERE {
+  ?a a <http://ekaw#Paper_Author> .
+  OPTIONAL { ?a <http://cmt#markConflictOfInterest> ?paper . }
+}"
+cmt-ekaw,relaxation_6.sparql,174,174,True,,True,,0,True,,True,Phase3_Optionalization,755,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,174,581,0,0.2305,1.0000,0.3746,0.0000,"# Pair: cmt-ekaw (cmt_100 -> ekaw_100)
+# target_phase: Phase 1
+# FailureMechanism: cmt:memberOfProgramCommittee が翻訳後も残留し targetで0件。Phase1で残留triple削除後、rdf:type(Person)で復活。
+SELECT ?p WHERE {
+  ?p <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Person> .
+  ?p <http://cmt#memberOfProgramCommittee> ?pc .
+}","SELECT  ?p
+WHERE
+  { ?p  a                     <http://ekaw#Person> ;
+        <http://cmt#memberOfProgramCommittee>  ?pc
+  }","SELECT  ?p
+WHERE {
+  ?p a <http://ekaw#Person> .
+  OPTIONAL { ?p <http://cmt#memberOfProgramCommittee> ?pc . }
+}"
+cmt-ekaw,relaxation_7.sparql,755,755,True,,True,,0,True,,True,Phase2_FilterRemoval,755,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,755,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: cmt-ekaw (cmt_100 -> ekaw_100)
+# target_phase: Phase 2
+# FailureMechanism: FILTERで cmt-instances# を要求。翻訳後は ekaw-instances# なので0件。Phase2でFILTER削除後に復活。
+SELECT ?s WHERE {
+  ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Person> .
+  FILTER(CONTAINS(STR(?s), ""cmt-instances#""))
+}","SELECT  ?s
+WHERE
+  { ?s  a  <http://ekaw#Person>
+    FILTER contains(str(?s), ""cmt-instances#"")
+  }","SELECT  ?s
+WHERE {
+  ?s  a  <http://ekaw#Person>
+}"
+cmt-ekaw,relaxation_8.sparql,784,784,True,,True,,0,True,,True,Phase2_FilterRemoval,784,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,784,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: cmt-ekaw (cmt_100 -> ekaw_100)
+# target_phase: Phase 2
+# FailureMechanism: STRSTARTSで cmt-instances# を要求。翻訳後は ekaw-instances# なので0件。Phase2でFILTER削除後に復活。
+SELECT ?r WHERE {
+  ?r <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Review> .
+  FILTER(STRSTARTS(STR(?r), ""http://cmt-instances#""))
+}","SELECT  ?r
+WHERE
+  { ?r  a  <http://ekaw#Review>
+    FILTER strstarts(str(?r), ""http://cmt-instances#"")
+  }","SELECT  ?r
+WHERE {
+  ?r  a  <http://ekaw#Review>
+}"
+cmt-ekaw,relaxation_9.sparql,209,209,True,,True,,0,True,,True,Phase2_FilterRemoval,291,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,209,82,0,0.7182,1.0000,0.8360,0.0000,"# Pair: cmt-ekaw (cmt_100 -> ekaw_100)
+# target_phase: Phase 2
+# FailureMechanism: regexで cmt-instances#paper を要求。翻訳後は ekaw-instances# なので0件。Phase2でFILTER削除後に復活。
+SELECT ?p WHERE {
+  ?p <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Paper> .
+  FILTER(regex(STR(?p), ""^http://cmt-instances#paper""))
+}","SELECT  ?p
+WHERE
+  { ?p  a  <http://ekaw#Paper>
+    FILTER regex(str(?p), ""^http://cmt-instances#paper"")
+  }","SELECT  ?p
+WHERE {
+  ?p  a  <http://ekaw#Paper>
+}"
+conference-confOf,relaxation_1.sparql,613,168,True,,True,,0,True,,True,Phase3_Optionalization,168,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,168,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: conference-confOf (conference_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: conference:has_an_abstract は未対応で残留 -> targetで0件。Phase1で残留triple削除後、Paper×has_authors で復活。
+SELECT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Paper> .
+  ?paper <http://conference#has_authors> ?a .
+  ?paper <http://conference#has_an_abstract> ?abs .
+}","SELECT  ?paper
+WHERE
+  { ?paper  a                     <http://confOf#Paper> ;
+            <http://confOf#writtenBy>  ?a ;
+            <http://conference#has_an_abstract>  ?abs
+  }","SELECT  ?paper
+WHERE {
+  ?paper a <http://confOf#Paper> .
+  OPTIONAL { ?paper <http://confOf#writtenBy> ?a . ?paper <http://conference#has_an_abstract> ?abs . }
+}"
+conference-confOf,relaxation_10.sparql,111,111,True,,True,,0,True,,True,Phase2_FilterRemoval,209,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,111,98,0,0.5311,1.0000,0.6937,0.0000,"# Pair: conference-confOf (conference_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 2
+# Mechanism: contribution URIが conference-instances#paper- であることを要求。targetは confOf-instances#paper- なので0件→Phase2で復活。
+SELECT ?c WHERE {
+  ?c <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Conference_contribution> .
+  FILTER(STRSTARTS(STR(?c), ""http://conference-instances#paper-""))
+}","SELECT  ?c
+WHERE
+  { ?c  a  <http://confOf#Contribution>
+    FILTER strstarts(str(?c), ""http://conference-instances#paper-"")
+  }","SELECT  ?c
+WHERE {
+  ?c  a  <http://confOf#Contribution>
+}"
+conference-confOf,relaxation_2.sparql,2871,168,True,,True,,0,True,,True,Phase3_Optionalization,209,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,168,41,0,0.8038,1.0000,0.8912,0.0000,"# Pair: conference-confOf (conference_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: conference:has_a_review は未対応で残留 -> targetで0件。Phase1で残留triple削除後、Conference_contributionで復活。
+SELECT ?c WHERE {
+  ?c <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Conference_contribution> .
+  ?c <http://conference#has_authors> ?auth .
+  ?c <http://conference#has_a_review> ?rev .
+}","SELECT  ?c
+WHERE
+  { ?c  a                     <http://confOf#Contribution> ;
+        <http://confOf#writtenBy>  ?auth ;
+        <http://conference#has_a_review>  ?rev
+  }","SELECT  ?c
+WHERE {
+  ?c a <http://confOf#Contribution> .
+  OPTIONAL { ?c <http://confOf#writtenBy> ?auth . ?c <http://conference#has_a_review> ?rev . }
+}"
+conference-confOf,relaxation_3.sparql,2871,168,True,,True,,0,True,,True,Phase3_Optionalization,209,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,168,41,0,0.8038,1.0000,0.8912,0.0000,"# Pair: conference-confOf (conference_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: conference:has_a_review は未対応で残留 -> targetで0件。Phase1で残留triple削除後、Conference_contributionで復活。
+SELECT ?c WHERE {
+  ?c <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Conference_contribution> .
+  ?c <http://conference#has_authors> ?auth .
+  ?c <http://conference#has_a_review> ?rev .
+}","SELECT  ?c
+WHERE
+  { ?c  a                     <http://confOf#Contribution> ;
+        <http://confOf#writtenBy>  ?auth ;
+        <http://conference#has_a_review>  ?rev
+  }","SELECT  ?c
+WHERE {
+  ?c a <http://confOf#Contribution> .
+  OPTIONAL { ?c <http://confOf#writtenBy> ?auth . ?c <http://conference#has_a_review> ?rev . }
+}"
+conference-confOf,relaxation_4.sparql,779,209,True,,True,,0,True,,True,Phase3_Optionalization,209,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,209,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: conference-confOf (conference_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: conference:is_submitted_at は未対応で残留 -> targetで0件。Phase1で残留triple削除後、contributes（翻訳済み）で復活。
+SELECT ?contrib WHERE {
+  ?who <http://conference#contributes> ?contrib .
+  ?contrib <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Conference_contribution> .
+  ?contrib <http://conference#is_submitted_at> ?ev .
+}","SELECT  ?contrib
+WHERE
+  { ?who      <http://confOf#reviewes>  ?contrib .
+    ?contrib  a                     <http://confOf#Contribution> ;
+              <http://conference#is_submitted_at>  ?ev
+  }","SELECT  ?contrib
+WHERE {
+  ?contrib a <http://confOf#Contribution> .
+  OPTIONAL { ?who <http://confOf#reviewes> ?contrib . ?contrib <http://conference#is_submitted_at> ?ev . }
+}"
+conference-confOf,relaxation_5.sparql,2871,168,True,,True,,0,True,,True,Phase3_Optionalization,209,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,168,41,0,0.8038,1.0000,0.8912,0.0000,"# Pair: conference-confOf (conference_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: conference:has_a_review は未対応で残留 -> targetで0件。Phase1で残留triple削除後、contributes×Conference_contribution で復活。
+SELECT ?contrib WHERE {
+  ?who <http://conference#contributes> ?contrib .
+  ?contrib <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Conference_contribution> .
+  ?contrib <http://conference#has_a_review> ?r .
+}","SELECT  ?contrib
+WHERE
+  { ?who      <http://confOf#reviewes>  ?contrib .
+    ?contrib  a                     <http://confOf#Contribution> ;
+              <http://conference#has_a_review>  ?r
+  }","SELECT  ?contrib
+WHERE {
+  ?contrib a <http://confOf#Contribution> .
+  OPTIONAL { ?who <http://confOf#reviewes> ?contrib . ?contrib <http://conference#has_a_review> ?r . }
+}"
+conference-confOf,relaxation_6.sparql,2871,168,True,,True,,0,True,,True,Phase3_Optionalization,209,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,168,41,0,0.8038,1.0000,0.8912,0.0000,"# Pair: conference-confOf (conference_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: conference:has_a_review は未対応で残留 -> targetで0件。Phase1で残留triple削除後、Conference_contributionで復活。
+SELECT ?c WHERE {
+  ?c <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Conference_contribution> .
+  ?c <http://conference#has_authors> ?auth .
+  ?c <http://conference#has_a_review> ?rev .
+}","SELECT  ?c
+WHERE
+  { ?c  a                     <http://confOf#Contribution> ;
+        <http://confOf#writtenBy>  ?auth ;
+        <http://conference#has_a_review>  ?rev
+  }","SELECT  ?c
+WHERE {
+  ?c a <http://confOf#Contribution> .
+  OPTIONAL { ?c <http://confOf#writtenBy> ?auth . ?c <http://conference#has_a_review> ?rev . }
+}"
+conference-confOf,relaxation_7.sparql,758,758,True,,True,,0,True,,True,Phase2_FilterRemoval,755,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,755,0,3,1.0000,0.9960,0.9980,0.0040,"# Pair: conference-confOf (conference_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 2
+# Mechanism: sourceは conference-instances# だが targetは confOf-instances#。FILTER不成立で0件→Phase2でFILTER削除後に復活。
+SELECT ?p WHERE {
+  ?p <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Person> .
+  FILTER(CONTAINS(STR(?p), ""conference-instances#""))
+}","SELECT  ?p
+WHERE
+  { ?p  a  <http://confOf#Person>
+    FILTER contains(str(?p), ""conference-instances#"")
+  }","SELECT  ?p
+WHERE {
+  ?p  a  <http://confOf#Person>
+}"
+conference-confOf,relaxation_8.sparql,89,89,True,,True,,0,True,,True,Phase2_FilterRemoval,168,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,89,79,0,0.5298,1.0000,0.6926,0.0000,"# Pair: conference-confOf (conference_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 2
+# Mechanism: paper URIが conference-instances#paper- であることを要求。targetは confOf-instances#paper- なので0件→Phase2で復活。
+SELECT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Paper> .
+  FILTER(regex(STR(?paper), ""^http://conference-instances#paper-""))
+}","SELECT  ?paper
+WHERE
+  { ?paper  a  <http://confOf#Paper>
+    FILTER regex(str(?paper), ""^http://conference-instances#paper-"")
+  }","SELECT  ?paper
+WHERE {
+  ?paper  a  <http://confOf#Paper>
+}"
+conference-confOf,relaxation_9.sparql,1,1,True,,True,,0,True,,True,Phase2_FilterRemoval,1,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,1,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: conference-confOf (conference_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 2
+# Mechanism: 「confOf-instances# を含まない」ことを要求。sourceは満たすが、翻訳後は confOf-instances# になり0件→Phase2で復活。
+SELECT ?conf WHERE {
+  ?conf <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Conference> .
+  FILTER(!CONTAINS(STR(?conf), ""confOf-instances#""))
+}","SELECT  ?conf
+WHERE
+  { ?conf  a  <http://confOf#Conference>
+    FILTER ( ! contains(str(?conf), ""confOf-instances#"") )
+  }","SELECT  ?conf
+WHERE {
+  ?conf  a  <http://confOf#Conference>
+}"
+conference-edas,relaxation_1.sparql,779,0,True,,True,,0,True,,False,,0,False,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,No successful relaxation,False,0,0,0,0.0000,0.0000,0.0000,0.0000,"# Pair: conference-edas (conference_100 -> edas_100)
+# target_phase: Phase 1
+# FailureMechanism: conference:has_an_abstract は未対応で残留 -> target(edas)で0件。Phase1で残留triple削除後、Conference_contributionで復活。
+SELECT ?c WHERE {
+  ?c <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Conference_contribution> .
+  ?c <http://conference#has_authors> ?auth .
+  ?c <http://conference#has_an_abstract> ?abstract .
+}","SELECT  ?c
+WHERE
+  { ?c  a                     <http://conference#Conference_contribution> ;
+        <http://conference#has_an_abstract>  ?abstract
+      { ?auth  a                     <http://edas#Person> .
+        ?c     <http://edas#relatesTo>  ?auth}
+    UNION
+      { ?c  <http://edas#isWrittenBy>  ?auth}
+  }","SELECT  ?c
+WHERE
+  { ?c  a                     <http://conference#Conference_contribution> ;
+        <http://conference#has_an_abstract>  ?abstract
+      { ?auth  a                     <http://edas#Person> .
+        ?c     <http://edas#relatesTo>  ?auth}
+    UNION
+      { ?c  <http://edas#isWrittenBy>  ?auth}
+  }"
+conference-edas,relaxation_10.sparql,4,4,True,,True,,0,True,,True,Phase2_FilterRemoval,9,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,4,5,0,0.4444,1.0000,0.6154,0.0000,"# Pair: conference-edas (conference_100 -> edas_100)
+# target_phase: Phase 2
+# FailureMechanism: regexで conference-instances#workshop- を要求。targetは edas-instances#workshop- なので0件。Phase2でFILTER削除後に復活。
+SELECT ?w WHERE {
+  ?w <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Workshop> .
+  FILTER(regex(STR(?w), ""^http://conference-instances#workshop-""))
+}","SELECT  ?w
+WHERE
+  { ?w  a  <http://edas#Workshop>
+    FILTER regex(str(?w), ""^http://conference-instances#workshop-"")
+  }","SELECT  ?w
+WHERE {
+  ?w  a  <http://edas#Workshop>
+}"
+conference-edas,relaxation_2.sparql,80,44,True,,True,,0,True,,True,Phase3_Optionalization,672,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,6,167,38,0.0347,0.1364,0.0553,0.8636,"# Pair: conference-edas (conference_100 -> edas_100)
+# target_phase: Phase 1
+# FailureMechanism: conference:contributes は未対応で残留 -> targetで0件。Phase1で残留triple削除後、Active_conference_participantで復活。
+SELECT ?p WHERE {
+  ?p <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Active_conference_participant> .
+  ?p <http://conference#contributes> ?contrib .
+}","SELECT  ?p
+WHERE
+  { ?p  a                     <http://conference#Active_conference_participant> ;
+        <http://edas#isReviewing>  ?contrib ;
+        a                     <http://conference#Reviewer>
+  }","SELECT  ?p
+WHERE {
+  ?p <http://edas#isReviewing> ?contrib .
+  OPTIONAL { ?p a <http://conference#Active_conference_participant> . ?p a <http://conference#Reviewer> . }
+}"
+conference-edas,relaxation_3.sparql,209,0,True,,True,,0,True,,False,,0,False,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,No successful relaxation,False,0,0,0,0.0000,0.0000,0.0000,0.0000,"# Pair: conference-edas (conference_100 -> edas_100)
+# target_phase: Phase 1
+# FailureMechanism: conference:is_submitted_at は未対応で残留 -> targetで0件。Phase1で残留triple削除後、Conference_contributionで復活。
+SELECT ?cv WHERE {
+  ?cv <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Conference_contribution> .
+  ?cv <http://conference#is_submitted_at> ?date .
+}","SELECT  ?cv
+WHERE
+  { ?cv  a                     <http://conference#Conference_contribution> ;
+         <http://conference#is_submitted_at>  ?date
+  }","SELECT  ?cv
+WHERE
+  { ?cv  a                     <http://conference#Conference_contribution> ;
+         <http://conference#is_submitted_at>  ?date
+  }"
+conference-edas,relaxation_4.sparql,41,0,True,,True,,0,True,,False,,0,False,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,No successful relaxation,False,0,0,0,0.0000,0.0000,0.0000,0.0000,"# Pair: conference-edas (conference_100 -> edas_100)
+# target_phase: Phase 1
+# FailureMechanism: conference:gives_presentations は未対応で残留 -> targetで0件。Phase1で残留triple削除後、Active_conference_participantで復活。
+SELECT ?cv WHERE {
+  ?cv <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Active_conference_participant> .
+  ?cv <http://conference#gives_presentations> ?pres .
+}","SELECT  ?cv
+WHERE
+  { ?cv  a                     <http://conference#Active_conference_participant> ;
+         <http://conference#gives_presentations>  ?pres
+  }","SELECT  ?cv
+WHERE
+  { ?cv  a                     <http://conference#Active_conference_participant> ;
+         <http://conference#gives_presentations>  ?pres
+  }"
+conference-edas,relaxation_5.sparql,8,0,True,,True,,0,True,,False,,0,False,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,No successful relaxation,False,0,0,0,0.0000,0.0000,0.0000,0.0000,"# Pair: conference-edas (conference_100 -> edas_100)
+# target_phase: Phase 1
+# FailureMechanism: conference:was_a_member_of は未対応で残留 -> targetで0件。Phase1で残留triple削除後、Active_conference_participantで復活。
+SELECT ?cv WHERE {
+  ?cv <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Active_conference_participant> .
+  ?cv <http://conference#was_a_member_of> ?committee .
+}","SELECT  ?cv
+WHERE
+  { ?cv  a                     <http://conference#Active_conference_participant> ;
+         <http://conference#was_a_member_of>  ?committee
+  }","SELECT  ?cv
+WHERE
+  { ?cv  a                     <http://conference#Active_conference_participant> ;
+         <http://conference#was_a_member_of>  ?committee
+  }"
+conference-edas,relaxation_6.sparql,784,0,True,,True,,0,True,,False,,0,False,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,No successful relaxation,False,0,0,0,0.0000,0.0000,0.0000,0.0000,"# Pair: conference-edas (conference_100 -> edas_100)
+# target_phase: UNSOLVABLE
+# FailureMechanism: conference:reviews / conference:has_authors は未対応で残留 -> targetで0件。
+#                   しかし両方をPhase1で削除すると SELECT ?r WHERE { ?r a Review } となり、
+#                   全Reviewが返る（過度な緩和）。緩和では解決不可能。
+# Note: アライメントに reviews または has_authors のマッピングが必要。
+SELECT ?r WHERE {
+  ?r <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Review> .
+  ?r <http://conference#reviews> ?x .
+  ?r <http://conference#has_authors> ?a .
+}","SELECT  ?r
+WHERE
+  { ?r  a                     <http://edas#Review> ;
+        <http://conference#reviews>  ?x
+      { ?a  a                     <http://edas#Person> .
+        ?r  <http://edas#relatesTo>  ?a}
+    UNION
+      { ?r  <http://edas#isWrittenBy>  ?a}
+  }","SELECT  ?r
+WHERE
+  { ?r  a                     <http://edas#Review> ;
+        <http://conference#reviews>  ?x
+      { ?a  a                     <http://edas#Person> .
+        ?r  <http://edas#relatesTo>  ?a}
+    UNION
+      { ?r  <http://edas#isWrittenBy>  ?a}
+  }"
+conference-edas,relaxation_7.sparql,758,758,True,,True,,0,True,,True,Phase2_FilterRemoval,755,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,755,0,3,1.0000,0.9960,0.9980,0.0040,"# Pair: conference-edas (conference_100 -> edas_100)
+# target_phase: Phase 2
+# FailureMechanism: FILTERで conference-instances# を要求。target個体は edas-instances# なので0件。Phase2でFILTER削除後に復活。
+SELECT ?p WHERE {
+  ?p <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Person> .
+  FILTER(CONTAINS(STR(?p), ""conference-instances#""))
+}","SELECT  ?p
+WHERE
+  { ?p  a  <http://edas#Person>
+    FILTER contains(str(?p), ""conference-instances#"")
+  }","SELECT  ?p
+WHERE {
+  ?p  a  <http://edas#Person>
+}"
+conference-edas,relaxation_8.sparql,415,415,True,,True,,0,True,,True,Phase2_FilterRemoval,784,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,415,369,0,0.5293,1.0000,0.6922,0.0000,"# Pair: conference-edas (conference_100 -> edas_100)
+# target_phase: Phase 2
+# FailureMechanism: review URIが conference-instances#review- であることを要求。targetは edas-instances#review- なので0件。Phase2で復活。
+SELECT ?r WHERE {
+  ?r <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Review> .
+  FILTER(STRSTARTS(STR(?r), ""http://conference-instances#review-""))
+}","SELECT  ?r
+WHERE
+  { ?r  a  <http://edas#Review>
+    FILTER strstarts(str(?r), ""http://conference-instances#review-"")
+  }","SELECT  ?r
+WHERE {
+  ?r  a  <http://edas#Review>
+}"
+conference-edas,relaxation_9.sparql,1,1,True,,True,,0,True,,True,Phase2_FilterRemoval,1,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,1,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: conference-edas (conference_100 -> edas_100)
+# target_phase: Phase 2
+# FailureMechanism: 「edas-instances# を含まない」FILTER。sourceは満たすがtargetは満たさず0件。Phase2でFILTER削除後に復活。
+SELECT ?conf WHERE {
+  ?conf <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Conference> .
+  FILTER(!CONTAINS(STR(?conf), ""edas-instances#""))
+}","SELECT  ?conf
+WHERE
+  { ?conf  a  <http://edas#Conference>
+    FILTER ( ! contains(str(?conf), ""edas-instances#"") )
+  }","SELECT  ?conf
+WHERE {
+  ?conf  a  <http://edas#Conference>
+}"
+conference-ekaw,relaxation_1.sparql,1612,0,True,,True,,672,False,,False,,0,False,,0,,False,0,0,0,0.0000,0.0000,0.0000,0.0000,"# Pair: conference-ekaw (conference_100 -> ekaw_100)
+# target_phase: Phase 1
+# FailureMechanism: conference:contributes は alignment未対応のため翻訳後も残留し、target(ekaw)で0件。
+# Phase1で残留triple削除後、rdf:type Person（翻訳済み）だけが残り復活。
+SELECT ?p WHERE {
+  ?p <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Person> .
+  ?p <http://conference#contributes> ?contrib .
+}","SELECT  ?p
+WHERE
+  { ?p  a                     <http://ekaw#Person> ;
+        <http://ekaw#reviewerOfPaper>  ?contrib
+  }",
+conference-ekaw,relaxation_10.sparql,784,784,True,,True,,0,True,,True,Phase2_FilterRemoval,784,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,784,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: conference-ekaw (conference_100 -> ekaw_100)
+# target_phase: Phase 2
+# FailureMechanism: 「ekaw-instances# を含まない」ことを要求。sourceは満たすが、targetは満たさず0件→Phase2で復活。
+SELECT ?rev WHERE {
+  ?rev <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Review> .
+  FILTER(!CONTAINS(STR(?rev), ""ekaw-instances#""))
+}","SELECT  ?rev
+WHERE
+  { ?rev  a  <http://ekaw#Review>
+    FILTER ( ! contains(str(?rev), ""ekaw-instances#"") )
+  }","SELECT  ?rev
+WHERE {
+  ?rev  a  <http://ekaw#Review>
+}"
+conference-ekaw,relaxation_2.sparql,204,187,True,,True,,0,True,,True,Phase3_Optionalization,755,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,187,568,0,0.2477,1.0000,0.3970,0.0000,"# Pair: conference-ekaw (conference_100 -> ekaw_100)
+# target_phase: Phase 1
+# FailureMechanism: conference:was_a_member_of が残留してtargetで0件。Phase1で削除後に Person 型で復活。
+SELECT ?p WHERE {
+  ?p <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Person> .
+  ?p <http://conference#was_a_member_of> ?committee .
+}","SELECT  ?p
+WHERE
+  { ?p  a                     <http://ekaw#Person> ;
+        <http://ekaw#SC_Member>  ?committee
+  }","SELECT  ?p
+WHERE {
+  ?p a <http://ekaw#Person> .
+  OPTIONAL { ?p <http://ekaw#SC_Member> ?committee . }
+}"
+conference-ekaw,relaxation_3.sparql,168,168,True,,True,,0,True,,True,Phase3_Optionalization,168,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,168,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: conference-ekaw (conference_100 -> ekaw_100)
+# target_phase: Phase 1
+# FailureMechanism: conference:is_submitted_at が残留してtargetで0件。Phase1で削除後に Paper 型で復活。
+SELECT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Paper> .
+  ?paper <http://conference#is_submitted_at> ?conf .
+}","SELECT  ?paper
+WHERE
+  { ?paper  a                     <http://ekaw#Regular_Paper> ;
+            <http://conference#is_submitted_at>  ?conf
+  }","SELECT  ?paper
+WHERE {
+  ?paper a <http://ekaw#Regular_Paper> .
+  OPTIONAL { ?paper <http://conference#is_submitted_at> ?conf . }
+}"
+conference-ekaw,relaxation_4.sparql,3553,1,True,,True,,0,True,,True,Phase3_Optionalization,1,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,1,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: conference-ekaw (conference_100 -> ekaw_100)
+# target_phase: Phase 1
+# FailureMechanism: conference:has_contributions が残留してtargetで0件。
+# Phase1で残留triple削除後、Conference × has_parts（翻訳済み側のみ）で復活。
+SELECT ?c WHERE {
+  ?c <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Conference> .
+  ?c <http://conference#has_parts> ?part .
+  ?c <http://conference#has_contributions> ?paper .
+}","SELECT  ?c
+WHERE
+  { ?c  a                     <http://ekaw#Conference> ;
+        <http://ekaw#hasEvent>  ?part ;
+        <http://conference#has_contributions>  ?paper
+  }","SELECT  ?c
+WHERE {
+  ?c a <http://ekaw#Conference> .
+  OPTIONAL { ?c <http://ekaw#hasEvent> ?part . ?c <http://conference#has_contributions> ?paper . }
+}"
+conference-ekaw,relaxation_5.sparql,784,784,True,,True,,0,True,,True,Phase3_Optionalization,784,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,784,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: conference-ekaw (conference_100 -> ekaw_100)
+# target_phase: Phase 1
+# FailureMechanism: conference:reviews は alignment未対応で残留しtargetで0件。Phase1で削除後、Review 型で復活。
+SELECT ?rev WHERE {
+  ?rev <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Review> .
+  ?rev <http://conference#reviews> ?paper .
+}","SELECT  ?rev
+WHERE
+  { ?rev  a                     <http://ekaw#Review> ;
+          <http://conference#reviews>  ?paper
+  }","SELECT  ?rev
+WHERE {
+  ?rev a <http://ekaw#Review> .
+  OPTIONAL { ?rev <http://conference#reviews> ?paper . }
+}"
+conference-ekaw,relaxation_6.sparql,41,41,True,,True,,0,True,,True,Phase3_Optionalization,755,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,41,714,0,0.0543,1.0000,0.1030,0.0000,"# Pair: conference-ekaw (conference_100 -> ekaw_100)
+# target_phase: Phase 1
+# FailureMechanism: conference:gives_presentations が残留してtargetで0件。Phase1で削除後、Person 型で復活。
+SELECT ?p WHERE {
+  ?p <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Person> .
+  ?p <http://conference#gives_presentations> ?pres .
+}","SELECT  ?p
+WHERE
+  { ?p  a                     <http://ekaw#Person> ;
+        <http://conference#gives_presentations>  ?pres
+  }","SELECT  ?p
+WHERE {
+  ?p a <http://ekaw#Person> .
+  OPTIONAL { ?p <http://conference#gives_presentations> ?pres . }
+}"
+conference-ekaw,relaxation_7.sparql,13,13,True,,True,,0,True,,True,Phase3_Optionalization,755,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,13,742,0,0.0172,1.0000,0.0339,0.0000,"# Pair: conference-ekaw (conference_100 -> ekaw_100)
+# target_phase: Phase 1
+# FailureMechanism: conference:was_a_track-workshop_chair_of が残留してtargetで0件。Phase1で削除後、Person 型で復活。
+SELECT ?p WHERE {
+  ?p <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Person> .
+  ?p <http://conference#was_a_track-workshop_chair_of> ?track .
+}","SELECT  ?p
+WHERE
+  { ?p  a                     <http://ekaw#Person> ;
+        <http://ekaw#Workshop_Chair>  ?track
+  }","SELECT  ?p
+WHERE {
+  ?p a <http://ekaw#Person> .
+  OPTIONAL { ?p <http://ekaw#Workshop_Chair> ?track . }
+}"
+conference-ekaw,relaxation_8.sparql,758,758,True,,True,,0,True,,True,Phase2_FilterRemoval,755,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,755,0,3,1.0000,0.9960,0.9980,0.0040,"# Pair: conference-ekaw (conference_100 -> ekaw_100)
+# target_phase: Phase 2
+# FailureMechanism: target個体は ekaw-instances# なので FILTER(CONTAINS(...,""conference-instances#"")) が不成立で0件。
+# Phase2でFILTER除去後に復活。
+SELECT ?p WHERE {
+  ?p <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Person> .
+  FILTER(CONTAINS(STR(?p), ""conference-instances#""))
+}","SELECT  ?p
+WHERE
+  { ?p  a  <http://ekaw#Person>
+    FILTER contains(str(?p), ""conference-instances#"")
+  }","SELECT  ?p
+WHERE {
+  ?p  a  <http://ekaw#Person>
+}"
+conference-ekaw,relaxation_9.sparql,89,89,True,,True,,0,True,,True,Phase2_FilterRemoval,168,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,89,79,0,0.5298,1.0000,0.6926,0.0000,"# Pair: conference-ekaw (conference_100 -> ekaw_100)
+# target_phase: Phase 2
+# FailureMechanism: paper URIが conference-instances#paper- を要求。targetは ekaw-instances#paper- なので0件→Phase2で復活。
+SELECT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Paper> .
+  FILTER(regex(STR(?paper), ""^http://conference-instances#paper-""))
+}","SELECT  ?paper
+WHERE
+  { ?paper  a  <http://ekaw#Regular_Paper>
+    FILTER regex(str(?paper), ""^http://conference-instances#paper-"")
+  }","SELECT  ?paper
+WHERE {
+  ?paper  a  <http://ekaw#Regular_Paper>
+}"
+confOf-cmt,relaxation_1.sparql,168,0,True,,True,,168,False,,False,,0,False,,0,,False,0,0,0,0.0000,0.0000,0.0000,0.0000,"# Pair: confOf-cmt (confOf_100 -> cmt_100)
+# target_phase: Phase 1
+# FailureMechanism: confOf:dealsWith は alignment(confOf-cmt.edoal) 対応済みだが、複数使用で制約強化
+# Recovery: 実際には翻訳されるためPhase1では復活しないが、writtenByを追加して別パターンでテスト
+SELECT DISTINCT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://confOf#Paper> .
+  ?paper <http://confOf#writtenBy> ?author .
+  ?paper <http://confOf#dealsWith> ?topic1 .
+  ?paper <http://confOf#dealsWith> ?topic2 .
+  FILTER(?topic1 != ?topic2)
+}","SELECT DISTINCT  ?paper
+WHERE
+  { ?paper  a                     <http://cmt#PaperFullVersion> ;
+            <http://cmt#hasAuthor>  ?author ;
+            <http://cmt#hasSubjectArea>  ?topic1 ;
+            <http://cmt#hasSubjectArea>  ?topic2
+    FILTER ( ?topic1 != ?topic2 )
+  }",
+confOf-cmt,relaxation_10.sparql,755,755,True,,True,,0,True,,True,Phase2_FilterRemoval,755,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,755,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: confOf-cmt (confOf_100 -> cmt_100)
+# target_phase: Phase 2
+# FailureMechanism: person URIが confOf-instances#person を要求。targetは cmt-instances#person なので0件
+# Recovery: Phase2でFILTER除去後に復活
+SELECT DISTINCT ?p WHERE {
+  ?p <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://confOf#Person> .
+  FILTER(regex(STR(?p), ""^http://confOf-instances#person""))
+}","SELECT DISTINCT  ?p
+WHERE
+  { ?p  a  <http://cmt#Person>
+    FILTER regex(str(?p), ""^http://confOf-instances#person"")
+  }","SELECT DISTINCT  ?p
+WHERE {
+  ?p  a  <http://cmt#Person>
+}"
+confOf-cmt,relaxation_2.sparql,333,333,True,,True,,0,True,,True,Phase3_Optionalization,191,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,123,68,210,0.6440,0.3694,0.4695,0.6306,"# Pair: confOf-cmt (confOf_100 -> cmt_100)
+# target_phase: Phase 1
+# FailureMechanism: confOf:earlyRegistration は未対応で残留 -> targetで0件
+# Recovery: Phase1で残留triple削除後、confOf:writes（対応済み）で復活
+SELECT DISTINCT ?person WHERE {
+  ?person <http://confOf#writes> ?paper .
+  ?person <http://confOf#earlyRegistration> ?reg .
+}","SELECT DISTINCT  ?person
+WHERE
+  { ?person  <http://cmt#writePaper>  ?paper ;
+             <http://confOf#earlyRegistration>  ?reg
+  }","SELECT DISTINCT  ?person
+WHERE {
+  ?person <http://cmt#writePaper> ?paper .
+  OPTIONAL { ?person <http://confOf#earlyRegistration> ?reg . }
+}"
+confOf-cmt,relaxation_3.sparql,149,149,True,,True,,0,True,,True,Phase3_Optionalization,209,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,149,60,0,0.7129,1.0000,0.8324,0.0000,"# Pair: confOf-cmt (confOf_100 -> cmt_100)
+# target_phase: Phase 1
+# FailureMechanism: confOf:earlyRegistration は未対応で残留 -> targetで0件
+# Recovery: Phase1で残留triple削除後、confOf:Paper + confOf:writtenBy（対応済み）で復活
+SELECT DISTINCT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://confOf#Paper> .
+  ?paper <http://confOf#writtenBy> ?author .
+  ?author <http://confOf#earlyRegistration> ?reg .
+}","SELECT DISTINCT  ?paper
+WHERE
+  { ?paper   a                     <http://cmt#PaperFullVersion> ;
+             <http://cmt#hasAuthor>  ?author .
+    ?author  <http://confOf#earlyRegistration>  ?reg
+  }","SELECT DISTINCT  ?paper
+WHERE {
+  ?paper a <http://cmt#PaperFullVersion> .
+  ?paper <http://cmt#hasAuthor> ?author .
+  OPTIONAL { ?author <http://confOf#earlyRegistration> ?reg . }
+}"
+confOf-cmt,relaxation_4.sparql,58,58,True,,True,,0,True,,True,Phase3_Optionalization,191,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,13,178,45,0.0681,0.2241,0.1044,0.7759,"# Pair: confOf-cmt (confOf_100 -> cmt_100)
+# target_phase: Phase 1
+# FailureMechanism: confOf:reviewes は未対応で残留 -> targetで0件
+# Recovery: Phase1で残留triple削除後、confOf:writes（対応済み）で復活
+SELECT DISTINCT ?person WHERE {
+  ?person <http://confOf#writes> ?paper .
+  ?person <http://confOf#reviewes> ?review .
+}","SELECT DISTINCT  ?person
+WHERE
+  { ?person  <http://cmt#writePaper>  ?paper ;
+             <http://cmt#Reviewer>  ?review
+  }","SELECT DISTINCT  ?person
+WHERE {
+  ?person <http://cmt#writePaper> ?paper .
+  OPTIONAL { ?person <http://cmt#Reviewer> ?review . }
+}"
+confOf-cmt,relaxation_5.sparql,30,30,True,,True,,0,True,,True,Phase3_Optionalization,191,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,7,184,23,0.0366,0.2333,0.0633,0.7667,"# Pair: confOf-cmt (confOf_100 -> cmt_100)
+# target_phase: Phase 1
+# FailureMechanism: confOf:earlyRegistration+reviewes は両方未対応で残留 -> targetで0件
+# Recovery: Phase1で残留triple削除後、confOf:writes（対応済み）で復活
+SELECT DISTINCT ?person WHERE {
+  ?person <http://confOf#writes> ?paper .
+  ?person <http://confOf#earlyRegistration> ?reg .
+  ?person <http://confOf#reviewes> ?review .
+}","SELECT DISTINCT  ?person
+WHERE
+  { ?person  <http://cmt#writePaper>  ?paper ;
+             <http://confOf#earlyRegistration>  ?reg ;
+             <http://cmt#Reviewer>  ?review
+  }","SELECT DISTINCT  ?person
+WHERE {
+  ?person <http://cmt#writePaper> ?paper .
+  OPTIONAL { ?person <http://confOf#earlyRegistration> ?reg . ?person <http://cmt#Reviewer> ?review . }
+}"
+confOf-cmt,relaxation_6.sparql,333,333,True,,True,,0,True,,True,Phase3_Optionalization,191,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,123,68,210,0.6440,0.3694,0.4695,0.6306,"# Pair: confOf-cmt (confOf_100 -> cmt_100)
+# target_phase: Phase 1
+# FailureMechanism: confOf:earlyRegistration は未対応で残留 -> targetで0件
+# Recovery: Phase1で残留triple削除後、confOf:Person（対応済みクラス）+ confOf:writes（対応済み）で復活
+SELECT DISTINCT ?person WHERE {
+  ?person <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://confOf#Person> .
+  ?person <http://confOf#writes> ?paper .
+  ?person <http://confOf#earlyRegistration> ?flag .
+}","SELECT DISTINCT  ?person
+WHERE
+  { ?person  a                     <http://cmt#Person> ;
+             <http://cmt#writePaper>  ?paper ;
+             <http://confOf#earlyRegistration>  ?flag
+  }","SELECT DISTINCT  ?person
+WHERE {
+  ?person a <http://cmt#Person> .
+  ?person <http://cmt#writePaper> ?paper .
+  OPTIONAL { ?person <http://confOf#earlyRegistration> ?flag . }
+}"
+confOf-cmt,relaxation_7.sparql,755,755,True,,True,,0,True,,True,Phase2_FilterRemoval,755,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,755,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: confOf-cmt (confOf_100 -> cmt_100)
+# target_phase: Phase 2
+# FailureMechanism: target個体URIは cmt-instances# になるため FILTER が不成立で0件
+# Recovery: Phase2でFILTER除去後に復活
+SELECT DISTINCT ?p WHERE {
+  ?p <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://confOf#Person> .
+  FILTER(CONTAINS(STR(?p), ""confOf-instances#""))
+}","SELECT DISTINCT  ?p
+WHERE
+  { ?p  a  <http://cmt#Person>
+    FILTER contains(str(?p), ""confOf-instances#"")
+  }","SELECT DISTINCT  ?p
+WHERE {
+  ?p  a  <http://cmt#Person>
+}"
+confOf-cmt,relaxation_8.sparql,168,168,True,,True,,0,True,,True,Phase2_FilterRemoval,209,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,168,41,0,0.8038,1.0000,0.8912,0.0000,"# Pair: confOf-cmt (confOf_100 -> cmt_100)
+# target_phase: Phase 2
+# FailureMechanism: paper URIが confOf-instances#paper を要求。targetは cmt-instances#paper なので0件
+# Recovery: Phase2でFILTER除去後に復活
+SELECT DISTINCT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://confOf#Paper> .
+  FILTER(regex(STR(?paper), ""^http://confOf-instances#paper""))
+}","SELECT DISTINCT  ?paper
+WHERE
+  { ?paper  a  <http://cmt#PaperFullVersion>
+    FILTER regex(str(?paper), ""^http://confOf-instances#paper"")
+  }","SELECT DISTINCT  ?paper
+WHERE {
+  ?paper  a  <http://cmt#PaperFullVersion>
+}"
+confOf-cmt,relaxation_9.sparql,585,585,True,,True,,0,True,,True,Phase2_FilterRemoval,585,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,585,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: confOf-cmt (confOf_100 -> cmt_100)
+# target_phase: Phase 2
+# FailureMechanism: 「cmt-instances# を含まない」を要求。sourceは満たすがtargetは満たさず0件
+# Recovery: Phase2でFILTER除去後に復活
+SELECT DISTINCT ?t WHERE {
+  ?t <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://confOf#Topic> .
+  FILTER(!CONTAINS(STR(?t), ""cmt-instances#""))
+}","SELECT DISTINCT  ?t
+WHERE
+  { ?t  a  <http://cmt#SubjectArea>
+    FILTER ( ! contains(str(?t), ""cmt-instances#"") )
+  }","SELECT DISTINCT  ?t
+WHERE {
+  ?t  a  <http://cmt#SubjectArea>
+}"
+confOf-conference,relaxation_1.sparql,168,168,True,,True,,0,True,,True,Phase3_Optionalization,168,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,168,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: confOf-conference (confOf_100 -> conference_100)
+# target_phase: Phase 1
+# FailureMechanism: confOf:dealsWith は alignment未対応で残留 -> target(conference)に存在せす0件
+# Recovery: Phase1で残留triple削除後、Paper + writtenBy(->has_authors) が残り復活
+SELECT DISTINCT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://confOf#Paper> .
+  ?paper <http://confOf#writtenBy> ?author .
+  ?paper <http://confOf#dealsWith> ?topic1 .
+  ?paper <http://confOf#dealsWith> ?topic2 .
+  FILTER(?topic1 != ?topic2)
+}","SELECT DISTINCT  ?paper
+WHERE
+  { ?paper  a                     <http://conference#Paper> ;
+            <http://conference#has_authors>  ?author ;
+            <http://confOf#dealsWith>  ?topic1 ;
+            <http://confOf#dealsWith>  ?topic2
+    FILTER ( ?topic1 != ?topic2 )
+  }","SELECT DISTINCT  ?paper
+WHERE {
+  ?paper a <http://conference#Paper> .
+  ?paper <http://conference#has_authors> ?author .
+  OPTIONAL { ?paper <http://confOf#dealsWith> ?topic1 . ?paper <http://confOf#dealsWith> ?topic2 . }
+}"
+confOf-conference,relaxation_10.sparql,16,0,True,,True,,0,True,,False,,0,False,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,No successful relaxation,False,0,0,0,0.0000,0.0000,0.0000,0.0000,"# Pair: confOf-conference (confOf_100 -> conference_100)
+# target_phase: Phase 2
+# FailureMechanism: target workshop URIは conference-instances#workshop... なので、confOf-instances#workshop... を要求するFILTERが不成立 -> 0件
+# Recovery: Phase2でFILTER除去後、Workshop + hasAdministrativeEvent が復活
+SELECT DISTINCT ?w ?e WHERE {
+  ?w <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://confOf#Workshop> .
+  ?w <http://confOf#hasAdministrativeEvent> ?e .
+  FILTER(STRSTARTS(STR(?w), ""http://confOf-instances#workshop-""))
+}","SELECT DISTINCT  ?w ?e
+WHERE
+  { ?w  a                     <http://conference#Workshop> ;
+        <http://confOf#hasAdministrativeEvent>  ?e
+    FILTER strstarts(str(?w), ""http://confOf-instances#workshop-"")
+  }","SELECT DISTINCT  ?w ?e
+WHERE
+  { ?w  a                     <http://conference#Workshop> ;
+        <http://confOf#hasAdministrativeEvent>  ?e
+    FILTER strstarts(str(?w), ""http://confOf-instances#workshop-"")
+  }"
+confOf-conference,relaxation_2.sparql,168,168,True,,True,,0,True,,True,Phase3_Optionalization,168,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,168,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: confOf-conference (confOf_100 -> conference_100)
+# target_phase: Phase 1
+# FailureMechanism: confOf:dealsWith は alignment未対応で残留 -> targetで0件
+# Recovery: Phase1で残留triple削除後、Paper + writtenBy が残り復活
+SELECT DISTINCT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://confOf#Paper> .
+  ?paper <http://confOf#writtenBy> ?author .
+  ?paper <http://confOf#dealsWith> ?topic .
+}","SELECT DISTINCT  ?paper
+WHERE
+  { ?paper  a                     <http://conference#Paper> ;
+            <http://conference#has_authors>  ?author ;
+            <http://confOf#dealsWith>  ?topic
+  }","SELECT DISTINCT  ?paper
+WHERE {
+  ?paper a <http://conference#Paper> .
+  ?paper <http://conference#has_authors> ?author .
+  OPTIONAL { ?paper <http://confOf#dealsWith> ?topic . }
+}"
+confOf-conference,relaxation_3.sparql,168,168,True,,True,,0,True,,True,Phase3_Optionalization,168,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,168,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: confOf-conference (confOf_100 -> conference_100)
+# target_phase: Phase 1
+# FailureMechanism: confOf:dealsWith は alignment未対応で残留 -> targetで0件
+# Recovery: Phase1で残留triple削除後、Paper + writtenBy が残り復活
+SELECT DISTINCT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://confOf#Paper> .
+  ?paper <http://confOf#writtenBy> ?author .
+  ?paper <http://confOf#dealsWith> ?topic .
+}","SELECT DISTINCT  ?paper
+WHERE
+  { ?paper  a                     <http://conference#Paper> ;
+            <http://conference#has_authors>  ?author ;
+            <http://confOf#dealsWith>  ?topic
+  }","SELECT DISTINCT  ?paper
+WHERE {
+  ?paper a <http://conference#Paper> .
+  ?paper <http://conference#has_authors> ?author .
+  OPTIONAL { ?paper <http://confOf#dealsWith> ?topic . }
+}"
+confOf-conference,relaxation_4.sparql,333,333,True,,True,,0,True,,True,Phase3_Optionalization,619,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,333,286,0,0.5380,1.0000,0.6996,0.0000,"# Pair: confOf-conference (confOf_100 -> conference_100)
+# target_phase: Phase 1
+# FailureMechanism: confOf:earlyRegistration は alignment未対応で残留 -> targetで0件
+# Recovery: Phase1で残留triple削除後、writes が残り復活
+SELECT DISTINCT ?p WHERE {
+  ?p <http://confOf#writes> ?paper .
+  ?p <http://confOf#earlyRegistration> ?reg .
+}","SELECT DISTINCT  ?p
+WHERE
+  { ?p      a                     <http://conference#Regular_author> .
+    ?paper  a                     <http://conference#Conference_contribution> .
+    ?p      <http://conference#contributes>  ?paper ;
+            <http://confOf#earlyRegistration>  ?reg
+  }","SELECT DISTINCT  ?p
+WHERE {
+  ?p a <http://conference#Regular_author> .
+  ?paper a <http://conference#Conference_contribution> .
+  ?p <http://conference#contributes> ?paper .
+  OPTIONAL { ?p <http://confOf#earlyRegistration> ?reg . }
+}"
+confOf-conference,relaxation_5.sparql,58,58,True,,True,,0,True,,True,Phase3_Optionalization,619,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,58,561,0,0.0937,1.0000,0.1713,0.0000,"# Pair: confOf-conference (confOf_100 -> conference_100)
+# target_phase: Phase 1
+# FailureMechanism: confOf:reviewes は alignment未対応で残留 -> targetで0件
+# Recovery: Phase1で残留triple削除後、writes が残り復活
+SELECT DISTINCT ?p WHERE {
+  ?p <http://confOf#writes> ?paper .
+  ?p <http://confOf#reviewes> ?review .
+}","SELECT DISTINCT  ?p
+WHERE
+  { ?p      a                     <http://conference#Regular_author> .
+    ?paper  a                     <http://conference#Conference_contribution> .
+    ?p      <http://conference#contributes>  ?paper ;
+            <http://conference#Reviewed_contribution>  ?review
+  }","SELECT DISTINCT  ?p
+WHERE {
+  ?p a <http://conference#Regular_author> .
+  ?paper a <http://conference#Conference_contribution> .
+  ?p <http://conference#contributes> ?paper .
+  OPTIONAL { ?p <http://conference#Reviewed_contribution> ?review . }
+}"
+confOf-conference,relaxation_6.sparql,333,333,True,,True,,0,True,,True,Phase3_Optionalization,619,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,333,286,0,0.5380,1.0000,0.6996,0.0000,"# Pair: confOf-conference (confOf_100 -> conference_100)
+# target_phase: Phase 1
+# FailureMechanism: confOf:earlyRegistration は alignment未対応で残留 -> targetで0件
+# Recovery: Phase1で残留triple削除後、writes が残り復活
+SELECT DISTINCT ?p WHERE {
+  ?p <http://confOf#writes> ?paper .
+  ?p <http://confOf#earlyRegistration> ?reg .
+}","SELECT DISTINCT  ?p
+WHERE
+  { ?p      a                     <http://conference#Regular_author> .
+    ?paper  a                     <http://conference#Conference_contribution> .
+    ?p      <http://conference#contributes>  ?paper ;
+            <http://confOf#earlyRegistration>  ?reg
+  }","SELECT DISTINCT  ?p
+WHERE {
+  ?p a <http://conference#Regular_author> .
+  ?paper a <http://conference#Conference_contribution> .
+  ?p <http://conference#contributes> ?paper .
+  OPTIONAL { ?p <http://confOf#earlyRegistration> ?reg . }
+}"
+confOf-conference,relaxation_7.sparql,9,9,True,,True,,0,True,,True,Phase3_Optionalization,9,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,9,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: confOf-conference (confOf_100 -> conference_100)
+# target_phase: Phase 1
+# FailureMechanism: confOf:has_short_title は alignment未対応で残留 -> targetで0件
+# Recovery: Phase1で残留triple削除後、Workshop + hasAdministrativeEvent が残り復活
+SELECT DISTINCT ?w WHERE {
+  ?w <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://confOf#Workshop> .
+  ?w <http://confOf#hasAdministrativeEvent> ?event .
+  ?w <http://confOf#has_short_title> ?st .
+}","SELECT DISTINCT  ?w
+WHERE
+  { ?w  a                     <http://conference#Workshop> ;
+        <http://confOf#hasAdministrativeEvent>  ?event ;
+        <http://confOf#has_short_title>  ?st
+  }","SELECT DISTINCT  ?w
+WHERE {
+  ?w a <http://conference#Workshop> .
+  OPTIONAL { ?w <http://confOf#hasAdministrativeEvent> ?event . ?w <http://confOf#has_short_title> ?st . }
+}"
+confOf-conference,relaxation_8.sparql,619,619,True,,True,,0,True,,True,Phase2_FilterRemoval,619,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,619,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: confOf-conference (confOf_100 -> conference_100)
+# target_phase: Phase 2
+# FailureMechanism: target個体URIは conference-instances# なので FILTER(CONTAINS(...,""confOf-instances#"")) が不成立 -> 0件
+# Recovery: Phase2でFILTER除去後、writes が復活
+SELECT DISTINCT ?p WHERE {
+  ?p <http://confOf#writes> ?paper .
+  FILTER(CONTAINS(STR(?p), ""confOf-instances#""))
+}","SELECT DISTINCT  ?p
+WHERE
+  { ?p      a                     <http://conference#Regular_author> .
+    ?paper  a                     <http://conference#Conference_contribution> .
+    ?p      <http://conference#contributes>  ?paper
+    FILTER contains(str(?p), ""confOf-instances#"")
+  }","SELECT DISTINCT  ?p
+WHERE {
+  ?p      a                     <http://conference#Regular_author> .
+      ?paper  a                     <http://conference#Conference_contribution> .
+      ?p      <http://conference#contributes>  ?paper
+}"
+confOf-conference,relaxation_9.sparql,168,168,True,,True,,0,True,,True,Phase2_FilterRemoval,168,True,"Phase2_FilterRemoval,Phase3_Optionalization,Phase4a_ClassHierarchy,Phase4b_PropertyHierarchy,Phase5_TypeRemoval",5,,True,168,0,0,1.0000,1.0000,1.0000,0.0000,"# Pair: confOf-conference (confOf_100 -> conference_100)
+# target_phase: Phase 2
+# FailureMechanism: target paper URIは conference-instances#paper... なので confOf-instances#paper... を要求するFILTERが不成立 -> 0件
+# Recovery: Phase2でFILTER除去後、Paper + writtenBy が復活
+SELECT DISTINCT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://confOf#Paper> .
+  ?paper <http://confOf#writtenBy> ?author .
+  FILTER(regex(STR(?paper), ""^http://confOf-instances#paper""))
+}","SELECT DISTINCT  ?paper
+WHERE
+  { ?paper  a                     <http://conference#Paper> ;
+            <http://conference#has_authors>  ?author
+    FILTER regex(str(?paper), ""^http://confOf-instances#paper"")
+  }","SELECT DISTINCT  ?paper
+WHERE {
+  ?paper  a                     <http://conference#Paper> ;
+              <http://conference#has_authors>  ?author
+}"

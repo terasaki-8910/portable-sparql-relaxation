@@ -1,0 +1,75 @@
+{
+  "name": "conference-edas",
+  "alignment_file": "data/alignment/conference-edas/alignment/conference-edas.edoal",
+  "queries_dir": "data/alignment/conference-edas/queries/",
+  "expected_output_dir": "data/alignment/conference-edas/expected_output/",
+  "datasets": [
+    {
+      "type": "file",
+      "path": "data/datasets/conference_100.ttl",
+      "format": "turtle"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/conference_eswc.ttl",
+      "format": "turtle"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/edas_100.ttl",
+      "format": "turtle"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/edas_eswc.ttl",
+      "format": "turtle"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/conference.schema.owl",
+      "format": "xml"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/edas.schema.owl",
+      "format": "xml"
+    }
+  ],
+  "endpoints": {},
+  "source_datasets": [
+    {
+      "type": "file",
+      "path": "data/datasets/conference_100.ttl",
+      "format": "turtle"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/conference_eswc.ttl",
+      "format": "turtle"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/conference.schema.owl",
+      "format": "xml"
+    }
+  ],
+  "target_datasets": [
+    {
+      "type": "file",
+      "path": "data/datasets/edas_100.ttl",
+      "format": "turtle"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/edas_eswc.ttl",
+      "format": "turtle"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/edas.schema.owl",
+      "format": "xml"
+    }
+  ],
+  "source_endpoints": {},
+  "target_endpoints": {}
+}

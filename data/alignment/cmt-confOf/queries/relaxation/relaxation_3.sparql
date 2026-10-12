@@ -1,0 +1,7 @@
+# Pair: cmt-confOf (cmt_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: cmt:hasBeenAssigned はEDOAL未対応で残留 -> targetで0件。Phase1で残留トリプル削除後に復活。
+SELECT ?r WHERE {
+  ?r <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Reviewer> .
+  ?r <http://cmt#hasBeenAssigned> ?paper .
+}

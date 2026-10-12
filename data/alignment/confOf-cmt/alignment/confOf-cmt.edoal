@@ -1,0 +1,397 @@
+<?xml version='1.0' encoding='utf-8' standalone='no'?>
+<rdf:RDF xmlns='http://knowledgeweb.semanticweb.org/heterogeneity/alignment#'
+         xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+         xmlns:ns0='http://purl.org/dc/elements/1.1/'
+         xmlns:xsd='http://www.w3.org/2001/XMLSchema#'
+         xmlns:alext='http://exmo.inrialpes.fr/align/ext/1.0/'
+         xmlns:align='http://knowledgeweb.semanticweb.org/heterogeneity/alignment#'
+         xmlns:edoal='http://ns.inria.org/edoal/1.0/#'>
+<Alignment>
+  <xml>yes</xml>
+  <level>2EDOAL</level>
+  <type>**</type>
+  <ns0:creator>http://www.irit.fr/recherches/MELODI/ontologies/contributors#thieblin</ns0:creator>
+  <ns0:date>2017/07/11</ns0:date>
+  <alext:method>http://exmo.inrialpes.fr/align/impl/BasicAlignment#inverse</alext:method>
+  <alext:derivedFrom>http://cmt-confof/alignment/</alext:derivedFrom>
+  <onto1>
+    <Ontology rdf:about="http://confOf#">
+      <location>http://confOf#</location>
+      <formalism>
+        <Formalism align:name="owl" align:uri="http://www.w3.org/TR/owl-guide/"/>
+      </formalism>
+    </Ontology>
+  </onto1>
+  <onto2>
+    <Ontology rdf:about="http://cmt#">
+      <location>http://cmt#</location>
+      <formalism>
+        <Formalism align:name="owl" align:uri="http://www.w3.org/TR/owl-guide/"/>
+      </formalism>
+    </Ontology>
+  </onto2>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Relation>
+          <edoal:inverse>
+            <edoal:Relation rdf:about="http://confOf#reviewes"/>
+          </edoal:inverse>
+        </edoal:Relation>
+      </entity1>
+      <entity2>
+        <edoal:Relation rdf:about="http://cmt#readByReviewer"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://confOf#Member_PC"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://cmt#ProgramCommitteeMember"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Relation rdf:about="http://confOf#writes"/>
+      </entity1>
+      <entity2>
+        <edoal:Relation rdf:about="http://cmt#writePaper"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Property rdf:about="http://confOf#contactEmail"/>
+      </entity1>
+      <entity2>
+        <edoal:Property>
+          <edoal:compose rdf:parseType="Collection">
+            <edoal:Relation rdf:about="http://cmt#hasAuthor"/>
+            <edoal:Property rdf:about="http://cmt#email"/>
+          </edoal:compose>
+        </edoal:Property>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Relation rdf:about="http://confOf#reviewes"/>
+      </entity1>
+      <entity2>
+        <edoal:Relation rdf:about="http://cmt#readPaper"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Property rdf:about="http://confOf#has_title"/>
+      </entity1>
+      <entity2>
+        <edoal:Property>
+          <edoal:and rdf:parseType="Collection">
+            <edoal:Property rdf:about="http://cmt#name"/>
+            <edoal:PropertyDomainRestriction>
+              <edoal:class>
+                <edoal:Class rdf:about="http://cmt#Conference"/>
+              </edoal:class>
+            </edoal:PropertyDomainRestriction>
+          </edoal:and>
+        </edoal:Property>
+      </entity2>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://confOf#Topic"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://cmt#SubjectArea"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://confOf#Participant"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://cmt#ConferenceMember"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://confOf#Event"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://cmt#Conference"/>
+      </entity2>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Property rdf:about="http://confOf#hasTitle"/>
+      </entity1>
+      <entity2>
+        <edoal:Property rdf:about="http://cmt#title"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://confOf#Working_event"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://cmt#Conference"/>
+      </entity2>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class>
+          <edoal:and rdf:parseType="Collection">
+            <edoal:Class rdf:about="http://confOf#Author"/>
+            <edoal:Class>
+              <edoal:not>
+                <edoal:AttributeOccurenceRestriction>
+                  <edoal:onAttribute>
+                    <edoal:Relation rdf:about="http://confOf#reviewes"/>
+                  </edoal:onAttribute>
+                  <edoal:comparator rdf:resource="http://ns.inria.org/edoal/1.0/#greater-than"/>
+                  <edoal:value>0</edoal:value>
+                </edoal:AttributeOccurenceRestriction>
+              </edoal:not>
+            </edoal:Class>
+          </edoal:and>
+        </edoal:Class>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://cmt#AuthorNotReviewer"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://confOf#Author"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://cmt#Author"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://confOf#Conference"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://cmt#Conference"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:AttributeOccurenceRestriction>
+          <edoal:onAttribute>
+            <edoal:Relation rdf:about="http://confOf#reviewes"/>
+          </edoal:onAttribute>
+          <edoal:comparator rdf:resource="http://ns.inria.org/edoal/1.0/#greater-than"/>
+          <edoal:value>0</edoal:value>
+        </edoal:AttributeOccurenceRestriction>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://cmt#Reviewer"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Relation rdf:about="http://confOf#dealsWith"/>
+      </entity1>
+      <entity2>
+        <edoal:Relation rdf:about="http://cmt#hasSubjectArea"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://confOf#Administrator"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://cmt#Administrator"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class>
+          <edoal:or rdf:parseType="Collection">
+            <edoal:Class rdf:about="http://confOf#Administrator"/>
+            <edoal:Class rdf:about="http://confOf#Author"/>
+            <edoal:AttributeOccurenceRestriction>
+              <edoal:onAttribute>
+                <edoal:Relation rdf:about="http://confOf#reviewes"/>
+              </edoal:onAttribute>
+              <edoal:comparator rdf:resource="http://ns.inria.org/edoal/1.0/#greater-than"/>
+              <edoal:value>0</edoal:value>
+            </edoal:AttributeOccurenceRestriction>
+          </edoal:or>
+        </edoal:Class>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://cmt#User"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://confOf#Person"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://cmt#Person"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://confOf#Chair_PC"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://cmt#Chairman"/>
+      </entity2>
+      <relation>&lt;</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://confOf#Chair_PC"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://cmt#ProgramCommitteeChair"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Relation rdf:about="http://confOf#writtenBy"/>
+      </entity1>
+      <entity2>
+        <edoal:Relation rdf:about="http://cmt#hasAuthor"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://confOf#Contribution"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://cmt#Document"/>
+      </entity2>
+      <relation>&lt;</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://confOf#Contribution"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://cmt#Paper"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Class rdf:about="http://confOf#Paper"/>
+      </entity1>
+      <entity2>
+        <edoal:Class rdf:about="http://cmt#PaperFullVersion"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1>
+        <edoal:Property rdf:about="http://confOf#hasEmail"/>
+      </entity1>
+      <entity2>
+        <edoal:Property rdf:about="http://cmt#email"/>
+      </entity2>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+</Alignment>
+</rdf:RDF>

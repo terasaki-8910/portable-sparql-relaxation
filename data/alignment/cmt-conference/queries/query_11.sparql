@@ -1,0 +1,6 @@
+PREFIX cmt: <http://cmt#>
+SELECT ?conference ?name
+WHERE {
+	?conference a cmt:Conference ;
+		cmt:name ?name .
+}

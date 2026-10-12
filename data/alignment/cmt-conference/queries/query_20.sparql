@@ -1,0 +1,6 @@
+PREFIX cmt: <http://cmt#>
+SELECT ?metaReviewer ?paper
+WHERE {
+	?metaReviewer a cmt:Meta-Reviewer .
+	?paper cmt:readByMeta-Reviewer ?metaReviewer .
+}

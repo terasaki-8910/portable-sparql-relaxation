@@ -1,0 +1,3 @@
+SELECT distinct ?s WHERE {  
+?s <http://cmt#markConflictOfInterest> ?o .  
+ }

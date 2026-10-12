@@ -1,0 +1,7 @@
+# Pair: conference-confOf (conference_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 2
+# Mechanism: 「confOf-instances# を含まない」ことを要求。sourceは満たすが、翻訳後は confOf-instances# になり0件→Phase2で復活。
+SELECT ?conf WHERE {
+  ?conf <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Conference> .
+  FILTER(!CONTAINS(STR(?conf), "confOf-instances#"))
+}

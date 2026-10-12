@@ -1,0 +1,8 @@
+# Pair: conference-confOf (conference_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: conference:is_submitted_at は未対応で残留 -> targetで0件。Phase1で残留triple削除後、contributes（翻訳済み）で復活。
+SELECT ?contrib WHERE {
+  ?who <http://conference#contributes> ?contrib .
+  ?contrib <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Conference_contribution> .
+  ?contrib <http://conference#is_submitted_at> ?ev .
+}

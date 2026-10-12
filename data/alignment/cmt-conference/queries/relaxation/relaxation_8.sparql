@@ -1,0 +1,7 @@
+# Pair: cmt-conference (cmt_100 -> conference_100)
+# IntendedSuccessPhase: Phase 2
+# Mechanism: STRSTARTSで cmt-instances を要求。targetでは不成立で0件。Phase2でFILTER除去後に復活。
+SELECT ?s WHERE {
+  ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Review> .
+  FILTER(STRSTARTS(STR(?s), "http://cmt-instances#"))
+}

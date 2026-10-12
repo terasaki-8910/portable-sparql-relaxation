@@ -1,0 +1,6 @@
+PREFIX cmt: <http://cmt#>
+SELECT ?admin ?conference
+WHERE {
+	?admin a cmt:Administrator ;
+		cmt:finalizePaperAssignment ?conference .
+}

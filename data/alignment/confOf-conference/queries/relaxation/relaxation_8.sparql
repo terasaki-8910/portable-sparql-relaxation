@@ -1,0 +1,8 @@
+# Pair: confOf-conference (confOf_100 -> conference_100)
+# target_phase: Phase 2
+# FailureMechanism: target個体URIは conference-instances# なので FILTER(CONTAINS(...,"confOf-instances#")) が不成立 -> 0件
+# Recovery: Phase2でFILTER除去後、writes が復活
+SELECT DISTINCT ?p WHERE {
+  ?p <http://confOf#writes> ?paper .
+  FILTER(CONTAINS(STR(?p), "confOf-instances#"))
+}

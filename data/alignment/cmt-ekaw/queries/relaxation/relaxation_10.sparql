@@ -1,0 +1,7 @@
+# Pair: cmt-ekaw (cmt_100 -> ekaw_100)
+# target_phase: Phase 2
+# FailureMechanism: 「ekaw-instances# を含まない」ことを要求。sourceは満たすが、翻訳後は ekaw-instances# になり0件。Phase2でFILTER削除後に復活。
+SELECT ?sa WHERE {
+  ?sa <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#SubjectArea> .
+  FILTER(!CONTAINS(STR(?sa), "ekaw-instances#"))
+}

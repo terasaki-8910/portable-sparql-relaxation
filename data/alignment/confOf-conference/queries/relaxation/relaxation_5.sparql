@@ -1,0 +1,8 @@
+# Pair: confOf-conference (confOf_100 -> conference_100)
+# target_phase: Phase 1
+# FailureMechanism: confOf:reviewes は alignment未対応で残留 -> targetで0件
+# Recovery: Phase1で残留triple削除後、writes が残り復活
+SELECT DISTINCT ?p WHERE {
+  ?p <http://confOf#writes> ?paper .
+  ?p <http://confOf#reviewes> ?review .
+}

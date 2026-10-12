@@ -1,0 +1,7 @@
+# Pair: cmt-confOf (cmt_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 2
+# Mechanism: 「confOf-instances# を含まない」ことを要求。sourceは満たすがtargetは満たさず0件。Phase2でFILTER除去後に復活。
+SELECT ?m WHERE {
+  ?m <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#ProgramCommitteeMember> .
+  FILTER(!CONTAINS(STR(?m), "confOf-instances#"))
+}

@@ -1,0 +1,6 @@
+PREFIX cmt: <http://cmt#>
+SELECT ?paper ?reviewer
+WHERE {
+	?paper cmt:assignedTo ?reviewer .
+	?reviewer a cmt:Reviewer .
+}

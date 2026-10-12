@@ -1,0 +1,64 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Apache Jena for SPARQL parsing
+    implementation 'org.apache.jena:jena-arq:4.10.0'
+
+    // Google Gson for JSON serialization
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+    // SLF4J binding for logging (to avoid warnings from Jena)
+    runtimeOnly 'org.slf4j:slf4j-simple:2.0.9'
+}
+
+application {
+    // Define the main class for the application
+    mainClass = 'sparql_parser_java.SparqlAstParser'
+}
+
+// シリアライザー用のタスクを追加
+task runSerializer(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'sparql_serializer_java.SparqlAstSerializer'
+    standardInput = System.in
+}
+
+// Javaのバージョンを指定
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+// UTF-8エンコーディングを指定
+compileJava {
+    options.encoding = 'UTF-8'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
+javadoc {
+    options.encoding = 'UTF-8'
+}
+
+// Fat Jarを作成する設定
+jar {
+    manifest {
+        attributes(
+            'Main-Class': 'sparql_parser_java.SparqlAstParser'
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}

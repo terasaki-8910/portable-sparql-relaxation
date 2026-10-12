@@ -1,0 +1,8 @@
+# Pair: conference-ekaw (conference_100 -> ekaw_100)
+# target_phase: Phase 2
+# FailureMechanism: target個体は ekaw-instances# なので FILTER(CONTAINS(...,"conference-instances#")) が不成立で0件。
+# Phase2でFILTER除去後に復活。
+SELECT ?p WHERE {
+  ?p <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Person> .
+  FILTER(CONTAINS(STR(?p), "conference-instances#"))
+}

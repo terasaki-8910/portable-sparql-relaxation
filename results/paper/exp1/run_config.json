@@ -1,0 +1,207 @@
+{
+  "config_name": "final545_lowload",
+  "timestamp": "20260912",
+  "git_commit": "redacted for double-blind review",
+  "params": {
+    "relax_max_results_threshold_default": 100000,
+    "max_queries": null,
+    "pairs": "all",
+    "phases": "all(default)",
+    "query_list_path": "output/_query_allowlist_545.txt",
+    "result_cap": null
+  },
+  "wall_clock_sec_total": 1742.51,
+  "wall_clock_sec_per_pair": {
+    "cmt-conference": 483.25,
+    "cmt-confOf": 73.99,
+    "cmt-edas": 1182.13,
+    "cmt-ekaw": 78.82,
+    "conference-cmt": 96.24,
+    "conference-confOf": 105.84,
+    "conference-edas": 100.73,
+    "conference-ekaw": 69.38,
+    "confOf-cmt": 64.31,
+    "confOf-conference": 902.77,
+    "confOf-edas": 61.23,
+    "confOf-ekaw": 330.45,
+    "edas-cmt": 103.85,
+    "edas-conference": 963.84,
+    "edas-confOf": 98.86,
+    "edas-ekaw": 306.98,
+    "ekaw-cmt": 84.52,
+    "ekaw-conference": 99.68,
+    "ekaw-confOf": 92.84,
+    "ekaw-edas": 94.49,
+    "gbo-gmo": 1.08
+  },
+  "rdflib_version": "7.1.3",
+  "rdfs_inference": false,
+  "rdfs_rules": [],
+  "rdfs_materialize_stats": {},
+  "python_version": "3.10.6",
+  "pythonhashseed": "0",
+  "os": "Windows 11",
+  "exp2_endpoints": null,
+  "backend": "rdflib in-memory (exp1 local)",
+  "workers": 1,
+  "parallel_peak_used_gb": null,
+  "status": "completed",
+  "translation_health": {
+    "translated": 545,
+    "total": 545,
+    "rate": 1.0,
+    "dead_translation_pairs": []
+  },
+  "num_completed_pairs": 21,
+  "completed_pairs": [
+    "cmt-conference",
+    "cmt-confOf",
+    "cmt-edas",
+    "cmt-ekaw",
+    "conference-cmt",
+    "conference-confOf",
+    "conference-edas",
+    "conference-ekaw",
+    "confOf-cmt",
+    "confOf-conference",
+    "confOf-edas",
+    "confOf-ekaw",
+    "edas-cmt",
+    "edas-conference",
+    "edas-confOf",
+    "edas-ekaw",
+    "ekaw-cmt",
+    "ekaw-conference",
+    "ekaw-confOf",
+    "ekaw-edas",
+    "gbo-gmo"
+  ],
+  "per_pair_diagnostics": {
+    "cmt-conference": {
+      "wall_clock_sec": 483.25,
+      "query_count": 42,
+      "rss_mb": 1205.2,
+      "peak_wset_mb": 1211.5
+    },
+    "cmt-confOf": {
+      "wall_clock_sec": 73.99,
+      "query_count": 20,
+      "rss_mb": 2371.5,
+      "peak_wset_mb": 2386.6
+    },
+    "cmt-edas": {
+      "wall_clock_sec": 1182.13,
+      "query_count": 21,
+      "rss_mb": 3540.9,
+      "peak_wset_mb": 3561.0
+    },
+    "cmt-ekaw": {
+      "wall_clock_sec": 78.82,
+      "query_count": 22,
+      "rss_mb": 4429.7,
+      "peak_wset_mb": 4441.7
+    },
+    "conference-cmt": {
+      "wall_clock_sec": 96.24,
+      "query_count": 34,
+      "rss_mb": 5594.5,
+      "peak_wset_mb": 5616.9
+    },
+    "conference-confOf": {
+      "wall_clock_sec": 105.84,
+      "query_count": 31,
+      "rss_mb": 6897.9,
+      "peak_wset_mb": 6919.9
+    },
+    "conference-edas": {
+      "wall_clock_sec": 100.73,
+      "query_count": 25,
+      "rss_mb": 8242.7,
+      "peak_wset_mb": 8265.7
+    },
+    "conference-ekaw": {
+      "wall_clock_sec": 69.38,
+      "query_count": 0,
+      "rss_mb": 9284.4,
+      "peak_wset_mb": 9303.5
+    },
+    "confOf-cmt": {
+      "wall_clock_sec": 64.31,
+      "query_count": 18,
+      "rss_mb": 10449.2,
+      "peak_wset_mb": 10466.3
+    },
+    "confOf-conference": {
+      "wall_clock_sec": 902.77,
+      "query_count": 25,
+      "rss_mb": 11791.4,
+      "peak_wset_mb": 11817.4
+    },
+    "confOf-edas": {
+      "wall_clock_sec": 61.23,
+      "query_count": 27,
+      "rss_mb": 13182.8,
+      "peak_wset_mb": 13195.4
+    },
+    "confOf-ekaw": {
+      "wall_clock_sec": 330.45,
+      "query_count": 26,
+      "rss_mb": 14277.8,
+      "peak_wset_mb": 14286.2
+    },
+    "edas-cmt": {
+      "wall_clock_sec": 103.85,
+      "query_count": 21,
+      "rss_mb": 15432.3,
+      "peak_wset_mb": 15453.4
+    },
+    "edas-conference": {
+      "wall_clock_sec": 963.84,
+      "query_count": 28,
+      "rss_mb": 1418.3,
+      "peak_wset_mb": 1423.3
+    },
+    "edas-confOf": {
+      "wall_clock_sec": 98.86,
+      "query_count": 37,
+      "rss_mb": 2783.1,
+      "peak_wset_mb": 2791.4
+    },
+    "edas-ekaw": {
+      "wall_clock_sec": 306.98,
+      "query_count": 36,
+      "rss_mb": 3874.5,
+      "peak_wset_mb": 3884.2
+    },
+    "ekaw-cmt": {
+      "wall_clock_sec": 84.52,
+      "query_count": 26,
+      "rss_mb": 4762.6,
+      "peak_wset_mb": 4782.6
+    },
+    "ekaw-conference": {
+      "wall_clock_sec": 99.68,
+      "query_count": 41,
+      "rss_mb": 5838.8,
+      "peak_wset_mb": 5867.7
+    },
+    "ekaw-confOf": {
+      "wall_clock_sec": 92.84,
+      "query_count": 31,
+      "rss_mb": 6928.5,
+      "peak_wset_mb": 6935.6
+    },
+    "ekaw-edas": {
+      "wall_clock_sec": 94.49,
+      "query_count": 34,
+      "rss_mb": 8035.2,
+      "peak_wset_mb": 8040.2
+    },
+    "gbo-gmo": {
+      "wall_clock_sec": 1.08,
+      "query_count": 0,
+      "rss_mb": 8043.1,
+      "peak_wset_mb": 8043.1
+    }
+  }
+}

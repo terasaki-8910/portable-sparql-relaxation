@@ -1,0 +1,7 @@
+# Pair: conference-edas (conference_100 -> edas_100)
+# target_phase: Phase 2
+# FailureMechanism: 「edas-instances# を含まない」FILTER。sourceは満たすがtargetは満たさず0件。Phase2でFILTER削除後に復活。
+SELECT ?conf WHERE {
+  ?conf <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Conference> .
+  FILTER(!CONTAINS(STR(?conf), "edas-instances#"))
+}

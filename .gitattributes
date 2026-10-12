@@ -1,0 +1,7 @@
+* text=auto eol=lf
+*.bat eol=crlf
+*.jar binary
+*.gz binary
+# Frozen results are byte-exact (CSV files contain CRLF row terminators and LF
+# inside quoted fields); keep them unnormalised so results/paper/SHA256SUMS holds.
+results/paper/** -text

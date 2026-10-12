@@ -1,0 +1,75 @@
+{
+  "name": "conference-cmt",
+  "alignment_file": "data/alignment/conference-cmt/alignment/conference-cmt.edoal",
+  "queries_dir": "data/alignment/conference-cmt/queries/",
+  "expected_output_dir": "data/alignment/conference-cmt/expected_output/",
+  "datasets": [
+    {
+      "type": "file",
+      "path": "data/datasets/conference_100.ttl",
+      "format": "turtle"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/conference_eswc.ttl",
+      "format": "turtle"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/cmt_100.ttl",
+      "format": "turtle"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/cmt_eswc.ttl",
+      "format": "turtle"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/conference.schema.owl",
+      "format": "xml"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/cmt.schema.owl",
+      "format": "xml"
+    }
+  ],
+  "endpoints": {},
+  "source_datasets": [
+    {
+      "type": "file",
+      "path": "data/datasets/conference_100.ttl",
+      "format": "turtle"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/conference_eswc.ttl",
+      "format": "turtle"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/conference.schema.owl",
+      "format": "xml"
+    }
+  ],
+  "target_datasets": [
+    {
+      "type": "file",
+      "path": "data/datasets/cmt_100.ttl",
+      "format": "turtle"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/cmt_eswc.ttl",
+      "format": "turtle"
+    },
+    {
+      "type": "file",
+      "path": "data/datasets/cmt.schema.owl",
+      "format": "xml"
+    }
+  ],
+  "source_endpoints": {},
+  "target_endpoints": {}
+}

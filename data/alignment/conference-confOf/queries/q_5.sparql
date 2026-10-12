@@ -1,0 +1,3 @@
+SELECT distinct ?s ?o WHERE {  
+?s <http://conference#is_a_topis_of_conference_parts> ?o .  
+ }

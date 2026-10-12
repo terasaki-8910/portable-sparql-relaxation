@@ -1,0 +1,8 @@
+# Pair: cmt-edas (cmt_100 -> edas_100)
+# IntendedSuccessPhase: Phase 2
+# Mechanism: sourceでは cmt-instances に一致するが、翻訳後 target個体は edas-instances のためFILTER不成立で0件。
+#            Phase2でFILTER除去後に復活。
+SELECT ?p WHERE {
+  ?p <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Paper> .
+  FILTER(CONTAINS(STR(?p), "cmt-instances#paper"))
+}

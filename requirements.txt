@@ -1,0 +1,9 @@
+# Python 3.10 (tested with 3.10.6)
+rdflib==7.1.3
+SPARQLWrapper==2.0.0
+pyparsing==3.0.8
+isodate==0.7.2
+
+# Optional: per-pair memory diagnostics in run_config.json of evaluate_full_pipeline.py
+# (the script runs without it).  Install with:  pip install psutil==5.9.0
+# psutil==5.9.0

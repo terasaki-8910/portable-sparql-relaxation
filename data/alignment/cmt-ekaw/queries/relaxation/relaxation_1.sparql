@@ -1,0 +1,7 @@
+# Pair: cmt-ekaw (cmt_100 -> ekaw_100)
+# target_phase: Phase 1
+# FailureMechanism: cmt:paperID が翻訳後も残留し target(ekaw)で0件。Phase1で残留triple削除後、rdf:type(Paper)で復活。
+SELECT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Paper> .
+  ?paper <http://cmt#paperID> ?id .
+}

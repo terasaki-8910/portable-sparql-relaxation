@@ -1,0 +1,6 @@
+PREFIX cmt: <http://cmt#>
+SELECT ?reviewer ?review
+WHERE {
+	?review a cmt:Review ;
+		cmt:writtenBy ?reviewer .
+}

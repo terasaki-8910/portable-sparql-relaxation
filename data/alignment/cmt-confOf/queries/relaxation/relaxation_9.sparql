@@ -1,0 +1,11 @@
+# Pair: cmt-confOf (cmt_100 -> confOf_100)
+# IntendedSuccessPhase: UNSOLVABLE
+# Mechanism: regexで cmt-instances#review を要求（Phase2でFILTER削除可能）。
+#            しかし cmt#Review クラスがEDOALに未マップ（confOfには Reviewing_event が存在）。
+#            Phase1で cmt#Review を削除すると、残るのはFILTERのみ。
+#            Phase2でFILTER削除すると制約が全くなくなり、全トリプルが返る（意味的に不正確）。
+# Note: アライメントに cmt#Review のマッピングが必要。緩和では解決不可能。
+SELECT ?r WHERE {
+  ?r <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Review> .
+  FILTER(regex(STR(?r), "^http://cmt-instances#review"))
+}

@@ -1,0 +1,9 @@
+# Pair: confOf-conference (confOf_100 -> conference_100)
+# target_phase: Phase 2
+# FailureMechanism: target workshop URIは conference-instances#workshop... なので、confOf-instances#workshop... を要求するFILTERが不成立 -> 0件
+# Recovery: Phase2でFILTER除去後、Workshop + hasAdministrativeEvent が復活
+SELECT DISTINCT ?w ?e WHERE {
+  ?w <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://confOf#Workshop> .
+  ?w <http://confOf#hasAdministrativeEvent> ?e .
+  FILTER(STRSTARTS(STR(?w), "http://confOf-instances#workshop-"))
+}

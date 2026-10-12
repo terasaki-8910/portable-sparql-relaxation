@@ -1,0 +1,8 @@
+# Pair: confOf-cmt (confOf_100 -> cmt_100)
+# target_phase: Phase 2
+# FailureMechanism: paper URIが confOf-instances#paper を要求。targetは cmt-instances#paper なので0件
+# Recovery: Phase2でFILTER除去後に復活
+SELECT DISTINCT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://confOf#Paper> .
+  FILTER(regex(STR(?paper), "^http://confOf-instances#paper"))
+}

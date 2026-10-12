@@ -1,0 +1,6 @@
+PREFIX cmt: <http://cmt#>
+SELECT ?person
+WHERE {
+	?person a cmt:ProgramCommitteeMember .
+	?person a cmt:Reviewer .
+}

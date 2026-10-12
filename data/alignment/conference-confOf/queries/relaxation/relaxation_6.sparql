@@ -1,0 +1,8 @@
+# Pair: conference-confOf (conference_100 -> confOf_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: conference:has_a_review は未対応で残留 -> targetで0件。Phase1で残留triple削除後、Conference_contributionで復活。
+SELECT ?c WHERE {
+  ?c <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Conference_contribution> .
+  ?c <http://conference#has_authors> ?auth .
+  ?c <http://conference#has_a_review> ?rev .
+}

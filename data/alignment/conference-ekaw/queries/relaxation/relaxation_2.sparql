@@ -1,0 +1,7 @@
+# Pair: conference-ekaw (conference_100 -> ekaw_100)
+# target_phase: Phase 1
+# FailureMechanism: conference:was_a_member_of が残留してtargetで0件。Phase1で削除後に Person 型で復活。
+SELECT ?p WHERE {
+  ?p <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Person> .
+  ?p <http://conference#was_a_member_of> ?committee .
+}

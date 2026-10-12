@@ -1,0 +1,5 @@
+PREFIX cmt: <http://cmt#>
+SELECT ?paper ?coAuthor
+WHERE {
+	?paper cmt:hasCo-author ?coAuthor .
+}

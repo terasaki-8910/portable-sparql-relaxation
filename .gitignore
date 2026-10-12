@@ -1,0 +1,24 @@
+# Run outputs (evaluate_*.py write here)
+output/
+
+# Gradle build output: keep only the prebuilt jar(s) in build/libs/
+/build/*
+!/build/libs/
+/build/libs/*
+!/build/libs/*.jar
+.gradle/
+
+# Python
+__pycache__/
+*.pyc
+
+# Log files written by sparql_translator/src/common/logger.py
+sparql_translator/log/
+
+# Turtle datasets extracted from data/datasets.tar.gz by scripts/setup_data.py
+data/datasets/*.ttl
+# RDFS materialisation cache (only created with --rdfs-materialize)
+data/datasets/_materialized/
+
+# Local secrets
+.env

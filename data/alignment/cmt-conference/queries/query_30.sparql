@@ -1,0 +1,7 @@
+PREFIX cmt: <http://cmt#>
+SELECT DISTINCT ?email
+WHERE {
+	?person a cmt:Person ;
+		cmt:email ?email .
+}
+ORDER BY ?email

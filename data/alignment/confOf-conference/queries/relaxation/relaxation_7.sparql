@@ -1,0 +1,9 @@
+# Pair: confOf-conference (confOf_100 -> conference_100)
+# target_phase: Phase 1
+# FailureMechanism: confOf:has_short_title は alignment未対応で残留 -> targetで0件
+# Recovery: Phase1で残留triple削除後、Workshop + hasAdministrativeEvent が残り復活
+SELECT DISTINCT ?w WHERE {
+  ?w <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://confOf#Workshop> .
+  ?w <http://confOf#hasAdministrativeEvent> ?event .
+  ?w <http://confOf#has_short_title> ?st .
+}

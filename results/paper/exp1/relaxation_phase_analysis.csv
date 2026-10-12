@@ -1,0 +1,4 @@
+phase,count,avg_f1,avg_improvement
+Phase1_ResidualDeletion,19,0.4539,+0.4539
+Phase3_Optionalization,2,0.6907,+0.6907
+Phase4a_ClassHierarchy,1,0.4818,+0.4818

@@ -1,0 +1,91 @@
+{
+  "version": "1.0",
+  "created_at": "2025-11-22",
+  "datasets": {
+    "cmt.schema.owl": {
+      "type": "file",
+      "path": "data/datasets/cmt.schema.owl",
+      "format": "xml"
+    },
+    "cmt_100.ttl": {
+      "type": "file",
+      "path": "data/datasets/cmt_100.ttl",
+      "format": "turtle"
+    },
+    "cmt_eswc.ttl": {
+      "type": "file",
+      "path": "data/datasets/cmt_eswc.ttl",
+      "format": "turtle"
+    },
+    "confOf.schema.owl": {
+      "type": "file",
+      "path": "data/datasets/confOf.schema.owl",
+      "format": "xml"
+    },
+    "confOf_100.ttl": {
+      "type": "file",
+      "path": "data/datasets/confOf_100.ttl",
+      "format": "turtle"
+    },
+    "confOf_eswc.ttl": {
+      "type": "file",
+      "path": "data/datasets/confOf_eswc.ttl",
+      "format": "turtle"
+    },
+    "conference.schema.owl": {
+      "type": "file",
+      "path": "data/datasets/conference.schema.owl",
+      "format": "xml"
+    },
+    "conference_100.ttl": {
+      "type": "file",
+      "path": "data/datasets/conference_100.ttl",
+      "format": "turtle"
+    },
+    "conference_eswc.ttl": {
+      "type": "file",
+      "path": "data/datasets/conference_eswc.ttl",
+      "format": "turtle"
+    },
+    "edas.schema.owl": {
+      "type": "file",
+      "path": "data/datasets/edas.schema.owl",
+      "format": "xml"
+    },
+    "edas_100.ttl": {
+      "type": "file",
+      "path": "data/datasets/edas_100.ttl",
+      "format": "turtle"
+    },
+    "edas_eswc.ttl": {
+      "type": "file",
+      "path": "data/datasets/edas_eswc.ttl",
+      "format": "turtle"
+    },
+    "ekaw.schema.owl": {
+      "type": "file",
+      "path": "data/datasets/ekaw.schema.owl",
+      "format": "xml"
+    },
+    "ekaw_100.ttl": {
+      "type": "file",
+      "path": "data/datasets/ekaw_100.ttl",
+      "format": "turtle"
+    },
+    "ekaw_eswc.ttl": {
+      "type": "file",
+      "path": "data/datasets/ekaw_eswc.ttl",
+      "format": "turtle"
+    },
+    "endpoint_dbpedia": {
+      "type": "endpoint",
+      "url": "http://dbpedia.org/sparql",
+      "format": "sparql"
+    },
+    "endpoint_uniprot": {
+      "type": "endpoint",
+      "url": "https://sparql.uniprot.org/sparql",
+      "format": "sparql"
+    }
+  }
+}

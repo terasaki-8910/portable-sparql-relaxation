@@ -1,0 +1,7 @@
+# Pair: conference-edas (conference_100 -> edas_100)
+# target_phase: Phase 2
+# FailureMechanism: regexで conference-instances#workshop- を要求。targetは edas-instances#workshop- なので0件。Phase2でFILTER削除後に復活。
+SELECT ?w WHERE {
+  ?w <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Workshop> .
+  FILTER(regex(STR(?w), "^http://conference-instances#workshop-"))
+}

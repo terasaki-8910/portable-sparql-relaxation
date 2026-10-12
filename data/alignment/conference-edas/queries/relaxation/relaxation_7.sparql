@@ -1,0 +1,7 @@
+# Pair: conference-edas (conference_100 -> edas_100)
+# target_phase: Phase 2
+# FailureMechanism: FILTERで conference-instances# を要求。target個体は edas-instances# なので0件。Phase2でFILTER削除後に復活。
+SELECT ?p WHERE {
+  ?p <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Person> .
+  FILTER(CONTAINS(STR(?p), "conference-instances#"))
+}

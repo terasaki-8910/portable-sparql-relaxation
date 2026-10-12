@@ -1,0 +1,7 @@
+PREFIX cmt: <http://cmt#>
+SELECT ?person
+WHERE {
+	{ ?person a cmt:Reviewer . }
+	UNION
+	{ ?person a cmt:Meta-Reviewer . }
+}

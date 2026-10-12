@@ -1,0 +1,13 @@
+# Pair: cmt-conference (cmt_100 -> conference_100)
+# IntendedSuccessPhase: UNSOLVABLE
+# Mechanism: cmt:markConflictOfInterest が翻訳後も残留（Phase1で削除可能）
+#            しかし cmt:memberOfProgramCommittee が conference:was_a_committee_chair_of に翻訳される。
+#            アライメントでは「Author + memberOfProgramCommittee」→「議長」と定義されており、
+#            conference_eswc.ttlには議長（was_a_committee_chair_of）が3件しか存在しないため、
+#            Phase1緩和後も0件となる。これはアライメントの意味的ミスマッチであり、緩和では解決不可能。
+# Note: ソースでは102件（PC所属のAuthor with conflict）、ターゲットでは議長のみが対象となるため不一致。
+SELECT ?a WHERE {
+  ?a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Author> .
+  ?a <http://cmt#memberOfProgramCommittee> ?pc .
+  ?a <http://cmt#markConflictOfInterest> ?x .
+}

@@ -1,0 +1,8 @@
+# Pair: cmt-edas (cmt_100 -> edas_100)
+# IntendedSuccessPhase: Phase 1
+# Mechanism: cmt:logoURL が翻訳後も残留し target(edas)で0件。Phase1で残留triple削除後、Conference×memberで復活。
+SELECT ?conf WHERE {
+  ?conf <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Conference> .
+  ?conf <http://cmt#hasConferenceMember> ?member .
+  ?conf <http://cmt#logoURL> ?logo .
+}

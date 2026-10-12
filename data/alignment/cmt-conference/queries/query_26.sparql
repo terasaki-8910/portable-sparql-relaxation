@@ -1,0 +1,6 @@
+PREFIX cmt: <http://cmt#>
+SELECT ?paper ?title
+WHERE {
+	?paper cmt:title ?title .
+	FILTER regex(?title, "Data", "i")
+}

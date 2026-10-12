@@ -1,0 +1,6 @@
+PREFIX cmt: <http://cmt#>
+SELECT ?author ?paper
+WHERE {
+	?author a cmt:Author ;
+		cmt:writePaper ?paper .
+}

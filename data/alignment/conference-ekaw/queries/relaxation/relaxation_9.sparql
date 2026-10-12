@@ -1,0 +1,7 @@
+# Pair: conference-ekaw (conference_100 -> ekaw_100)
+# target_phase: Phase 2
+# FailureMechanism: paper URIが conference-instances#paper- を要求。targetは ekaw-instances#paper- なので0件→Phase2で復活。
+SELECT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Paper> .
+  FILTER(regex(STR(?paper), "^http://conference-instances#paper-"))
+}

@@ -1,0 +1,9 @@
+# Pair: cmt-ekaw (cmt_100 -> ekaw_100)
+# target_phase: Phase 1
+# FailureMechanism: cmt:memberOfConference が翻訳後も残留し targetで0件。Phase1で残留triple削除後、Review×writtenBy×Personで復活。
+SELECT ?rev WHERE {
+  ?rev <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Review> .
+  ?rev <http://cmt#writtenBy> ?p .
+  ?p <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://cmt#Person> .
+  ?p <http://cmt#memberOfConference> ?c .
+}

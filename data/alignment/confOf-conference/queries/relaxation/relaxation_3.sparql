@@ -1,0 +1,9 @@
+# Pair: confOf-conference (confOf_100 -> conference_100)
+# target_phase: Phase 1
+# FailureMechanism: confOf:dealsWith は alignment未対応で残留 -> targetで0件
+# Recovery: Phase1で残留triple削除後、Paper + writtenBy が残り復活
+SELECT DISTINCT ?paper WHERE {
+  ?paper <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://confOf#Paper> .
+  ?paper <http://confOf#writtenBy> ?author .
+  ?paper <http://confOf#dealsWith> ?topic .
+}

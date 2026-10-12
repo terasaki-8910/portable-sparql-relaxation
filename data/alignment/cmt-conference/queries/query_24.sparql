@@ -1,0 +1,8 @@
+PREFIX cmt: <http://cmt#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?pcm ?maxPapers
+WHERE {
+	?pcm a cmt:ProgramCommitteeMember ;
+		cmt:maxPapers ?maxPapers .
+	FILTER (?maxPapers > 5)
+}

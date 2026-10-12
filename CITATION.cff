@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+message: "If you use this code or data, please cite the paper below."
+title: "Portable SPARQL query relaxation: code and data"
+type: software
+authors:
+  - family-names: Hinooka
+    given-names: Masato
+    affiliation: University of Tsukuba
+  - family-names: Nagamori
+    given-names: Mitsuharu
+    affiliation: University of Tsukuba
+    orcid: "https://orcid.org/0000-0002-9545-7825"
+repository-code: "https://github.com/terasaki-8910/portable-sparql-relaxation"
+license: MIT
+keywords:
+  - Linked Open Data
+  - SPARQL query rewriting
+  - query relaxation
+  - ontology alignment
+  - EDOAL
+preferred-citation:
+  type: conference-paper
+  title: "Toward Portable SPARQL Queries Across Linked Open Data: A Query Relaxation Approach to Cross-Dataset Rewriting"
+  authors:
+    - family-names: Hinooka
+      given-names: Masato
+      affiliation: University of Tsukuba
+    - family-names: Nagamori
+      given-names: Mitsuharu
+      affiliation: University of Tsukuba
+      orcid: "https://orcid.org/0000-0002-9545-7825"
+  collection-title: "Metadata and Semantic Research (MTSR 2026)"
+  collection-type: proceedings
+  conference:
+    name: "Metadata and Semantics Research Conference (MTSR 2026)"
+    city: Bucharest
+    country: RO
+  publisher:
+    name: Springer
+  notes: "Communications in Computer and Information Science. To appear."

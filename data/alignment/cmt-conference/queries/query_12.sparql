@@ -1,0 +1,6 @@
+PREFIX cmt: <http://cmt#>
+SELECT ?paper ?title
+WHERE {
+	?paper a cmt:Paper ;
+		cmt:title ?title .
+}

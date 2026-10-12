@@ -1,0 +1,6 @@
+PREFIX cmt: <http://cmt#>
+
+SELECT ?paper ?bid
+WHERE {
+  ?paper cmt:hasBid ?bid .
+}

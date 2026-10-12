@@ -1,0 +1,7 @@
+# Pair: conference-ekaw (conference_100 -> ekaw_100)
+# target_phase: Phase 1
+# FailureMechanism: conference:reviews は alignment未対応で残留しtargetで0件。Phase1で削除後、Review 型で復活。
+SELECT ?rev WHERE {
+  ?rev <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Review> .
+  ?rev <http://conference#reviews> ?paper .
+}

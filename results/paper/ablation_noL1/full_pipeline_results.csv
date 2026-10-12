@@ -1,0 +1,370 @@
+pair_name,query_file,input_query,query_sha256,custom_initial_source_count,custom_initial_result_count,initial_status,custom_initial_tp,custom_initial_fp,custom_initial_fn,custom_initial_precision,custom_initial_recall,custom_initial_f1,custom_final_result_count,custom_final_tp,custom_final_fp,custom_final_fn,custom_final_precision,custom_final_recall,custom_final_f1,custom_final_f2,custom_final_f0_5,result_cap,cap_hit,relaxation_attempted,relaxation_applied,relaxation_phase,relaxation_category,relaxation_primary_category,custom_translation_success,custom_output_query,custom_final_query,baseline_source_count,baseline_result_count,baseline_tp,baseline_fp,baseline_fn,baseline_precision,baseline_recall,baseline_f1,baseline_f2,baseline_f0_5,baseline_translation_success,baseline_output_query,f1_diff_initial,f1_diff_final,custom_error,baseline_error
+cmt-confOf,q_30.sparql,"SELECT distinct ?s ?o WHERE {  
+?s <http://cmt#name> ?o .  
+ }
+",c6751ba6125142e8f1c02fd0e8262f11bee441378a6cc1957b62a50f8d3e3ee2,4357,0,empty_success,0,0,4357,0.0000,0.0000,0.0000,108,6,102,4351,0.0556,0.0014,0.0027,0.0017,0.0063,10000,False,True,True,Phase3_Optionalization,,,True,"SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://confOf#has_title>  ?o ;
+        a                     <http://cmt#Conference>
+  }","SELECT DISTINCT  ?s ?o
+WHERE {
+  ?s <http://confOf#has_title> ?o .
+  OPTIONAL { ?s a <http://cmt#Conference> . }
+}",4357,0,0,0,4357,0.0000,0.0000,0.0000,0.0000,0.0000,True,"PREFIX cmt: <http://cmt#> 
+
+SELECT distinct ?s ?o WHERE {
+?s cmt:name ?o .
+}",+0.0000,+0.0027,,
+cmt-conference,q_19.sparql,"SELECT distinct ?s ?o WHERE {  
+?s <http://cmt#hasProgramCommitteeMember> ?o .  
+ }
+",f366cdfed1486370724ea243f45b48e0489cac51100f3fb53154e99a848601c2,1248,0,empty_success,0,0,1254,0.0000,0.0000,0.0000,18,16,19,1238,0.4571,0.0128,0.0248,0.0158,0.0574,10000,False,True,True,Phase3_Optionalization,,,True,"SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://conference#has_a_committee_chair>  ?o .
+    ?o  a                     <http://cmt#ProgramCommitteeChair>
+  }","SELECT DISTINCT  ?s ?o
+WHERE {
+  ?s <http://conference#has_a_committee_chair> ?o .
+  OPTIONAL { ?o a <http://cmt#ProgramCommitteeChair> . }
+}",1248,1249,1254,1,0,0.9992,1.0000,0.9996,0.9998,0.9994,True,"PREFIX cmt: <http://cmt#> 
+
+SELECT distinct ?s ?o WHERE {
+?s <http://conference#has_members> ?o . ?s <http://conference#has_members> ?o . 
+?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Program_committee>. 
+
+}",-0.9996,-0.9748,,
+cmt-conference,q_29.sparql,"SELECT distinct ?s ?o WHERE {  
+?s <http://cmt#memberOfProgramCommittee> ?o .  
+ }
+",c2e06531d5ba897bcc44a621202546f12feb38aa3d1e5da78e65dd6e210e8c22,1248,0,empty_success,0,0,1254,0.0000,0.0000,0.0000,18,16,19,1238,0.4571,0.0128,0.0248,0.0158,0.0574,10000,False,True,True,Phase3_Optionalization,,,True,"SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://conference#was_a_committee_chair_of>  ?o ;
+        a                     <http://cmt#ProgramCommitteeChair>
+  }","SELECT DISTINCT  ?s ?o
+WHERE {
+  ?s <http://conference#was_a_committee_chair_of> ?o .
+  OPTIONAL { ?s a <http://cmt#ProgramCommitteeChair> . }
+}",1248,1249,1254,1,0,0.9992,1.0000,0.9996,0.9998,0.9994,True,"PREFIX cmt: <http://cmt#> 
+
+SELECT distinct ?s ?o WHERE {
+?s <http://conference#was_a_member_of> ?o . 
+?o  <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://conference#Program_committee>. 
+?s <http://conference#was_a_member_of> ?o . 
+}",-0.9996,-0.9748,,
+cmt-conference,q_30.sparql,"SELECT distinct ?s ?o WHERE {  
+?s <http://cmt#name> ?o .  
+ }
+",c6751ba6125142e8f1c02fd0e8262f11bee441378a6cc1957b62a50f8d3e3ee2,4357,0,empty_success,0,0,4357,0.0000,0.0000,0.0000,592,5,587,4352,0.0084,0.0011,0.0020,0.0014,0.0037,10000,False,True,True,Phase3_Optionalization,,,True,"SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://conference#has_a_name>  ?o ;
+        a                     <http://cmt#Conference>
+  }","SELECT DISTINCT  ?s ?o
+WHERE {
+  ?s <http://conference#has_a_name> ?o .
+  OPTIONAL { ?s a <http://cmt#Conference> . }
+}",4357,0,0,0,4357,0.0000,0.0000,0.0000,0.0000,0.0000,True,"PREFIX cmt: <http://cmt#> 
+
+SELECT distinct ?s ?o WHERE {
+?s cmt:name ?o .
+}",+0.0000,+0.0020,,
+cmt-conference,query_11.sparql,"PREFIX cmt: <http://cmt#>
+SELECT ?conference ?name
+WHERE {
+	?conference a cmt:Conference ;
+		cmt:name ?name .
+}",ca2e1557630bb3711634785a3c14031c65ad370bd56db4896751f636d3b3a65d,6,0,empty_success,0,0,6,0.0000,0.0000,0.0000,5,5,0,1,1.0000,0.8333,0.9091,0.8621,0.9615,10000,False,True,True,Phase3_Optionalization,,,True,"PREFIX  cmt:  <http://cmt#>
+
+SELECT  ?conference ?name
+WHERE
+  { ?conference  a                  <http://conference#Conference> ;
+              <http://conference#has_a_name>  ?name ;
+              a                     cmt:Conference
+  }","PREFIX  cmt:  <http://cmt#>
+SELECT  ?conference ?name
+WHERE {
+  ?conference a <http://conference#Conference> .
+  ?conference <http://conference#has_a_name> ?name .
+  OPTIONAL { ?conference a cmt:Conference . }
+}",0,0,0,0,0,0.0000,0.0000,0.0000,0.0000,0.0000,False,,+0.0000,+0.9091,,Baseline returned null (query pattern not supported)
+cmt-conference,query_12.sparql,"PREFIX cmt: <http://cmt#>
+SELECT ?paper ?title
+WHERE {
+	?paper a cmt:Paper ;
+		cmt:title ?title .
+}",42e0bc81670e49b55c59fc3348ea385703c43654efc8d9da02398fa44b860023,4300,0,empty_success,0,0,4300,0.0000,0.0000,0.0000,5966,4300,1666,0,0.7208,1.0000,0.8377,0.9281,0.7634,10000,False,True,True,Phase3_Optionalization,,,True,"PREFIX  cmt:  <http://cmt#>
+
+SELECT  ?paper ?title
+WHERE
+  { ?paper  a          <http://conference#Conference_contribution> ;
+            cmt:title  ?title
+  }","PREFIX  cmt:  <http://cmt#>
+SELECT  ?paper ?title
+WHERE {
+  ?paper a <http://conference#Conference_contribution> .
+  OPTIONAL { ?paper cmt:title ?title . }
+}",0,0,0,0,0,0.0000,0.0000,0.0000,0.0000,0.0000,False,,+0.0000,+0.8377,,Baseline returned null (query pattern not supported)
+cmt-conference,query_17.sparql,"PREFIX cmt: <http://cmt#>
+SELECT ?paper ?reviewer
+WHERE {
+	?paper cmt:assignedTo ?reviewer .
+	?reviewer a cmt:Reviewer .
+}",0949df91022c2d850bbaf654568c65fee7287b82d9ba3bb5ee2a9d2b123cb8cd,10884,0,empty_success,0,0,3563,0.0000,0.0000,0.0000,2847,1245,1602,2318,0.4373,0.3494,0.3885,0.3641,0.4164,10000,True,True,True,Phase3_Optionalization,,,True,"PREFIX  cmt:  <http://cmt#>
+
+SELECT  ?paper ?reviewer
+WHERE
+  { ?paper    cmt:assignedTo  ?reviewer .
+    ?reviewer  a              <http://conference#Reviewer>
+  }","PREFIX  cmt:  <http://cmt#>
+SELECT  ?paper ?reviewer
+WHERE {
+  ?reviewer a <http://conference#Reviewer> .
+  OPTIONAL { ?paper cmt:assignedTo ?reviewer . }
+}",10884,0,0,0,3563,0.0000,0.0000,0.0000,0.0000,0.0000,True,"PREFIX cmt: <http://cmt#> 
+ cmt: cmt:
+SELECT ?paper ?reviewer
+WHERE {
+?paper cmt:assignedTo ?reviewer .
+
+}",+0.0000,+0.3885,,
+cmt-conference,query_3.sparql,"PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX cmt: <http://cmt#>
+
+SELECT ?paper ?title
+WHERE {
+  ?paper rdf:type cmt:Paper .
+  ?paper cmt:title ?title .
+}",a4794af6fb67092c1276a17062f99fbe1da2d79aa2b9b9be9725b395917622e0,4300,0,empty_success,0,0,4300,0.0000,0.0000,0.0000,5966,4300,1666,0,0.7208,1.0000,0.8377,0.9281,0.7634,10000,False,True,True,Phase3_Optionalization,,,True,"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  cmt:  <http://cmt#>
+
+SELECT  ?paper ?title
+WHERE
+  { ?paper  rdf:type   <http://conference#Conference_contribution> ;
+            cmt:title  ?title
+  }","PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  cmt:  <http://cmt#>
+SELECT  ?paper ?title
+WHERE {
+  ?paper rdf:type <http://conference#Conference_contribution> .
+  OPTIONAL { ?paper cmt:title ?title . }
+}",4300,0,0,0,4300,0.0000,0.0000,0.0000,0.0000,0.0000,True,"PREFIX cmt: <http://cmt#> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+ cmt: cmt:
+SELECT ?paper ?title
+WHERE {
+
+?paper cmt:title ?title .
+}",+0.0000,+0.8377,,
+cmt-conference,query_6.sparql,"PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX cmt: <http://cmt#>
+
+SELECT ?reviewer ?paper
+WHERE {
+  ?reviewer rdf:type cmt:Reviewer .
+  ?reviewer cmt:hasBeenAssigned ?paper .
+}",b8d34096a9f301dcdb16eca39bb0544c48b9fc55d62975400cb8c4231dbcbde1,10884,0,empty_success,0,0,3563,0.0000,0.0000,0.0000,2847,1245,1602,2318,0.4373,0.3494,0.3885,0.3641,0.4164,10000,True,True,True,Phase3_Optionalization,,,True,"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  cmt:  <http://cmt#>
+
+SELECT  ?reviewer ?paper
+WHERE
+  { ?reviewer  rdf:type            <http://conference#Reviewer> ;
+              cmt:hasBeenAssigned  ?paper
+  }","PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  cmt:  <http://cmt#>
+SELECT  ?reviewer ?paper
+WHERE {
+  ?reviewer rdf:type <http://conference#Reviewer> .
+  OPTIONAL { ?reviewer cmt:hasBeenAssigned ?paper . }
+}",10884,0,0,0,3563,0.0000,0.0000,0.0000,0.0000,0.0000,True,"PREFIX cmt: <http://cmt#> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+ cmt: cmt:
+SELECT ?reviewer ?paper
+WHERE {
+
+?reviewer cmt:hasBeenAssigned ?paper .
+}",+0.0000,+0.3885,,
+cmt-conference,query_7.sparql,"PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX cmt: <http://cmt#>
+
+SELECT ?conference ?name ?date ?reviewsPerPaper
+WHERE {
+  ?conference rdf:type cmt:Conference .
+  ?conference cmt:name ?name ;
+              cmt:date ?date ;
+              cmt:reviewsPerPaper ?reviewsPerPaper .
+}",0795001e221b124525dd9690cb56c7a89d8f8cf49cfdf39b1cccf3f107327b16,6,0,empty_success,0,0,6,0.0000,0.0000,0.0000,0,0,0,6,0.0000,0.0000,0.0000,0.0000,0.0000,10000,False,True,False,,,,True,"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  cmt:  <http://cmt#>
+
+SELECT  ?conference ?name ?date ?reviewsPerPaper
+WHERE
+  { ?conference  rdf:type           <http://conference#Conference> ;
+              <http://conference#has_a_name>  ?name ;
+              rdf:type              cmt:Conference ;
+              cmt:date              ?date ;
+              cmt:reviewsPerPaper   ?reviewsPerPaper
+  }","PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  cmt:  <http://cmt#>
+
+SELECT  ?conference ?name ?date ?reviewsPerPaper
+WHERE
+  { ?conference  rdf:type           <http://conference#Conference> ;
+              <http://conference#has_a_name>  ?name ;
+              rdf:type              cmt:Conference ;
+              cmt:date              ?date ;
+              cmt:reviewsPerPaper   ?reviewsPerPaper
+  }",0,0,0,0,0,0.0000,0.0000,0.0000,0.0000,0.0000,False,,+0.0000,+0.0000,,Baseline returned null (query pattern not supported)
+conference-cmt,q_2.sparql,"SELECT distinct ?s ?o WHERE {  
+?s <http://conference#has_a_review> ?o .  
+ }
+",559964ae3b49b425456997ef8f34fc33d2e8eaee7f1fbc21f9a098c25e696218,11073,0,empty_success,0,0,13391,0.0000,0.0000,0.0000,8648,2318,1225,11073,0.6542,0.1731,0.2738,0.2030,0.4205,10000,True,True,True,Phase3_Optionalization,,,True,"SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://cmt#readByReviewer>  ?o .
+    ?o  a                     <http://conference#Reviewer>
+  }","SELECT DISTINCT  ?s ?o
+WHERE {
+  ?s <http://cmt#readByReviewer> ?o .
+  OPTIONAL { ?o a <http://conference#Reviewer> . }
+}",11073,0,0,0,13391,0.0000,0.0000,0.0000,0.0000,0.0000,True,"PREFIX conference: <http://conference#> 
+
+SELECT distinct ?s ?o WHERE {
+?s conference:has_a_review ?o .
+}",+0.0000,+0.2738,,
+conference-cmt,q_58.sparql,"SELECT distinct ?s ?o WHERE {  
+?s <http://conference#contributes> ?o .  
+ }
+",d797f52b73f32ade9d53a402c7b518f9eecc465af8e53af664e9fc7284c211e6,28291,0,empty_success,0,0,20487,0.0000,0.0000,0.0000,2359,4005,0,16482,1.0000,0.1955,0.3270,0.2330,0.5485,10000,True,True,True,Phase3_Optionalization,,,True,"SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://cmt#writePaper>  ?o ;
+        a                     <http://conference#Regular_author> .
+    ?o  a                     <http://conference#Written_contribution>
+  }","SELECT DISTINCT  ?s ?o
+WHERE {
+  ?s <http://cmt#writePaper> ?o .
+  OPTIONAL { ?s a <http://conference#Regular_author> . ?o a <http://conference#Written_contribution> . }
+}",28291,18783,17565,0,2922,1.0000,0.8574,0.9232,0.8825,0.9678,True,"PREFIX conference: <http://conference#> 
+
+SELECT distinct ?s ?o WHERE {
+{?s <http://cmt#writePaper> ?o . }UNION
+{?s <http://cmt#writeReview> ?o . }UNION
+{?s <http://cmt#co-writePaper> ?o . }
+}",-0.9232,-0.5962,,
+conference-edas,q_2.sparql,"SELECT distinct ?s ?o WHERE {  
+?s <http://conference#has_a_review> ?o .  
+ }
+",559964ae3b49b425456997ef8f34fc33d2e8eaee7f1fbc21f9a098c25e696218,11073,0,empty_success,0,0,13391,0.0000,0.0000,0.0000,22870,4509,2847,8882,0.6130,0.3367,0.4347,0.3701,0.5266,10000,True,True,True,Phase3_Optionalization,,,True,"SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://edas#isReviewedBy>  ?o .
+    ?o  a                     <http://conference#Reviewer>
+  }","SELECT DISTINCT  ?s ?o
+WHERE {
+  ?s <http://edas#isReviewedBy> ?o .
+  OPTIONAL { ?o a <http://conference#Reviewer> . }
+}",11073,0,0,0,13391,0.0000,0.0000,0.0000,0.0000,0.0000,True,"PREFIX conference: <http://conference#> 
+
+SELECT distinct ?s ?o WHERE {
+?s conference:has_a_review ?o .
+}",+0.0000,+0.4347,,
+conference-edas,q_58.sparql,"SELECT distinct ?s ?o WHERE {  
+?s <http://conference#contributes> ?o .  
+ }
+",d797f52b73f32ade9d53a402c7b518f9eecc465af8e53af664e9fc7284c211e6,28291,0,empty_success,0,0,20487,0.0000,0.0000,0.0000,22698,7315,0,13172,1.0000,0.3571,0.5262,0.4097,0.7352,10000,True,True,True,Phase3_Optionalization,,,True,"SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://edas#isReviewing>  ?o ;
+        a                     <http://conference#Reviewer>
+  }","SELECT DISTINCT  ?s ?o
+WHERE {
+  ?s <http://edas#isReviewing> ?o .
+  OPTIONAL { ?s a <http://conference#Reviewer> . }
+}",28291,31057,20423,1505,64,0.9314,0.9969,0.9630,0.9830,0.9438,True,"PREFIX conference: <http://conference#> 
+
+SELECT distinct ?s ?o WHERE {
+{?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://edas#Person>. 
+?s <http://edas#hasRelatedDocument> ?o . 
+}UNION
+{?s <http://edas#hasRelatedPaper> ?o . }
+}",-0.9630,-0.4368,,
+edas-cmt,q_30.sparql,"SELECT distinct ?s ?o WHERE {  
+?s <http://edas#hasTopic> ?o .  
+ }
+",586983f69706ada5833c798f9c08bcc69c400c5303a1d59d955818138c877dbf,27092,0,empty_success,0,0,9274,0.0000,0.0000,0.0000,22395,8350,0,924,1.0000,0.9004,0.9476,0.9187,0.9783,10000,True,True,True,Phase3_Optionalization,,,True,"SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://cmt#hasSubjectArea>  ?o ;
+        a                     <http://edas#Paper>
+  }","SELECT DISTINCT  ?s ?o
+WHERE {
+  ?s <http://cmt#hasSubjectArea> ?o .
+  OPTIONAL { ?s a <http://edas#Paper> . }
+}",27092,0,0,0,9274,0.0000,0.0000,0.0000,0.0000,0.0000,True,"PREFIX edas: <http://edas#> 
+
+SELECT distinct ?s ?o WHERE {
+?s edas:hasTopic ?o .
+}",+0.0000,+0.9476,,
+ekaw-cmt,q_11.sparql,"SELECT distinct ?s ?o WHERE {  
+?s <http://ekaw#authorOf> ?o .  
+ }
+",70b3bfa96e5afa2bd6321cb5453f6d93754d1c23b7387641e92dcde5192a3c3d,22697,0,empty_success,0,0,18768,0.0000,0.0000,0.0000,2359,4005,0,14763,1.0000,0.2134,0.3517,0.2532,0.5756,10000,True,True,True,Phase3_Optionalization,,,True,"SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://cmt#writePaper>  ?o .
+    ?o  a                     <http://ekaw#Paper> .
+    ?s  a                     <http://ekaw#Paper_Author>
+  }","SELECT DISTINCT  ?s ?o
+WHERE {
+  ?s <http://cmt#writePaper> ?o .
+  OPTIONAL { ?o a <http://ekaw#Paper> . ?s a <http://ekaw#Paper_Author> . }
+}",22697,18783,17565,0,1203,1.0000,0.9359,0.9669,0.9481,0.9865,True,"PREFIX ekaw: <http://ekaw#> 
+
+SELECT distinct ?s ?o WHERE {
+{?s <http://cmt#writePaper> ?o . }UNION
+{?s <http://cmt#writeReview> ?o . }UNION
+{?s <http://cmt#co-writePaper> ?o . }
+}",-0.9669,-0.6152,,
+ekaw-cmt,q_51.sparql,"SELECT distinct ?s ?o WHERE {  
+?s <http://ekaw#writtenBy> ?o .  
+ }
+",42d6ae15de2e6f887036e17f7d3a9107397123ac25589ad19b4d5a5258f805f3,22697,0,empty_success,0,0,18768,0.0000,0.0000,0.0000,2359,4005,0,14763,1.0000,0.2134,0.3517,0.2532,0.5756,10000,True,True,True,Phase3_Optionalization,,,True,"SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://cmt#hasAuthor>  ?o ;
+        a                     <http://ekaw#Paper> .
+    ?o  a                     <http://ekaw#Paper_Author>
+  }","SELECT DISTINCT  ?s ?o
+WHERE {
+  ?s <http://cmt#hasAuthor> ?o .
+  OPTIONAL { ?s a <http://ekaw#Paper> . ?o a <http://ekaw#Paper_Author> . }
+}",22697,18783,17330,235,1438,0.9866,0.9234,0.9540,0.9354,0.9733,True,"PREFIX ekaw: <http://ekaw#> 
+
+SELECT distinct ?s ?o WHERE {
+{?s <http://cmt#hasAuthor> ?o . }UNION
+{?s <http://cmt#writtenBy> ?o . }UNION
+{?s <http://cmt#hasCo-author> ?o . }
+}",-0.9540,-0.6022,,
+ekaw-cmt,q_52.sparql,"SELECT distinct ?s ?o WHERE {  
+?s <http://ekaw#coversTopic> ?o .  
+ }
+",ff7610b55bbdb4725d08590777bc3e966ac6df6e0114591ef70ca1842e2f11ad,18479,0,empty_success,0,0,7573,0.0000,0.0000,0.0000,22395,7071,1279,502,0.8468,0.9337,0.8881,0.9149,0.8629,10000,True,True,True,Phase3_Optionalization,,,True,"SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://cmt#hasSubjectArea>  ?o ;
+        a                     <http://ekaw#Paper>
+  }","SELECT DISTINCT  ?s ?o
+WHERE {
+  ?s <http://cmt#hasSubjectArea> ?o .
+  OPTIONAL { ?s a <http://ekaw#Paper> . }
+}",18479,22395,7071,1279,502,0.8468,0.9337,0.8881,0.9149,0.8629,True,"PREFIX ekaw: <http://ekaw#> 
+
+SELECT distinct ?s ?o WHERE {
+?s <http://cmt#hasSubjectArea> ?o . 
+}",-0.8881,+0.0000,,
+ekaw-conference,q_25.sparql,"SELECT distinct ?s ?o WHERE {  
+?s <http://ekaw#hasEvent> ?o .  
+ }
+",f0cafcc723898cbb22adbbe4b4e6b83acca35c76ae29e655c817f5b67d622a83,989,0,empty_success,0,0,995,0.0000,0.0000,0.0000,105,110,1,885,0.9910,0.1106,0.1989,0.1344,0.3822,10000,False,True,True,Phase3_Optionalization,,,True,"SELECT DISTINCT  ?s ?o
+WHERE
+  { ?s  <http://conference#has_parts>  ?o ;
+        a                     <http://ekaw#Conference>
+  }","SELECT DISTINCT  ?s ?o
+WHERE {
+  ?s <http://conference#has_parts> ?o .
+  OPTIONAL { ?s a <http://ekaw#Conference> . }
+}",989,105,110,1,885,0.9910,0.1106,0.1989,0.1344,0.3822,True,"PREFIX ekaw: <http://ekaw#> 
+
+SELECT distinct ?s ?o WHERE {
+?s <http://conference#has_parts> ?o . 
+}",-0.1989,+0.0000,,

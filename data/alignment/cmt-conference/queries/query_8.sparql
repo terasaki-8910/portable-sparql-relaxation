@@ -1,0 +1,6 @@
+PREFIX cmt: <http://cmt#>
+
+SELECT ?person ?document
+WHERE {
+  ?person cmt:hasConflictOfInterest ?document .
+}
